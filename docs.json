@@ -1,110 +1,121 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
+  "theme": "dark",
   "name": "Ascend Documentation",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
-  },
-  "favicon": "/favicon.svg",
-  "navigation": {
-    "tabs": [
-      {
-        "tab": "Documentation",
-        "groups": [
-          {
-            "group": "Start Here",
-            "pages": [
-              "start-here/outcomes-in-motion",
-              "start-here/what-is-ascend",
-              "start-here/vision"
-            ]
-          },
-          {
-            "group": "Core Concepts",
-            "pages": [
-              "core-concepts/outcome-probabilities",
-              "core-concepts/directional-outcome-trading",
-              "core-concepts/pnl-leverage-basics",
-              "core-concepts/index-oracle-layer",
-              "core-concepts/mark-price-system"
-            ]
-          },
-          {
-            "group": "Market Mechanics",
-            "pages": [
-              "market-mechanics/perpetual-outcome-markets",
-              "market-mechanics/settlement-resolution",
-              "market-mechanics/funding-price-alignment",
-              "market-mechanics/margin-risk-framework",
-              "market-mechanics/liquidation-logic"
-            ]
-          },
-          {
-            "group": "Trading Engine",
-            "pages": [
-              "trading-engine/orderbook-execution",
-              "trading-engine/continuous-pricing"
-            ]
-          },
-          {
-            "group": "Market Types",
-            "pages": [
-              "market-types/outcome-markets",
-              "market-types/rolling-outcome-markets",
-              "market-types/macro-outcome-markets"
-            ]
-          },
-          {
-            "group": "User Guides",
-            "pages": [
-              "user-guides/open-a-position",
-              "user-guides/manage-exposure",
-              "user-guides/close-settle-positions"
-            ]
-          },
-          {
-            "group": "Resources",
-            "pages": [
-              "resources/risk-disclosure",
-              "resources/faqs"
-            ]
-          }
-        ]
-      }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Website",
-          "href": "https://ascend.com",
-          "icon": "globe"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://discord.gg/ascend",
-          "icon": "discord"
-        }
-      ]
+    "primary": "#F35233",
+    "light": "#F47456",
+    "dark": "#871C08",
+    "background": {
+      "dark": "#0A0A0A"
     }
   },
+  "primaryTab": {
+    "name": "Documentation"
+  },
+  "layout": "sidenav",
+  "typography": {
+    "headings": {
+      "family": "Inter"
+    },
+    "body": {
+      "family": "Inter"
+    },
+    "code": {
+      "family": "DM Mono, monospace"
+    }
+  },
+  "favicon": "/favicon.svg",
+  "navigation": [
+    {
+      "group": "Start Here",
+      "pages": [
+        "start-here/outcomes-in-motion",
+        "start-here/what-is-ascend",
+        "start-here/vision"
+      ]
+    },
+    {
+      "group": "Core Concepts",
+      "pages": [
+        "core-concepts/outcome-probabilities",
+        "core-concepts/directional-outcome-trading",
+        "core-concepts/pnl-leverage-basics",
+        "core-concepts/index-oracle-layer",
+        "core-concepts/mark-price-system"
+      ]
+    },
+    {
+      "group": "Market Mechanics",
+      "pages": [
+        "market-mechanics/perpetual-outcome-markets",
+        "market-mechanics/settlement-resolution",
+        "market-mechanics/funding-price-alignment",
+        "market-mechanics/margin-risk-framework",
+        "market-mechanics/liquidation-logic"
+      ]
+    },
+    {
+      "group": "Trading Engine",
+      "pages": [
+        "trading-engine/orderbook-execution",
+        "trading-engine/continuous-pricing"
+      ]
+    },
+    {
+      "group": "Market Types",
+      "pages": [
+        "market-types/outcome-markets",
+        "market-types/rolling-outcome-markets",
+        "market-types/macro-outcome-markets"
+      ]
+    },
+    {
+      "group": "User Guides",
+      "pages": [
+        "user-guides/open-a-position",
+        "user-guides/manage-exposure",
+        "user-guides/close-settle-positions"
+      ]
+    },
+    {
+      "group": "Resources",
+      "pages": [
+        "resources/risk-disclosure",
+        "resources/faqs"
+      ]
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Main Site",
+      "icon": "globe",
+      "url": "https://ascend.com"
+    },
+    {
+      "name": "Twitter",
+      "icon": "twitter",
+      "url": "https://x.com/ascend"
+    },
+    {
+      "name": "Discord",
+      "icon": "discord",
+      "url": "https://discord.gg/ascend"
+    }
+  ],
   "logo": {
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg"
   },
-  "navbar": {
-    "links": [
-      {
-        "label": "Trade",
-        "href": "https://app.ascend.com"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Launch App",
-      "href": "https://app.ascend.com"
+  "topbarLinks": [
+    {
+      "name": "Main Site",
+      "url": "https://ascend.com"
     }
+  ],
+  "topbarCtaButton": {
+    "type": "github",
+    "url": "https://github.com/ascend"
   },
   "contextual": {
     "options": [
