@@ -1,29 +1,11 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "dark",
+  "theme": "mint",
   "name": "Ascend Documentation",
   "colors": {
     "primary": "#F35233",
     "light": "#F47456",
-    "dark": "#871C08",
-    "background": {
-      "dark": "#0A0A0A"
-    }
-  },
-  "primaryTab": {
-    "name": "Documentation"
-  },
-  "layout": "sidenav",
-  "typography": {
-    "headings": {
-      "family": "Inter"
-    },
-    "body": {
-      "family": "Inter"
-    },
-    "code": {
-      "family": "DM Mono, monospace"
-    }
+    "dark": "#871C08"
   },
   "favicon": "/favicon.svg",
   "navigation": [

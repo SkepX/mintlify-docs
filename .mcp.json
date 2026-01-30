@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "acme-mcp": {
+      "type": "http",
+      "url": "https://acme-58ae63bf.mintlify.app/mcp"
+    }
+  }
+}
