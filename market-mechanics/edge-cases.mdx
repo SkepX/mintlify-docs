@@ -7,43 +7,6 @@ Prediction markets can experience sudden price swings, oracle issues, and unusua
 
 ---
 
-## Extreme Price Movements
-
-### What Counts as Extreme
-
-- Rapid moves (20%+ change in minutes)
-- Flash spikes followed by reversals
-- Prices near 0% or 100%
-- Thin liquidity causing outsized impact
-
-### Mark Price Protection
-
-During extreme moves, Mark Price smoothing provides stability.
-
-**Example: Flash spike**
-
-| Time | Index | Mark | What Happens |
-|------|-------|------|--------------|
-| 0:00 | 55% | 55% | Normal trading |
-| 0:01 | 78% | 66% | Spike begins. Mark lags. |
-| 0:02 | 82% | 74% | Mark rises but stays behind. |
-| 0:03 | 58% | 66% | Index reverses. Mark smooths. |
-| 0:04 | 56% | 61% | Mark converges back. |
-
-The Mark Price never reached 82%. Traders were not liquidated at the spike peak.
-
-### Circuit Breakers
-
-In extreme conditions, the system may automatically:
-
-- Pause trading to prevent cascading liquidations
-- Widen spreads reflecting uncertainty
-- Reduce max leverage for new positions
-
-These activate based on predefined rules, not manual intervention.
-
----
-
 ## Trading Near Boundaries
 
 As prices approach 0% or 100%:
@@ -122,11 +85,10 @@ If data quality is compromised:
 
 ## Key Takeaways
 
-- Mark Price smoothing protects against flash spikes
-- Liquidations use Mark Price, not raw Index
-- Circuit breakers activate automatically
-- Multiple validation layers protect against bad oracle data
+- Small moves near 0% or 100% create outsized PnL
+- Drift erodes margin slowly over time
 - You can exit anytime before resolution
+- Multiple validation layers protect against bad oracle data
 - All handling is deterministic and transparent
 
 ---
