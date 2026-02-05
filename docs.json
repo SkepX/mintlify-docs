@@ -72,8 +72,8 @@
     }
   ],
   "logo": {
-    "light": "/logo/dark.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/images/Dark.svg",
+    "dark": "/images/Dark.svg"
   },
   "topbarLinks": [
     {
