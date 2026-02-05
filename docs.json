@@ -32,7 +32,7 @@
       {
         "group": "Pricing & Oracles",
         "pages": [
-          "pricing-oracles/index-oracle-layer",
+          "pricing-oracles/index-oracle-design",
           "pricing-oracles/mark-price-system"
         ]
       },
