@@ -48,15 +48,8 @@
         "pages": [
           "market-mechanics/funding-price-alignment",
           "market-mechanics/clob-matching",
-          "market-mechanics/settlement-resolution"
-        ]
-      },
-      {
-        "group": "Edge Cases",
-        "pages": [
-          "edge-cases/extreme-price-behavior",
-          "edge-cases/drift-resolution",
-          "edge-cases/oracle-irregularities"
+          "market-mechanics/settlement-resolution",
+          "market-mechanics/edge-cases"
         ]
       }
     ]

@@ -1,0 +1,140 @@
+---
+title: 'Edge Cases'
+description: 'How the system handles extreme conditions and irregularities'
+---
+
+Prediction markets can experience sudden price swings, oracle issues, and unusual conditions. Ascend is designed to handle these gracefully while protecting traders.
+
+---
+
+## Extreme Price Movements
+
+### What Counts as Extreme
+
+- Rapid moves (20%+ change in minutes)
+- Flash spikes followed by reversals
+- Prices near 0% or 100%
+- Thin liquidity causing outsized impact
+
+### Mark Price Protection
+
+During extreme moves, Mark Price smoothing provides stability.
+
+**Example: Flash spike**
+
+| Time | Index | Mark | What Happens |
+|------|-------|------|--------------|
+| 0:00 | 55% | 55% | Normal trading |
+| 0:01 | 78% | 66% | Spike begins. Mark lags. |
+| 0:02 | 82% | 74% | Mark rises but stays behind. |
+| 0:03 | 58% | 66% | Index reverses. Mark smooths. |
+| 0:04 | 56% | 61% | Mark converges back. |
+
+The Mark Price never reached 82%. Traders were not liquidated at the spike peak.
+
+### Circuit Breakers
+
+In extreme conditions, the system may automatically:
+
+- Pause trading to prevent cascading liquidations
+- Widen spreads reflecting uncertainty
+- Reduce max leverage for new positions
+
+These activate based on predefined rules, not manual intervention.
+
+---
+
+## Trading Near Boundaries
+
+As prices approach 0% or 100%:
+
+| Position | Near 0% | Near 100% |
+|----------|---------|-----------|
+| LONG | High upside if rises, total loss if settles at 0% | Limited upside, expected settlement |
+| SHORT | Limited downside | High risk if outcome confirms |
+
+Small probability changes near boundaries create outsized PnL.
+
+---
+
+## Drift vs Instant Resolution
+
+### Slow Drift
+
+Drift is when prices creep in one direction as news trickles in.
+
+**Example:** A market on "Will Company X be acquired?" moves from 25% to 61% over three months. No single event caused a big jump.
+
+**Watch for:**
+- Funding adds up over time
+- Margin shrinks quietly against slow moves
+
+### Instant Resolution
+
+Resolution is when the outcome becomes known and price jumps to 0% or 100% in seconds.
+
+| Entry | Direction | Settles at 100% | Settles at 0% |
+|-------|-----------|-----------------|---------------|
+| 40% | LONG | +60% | -40% |
+| 40% | SHORT | -60% | +40% |
+| 70% | LONG | +30% | -70% |
+| 70% | SHORT | -30% | +70% |
+
+You do not have to hold through resolution. You can take profit or reduce size anytime before.
+
+---
+
+## Oracle Irregularities
+
+| Type | What Happens | How It's Handled |
+|------|--------------|------------------|
+| Stale data | Oracle stops updating | Excluded after threshold |
+| Price spike | Extreme value reported | Outlier detection filters it |
+| Source disagreement | Conflicting prices | Weighted averaging smooths |
+| Complete outage | No data received | Fallback or pause |
+
+### Layered Protection
+
+<Steps>
+  <Step title="Oracle validation">
+    Bad data is flagged and excluded. Staleness checks, outlier detection, and confidence metadata filter unreliable inputs.
+  </Step>
+  <Step title="Multi-source aggregation">
+    Index Price averages across sources. No single source dominates.
+  </Step>
+  <Step title="Mark Price smoothing">
+    EMA smoothing dampens impact of bad data on Mark Price.
+  </Step>
+  <Step title="Clamping">
+    Mark Price cannot diverge too far from Index too fast.
+  </Step>
+</Steps>
+
+### Market Restrictions
+
+If data quality is compromised:
+
+- **Single source outage**: Remaining sources continue
+- **Multiple sources fail**: Market enters restricted state
+- **Total outage**: Trading paused until data returns
+
+---
+
+## Key Takeaways
+
+- Mark Price smoothing protects against flash spikes
+- Liquidations use Mark Price, not raw Index
+- Circuit breakers activate automatically
+- Multiple validation layers protect against bad oracle data
+- You can exit anytime before resolution
+- All handling is deterministic and transparent
+
+---
+
+<Card
+  title="Back to Start"
+  icon="arrow-left"
+  href="/start-here/outcomes-in-motion"
+>
+  Return to the beginning
+</Card>
