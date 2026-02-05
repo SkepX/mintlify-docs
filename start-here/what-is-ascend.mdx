@@ -1,8 +1,106 @@
 ---
-title: 'What is Ascend'
-description: 'Outcome-based prediction perpetuals, explained clearly'
+title: "What is Ascend?"
+description: "Trade outcome probabilities with leverage"
 ---
 
-# What is Ascend
+<Frame>
+  <img src="/images/platform.png" alt="Ascend Platform" />
+</Frame>
 
-Content coming soon...
+Ascend is a trading platform for prediction markets.
+
+Instead of trading assets like stocks or crypto, or placing simple yes or no bets, you trade **probabilities**. Each market represents how likely an outcome is, expressed as a percentage. You take a directional position on whether that probability will move higher or lower.
+
+When you open a position, you choose your size and leverage upfront. The position then plays out according to market rules and price movement.
+
+Ascend supports multiple types of outcome based markets, all using the same probability first trading model.
+
+---
+
+## Markets on Ascend
+
+<CardGroup cols={2}>
+  <Card title="Prediction markets" icon="ballot-check">
+    Markets based on real-world outcomes such as elections, policy decisions, court rulings, or economic releases. Each outcome is priced as a probability that moves as new information appears.
+  </Card>
+
+  <Card title="Real world event markets" icon="calendar">
+    Short and medium horizon markets tied to specific events. These focus on how expectations shift leading up to a clear resolution.
+  </Card>
+
+  <Card title="Crypto belief markets" icon="bitcoin-sign">
+    Markets that express belief about crypto related conditions, such as short term price direction or network events. Example: *Will BTC reach a specific level within a defined window?*
+  </Card>
+
+  <Card title="Macro belief markets" icon="chart-line">
+    Markets for equities, metals, and commodities such as stocks, gold, or silver. These markets express directional belief rather than asset ownership.
+  </Card>
+</CardGroup>
+
+---
+
+## How Ascend Works
+
+<Steps>
+  <Step title="Choose a Market">
+    Select a **belief market** expressed as a percentage, covering **outcomes, metals, commodities, stocks, or crypto**.
+
+    Each market represents the current probability or belief price.
+
+    Trade the belief you think the market is mispricing.
+  </Step>
+
+  <Step title="Long or Short the Belief %">
+    Take a **LONG** position if you believe the belief percentage will move higher, or a **SHORT** position if you believe it will move lower.
+
+    Set your **position size and leverage** within the market's margin framework.
+
+    Your exposure scales with leverage, while risk is governed by explicit market rules.
+  </Step>
+
+  <Step title="Trade the Move">
+    As the belief price moves in your favor, **PnL scales with your leveraged exposure**.
+
+    Positions update continuously, and you can **close or adjust at any time**, settling according to deterministic market mechanics.
+  </Step>
+</Steps>
+
+---
+
+## What Makes Ascend Different
+
+<AccordionGroup>
+  <Accordion title="Perpetual Mechanics on Prediction Prices" icon="infinity">
+    Ascend applies **perpetual exchange mechanics** including continuous markets, leverage, margin frameworks, and orderbook based trading to **prediction prices rather than underlying assets**.
+
+    This allows traders to operate fully within a **prediction market context**, while accessing familiar perp style functionality.
+  </Accordion>
+
+  <Accordion title="Leveraged Directional Exposure" icon="arrow-trend-up">
+    Traders express **directional conviction** on belief prices using leverage, scaling exposure according to **explicit margin and risk parameters**.
+
+    Position behavior is governed by market rules, position size, and pricing dynamics.
+  </Accordion>
+
+  <Accordion title="Continuous Pricing and Trading" icon="clock">
+    Prediction markets on Ascend operate as **always on markets**.
+
+    Belief prices update continuously, and positions may be opened, adjusted, or closed at any time within the market's trading rules.
+  </Accordion>
+
+  <Accordion title="Deterministic Settlement" icon="scale-balanced">
+    Positions settle according to **deterministic rules tied to prediction price movement and market state**.
+
+    Settlement outcomes follow predefined formulas and processes, providing consistent and transparent behavior across all markets.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+<Card
+  title="Next: Vision"
+  icon="arrow-right"
+  href="/start-here/vision"
+>
+  Understand why prediction perpetuals are the future of outcome markets
+</Card>

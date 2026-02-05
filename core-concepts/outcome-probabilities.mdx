@@ -3,6 +3,149 @@ title: 'Outcome Probabilities'
 description: 'What an outcome probability represents and how to read 0–100% pricing'
 ---
 
-# Outcome Probabilities
+On Ascend, every market is priced as a probability between 0% and 100%.
 
-Content coming soon...
+This probability represents the market's collective belief about how likely something is to happen. It is not an opinion. It is not a prediction from a single source. It is the aggregated result of continuous trading activity across all participants.
+
+When you see a price of 62%, it means the market currently assigns a 62% likelihood to that outcome. When you see 35%, the market thinks it is less likely. When you see 88%, the market thinks it is highly probable.
+
+You are not buying or selling an asset. You are taking a position on whether that probability will move up or down.
+
+---
+
+## Reading 0–100% Prices
+
+The percentage scale is intuitive:
+
+<CardGroup cols={3}>
+  <Card title="0%" icon="circle-xmark">
+    The market considers this outcome impossible.
+  </Card>
+
+  <Card title="50%" icon="scale-balanced">
+    The market is evenly split. Could go either way.
+  </Card>
+
+  <Card title="100%" icon="circle-check">
+    The market considers this outcome certain.
+  </Card>
+</CardGroup>
+
+Most prices sit somewhere in between. A few examples:
+
+| Price | What It Means |
+|-------|---------------|
+| 23% | Unlikely, but possible |
+| 47% | Slightly less than a coin flip |
+| 61% | More likely than not |
+| 84% | Highly probable |
+
+---
+
+## Price Movement Is the Signal
+
+Probability prices move as new information arrives and traders update their beliefs.
+
+<AccordionGroup>
+  <Accordion title="Price rising: 55% → 68%" icon="arrow-up">
+    The market is becoming more confident this outcome will happen. Traders are buying YES, pushing the price up. New information may have increased the perceived likelihood.
+  </Accordion>
+
+  <Accordion title="Price falling: 72% → 58%" icon="arrow-down">
+    The market is becoming less confident. Traders are selling YES or buying NO. Something changed the collective expectation.
+  </Accordion>
+
+  <Accordion title="Price stable: 64% → 65% → 63%" icon="arrows-left-right">
+    No major new information. The market has reached temporary consensus around this probability.
+  </Accordion>
+</AccordionGroup>
+
+Your PnL comes from these movements. If you go LONG at 55% and the price rises to 68%, you profit. If it drops to 45%, you lose. The final event resolution matters for settlement, but you can trade in and out based on probability movement alone.
+
+---
+
+## Where Do These Probabilities Come From?
+
+Ascend does not invent probabilities. Prices are anchored to external sources.
+
+<Steps>
+  <Step title="External prediction markets">
+    Platforms like Polymarket and Kalshi already price thousands of outcomes. Ascend references these prices as a baseline.
+  </Step>
+  <Step title="Oracle feeds">
+    For asset-linked markets (crypto, equities, commodities), specialized oracles provide belief data based on directional sentiment.
+  </Step>
+  <Step title="Aggregation">
+    Multiple sources are combined using weighted averages. No single source dominates. Stale or invalid data is excluded automatically.
+  </Step>
+</Steps>
+
+This oracle-sourced design keeps Ascend prices grounded in real market information while allowing leveraged trading on top.
+
+---
+
+## Why Percentages?
+
+Percentages work because they are universal.
+
+<Check>A 70% probability means the same thing whether you are trading an election, a Fed decision, or a crypto price target</Check>
+<Check>No need to understand contract mechanics or notional values</Check>
+<Check>Directional trading is intuitive: higher percentage means more likely, lower means less likely</Check>
+
+This abstraction lets you focus on one question: **Where do I think this probability is going?**
+
+---
+
+## Single vs Multi-Outcome Markets
+
+Some markets have one outcome. Others have several.
+
+<Tabs>
+  <Tab title="Single Outcome">
+    **Example:** Will the Fed cut rates in June?
+
+    One probability. One YES/NO. The price reflects the likelihood of YES.
+
+    Price at 72% means the market thinks a cut is likely. You go LONG if you think it will rise toward 100%. You go SHORT if you think it will fall toward 0%.
+  </Tab>
+  <Tab title="Multi-Outcome">
+    **Example:** Who will win the 2028 presidential election?
+
+    Multiple candidates. Each has a separate probability.
+
+    | Candidate | Probability |
+    |-----------|-------------|
+    | Candidate A | 38% |
+    | Candidate B | 31% |
+    | Candidate C | 22% |
+    | Field (others) | 9% |
+
+    The probabilities roughly sum to 100%. You can go LONG or SHORT on any individual candidate. If you think Candidate B is undervalued, you go LONG on B. If you think A is overvalued, you go SHORT on A.
+  </Tab>
+</Tabs>
+
+---
+
+## What Happens at Resolution?
+
+When an event resolves, the probability snaps to its final value.
+
+The winning outcome settles at **100%**. All other outcomes settle at **0%**.
+
+If you are LONG on the winning outcome, your position settles at maximum value. If you are LONG on a losing outcome, it settles at zero.
+
+But remember: you do not have to hold until resolution. You can exit anytime based on probability movement.
+
+<Note>
+Resolution follows predefined rules announced at market creation. There is no discretionary judgment. The same inputs always produce the same settlement.
+</Note>
+
+---
+
+<Card
+  title="Next: Directional Outcome Trading"
+  icon="arrow-right"
+  href="/core-concepts/directional-outcome-trading"
+>
+  Learn how to go LONG and SHORT on probabilities
+</Card>

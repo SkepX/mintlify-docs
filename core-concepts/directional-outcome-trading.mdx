@@ -3,6 +3,133 @@ title: 'Directional Outcome Trading'
 description: 'LONG & SHORT positions on outcome probabilities'
 ---
 
-# Directional Outcome Trading
+On Ascend, you do not trade ownership of an asset or a fixed event contract. You take positions on how a probability will move over time.
 
-Content coming soon...
+This means you can express conviction in either direction:
+
+<Check>**LONG** if you believe the probability will increase</Check>
+<Check>**SHORT** if you believe the probability will decrease</Check>
+
+Leverage allows you to scale exposure relative to posted margin, amplifying gains and losses according to market rules.
+
+---
+
+## LONG Positions
+
+A LONG position expresses the belief that a probability will increase.
+
+<CardGroup cols={2}>
+  <Card title="Example: LONG 55% → 62%" icon="arrow-trend-up">
+    You enter LONG at 55%. The probability rises to 62%. You profit from the 7 point move.
+  </Card>
+
+  <Card title="Example: LONG 48% → 51%" icon="arrow-trend-up">
+    You enter LONG at 48%. The probability rises to 51%. You profit from the 3 point move.
+  </Card>
+</CardGroup>
+
+If the probability rises, a LONG position gains.
+
+If the probability falls, a LONG position loses.
+
+---
+
+## SHORT Positions
+
+A SHORT position expresses the belief that a probability will decrease.
+
+<CardGroup cols={2}>
+  <Card title="Example: SHORT 68% → 60%" icon="arrow-trend-down">
+    You enter SHORT at 68%. The probability falls to 60%. You profit from the 8 point move.
+  </Card>
+
+  <Card title="Example: SHORT 52% → 45%" icon="arrow-trend-down">
+    You enter SHORT at 52%. The probability falls to 45%. You profit from the 7 point move.
+  </Card>
+</CardGroup>
+
+If the probability falls, a SHORT position gains.
+
+If the probability rises, a SHORT position loses.
+
+---
+
+## Probability Movement, Not Event Resolution
+
+PnL on Ascend is driven by changes in probability prices, not solely by final outcome resolution.
+
+This is a key difference from traditional prediction markets where you bet and wait.
+
+<AccordionGroup>
+  <Accordion title="Enter and exit dynamically" icon="right-left">
+    You do not have to hold until the event resolves. If the probability moves in your favor, you can close and take profit. If it moves against you, you can cut losses.
+  </Accordion>
+
+  <Accordion title="Trade changing expectations" icon="rotate">
+    As new information arrives, probabilities shift. You can trade these shifts in real time, capturing value from how beliefs evolve.
+  </Accordion>
+
+  <Accordion title="Manage risk continuously" icon="shield-halved">
+    Traditional prediction markets lock you in. On Ascend, you can adjust position size, add margin, or exit entirely as conditions change.
+  </Accordion>
+</AccordionGroup>
+
+Probability prices are treated as tradable signals, not static forecasts.
+
+---
+
+## Symmetric Exposure
+
+LONG and SHORT positions on Ascend are structurally symmetric.
+
+| Property | LONG | SHORT |
+|----------|------|-------|
+| Profits when | Probability rises | Probability falls |
+| Loses when | Probability falls | Probability rises |
+| Margin rules | Same | Same |
+| Risk framework | Same | Same |
+| Mark price reference | Same | Same |
+
+This ensures fair and consistent exposure regardless of direction. No side has a structural advantage.
+
+---
+
+## How Leverage Applies
+
+Leverage on Ascend scales exposure to probability movement, not to asset ownership.
+
+<Steps>
+  <Step title="Margin determines capital at risk">
+    The margin you post is the capital backing your position. This is the maximum you can lose on the trade.
+  </Step>
+  <Step title="Leverage determines sensitivity">
+    Higher leverage means a smaller probability move creates a larger PnL impact. A 2 point move at 10x leverage has 10 times the effect of a 2 point move at 1x.
+  </Step>
+  <Step title="PnL scales with both">
+    Your profit or loss depends on: probability movement, position size, and leverage. A small change in probability can result in meaningful PnL when leverage is applied.
+  </Step>
+</Steps>
+
+Leverage operates within explicit market-defined limits to ensure consistent risk behavior.
+
+---
+
+## Why This Matters
+
+Leveraged LONG and SHORT trading on probabilities enables:
+
+<Check>**Active participation** in prediction markets, not passive betting</Check>
+<Check>**Scalable expression of conviction** through leverage</Check>
+<Check>**Continuous price discovery** around changing beliefs</Check>
+
+This is the core mechanic that transforms prediction markets into perpetual trading venues.
+
+---
+
+<Card
+  title="Next: PnL & Leverage Basics"
+  icon="arrow-right"
+  href="/core-concepts/pnl-leverage-basics"
+>
+  Understand how PnL is calculated and how leverage affects your positions
+</Card>

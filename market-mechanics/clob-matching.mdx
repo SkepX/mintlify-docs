@@ -1,0 +1,207 @@
+---
+title: 'CLOB & Matching'
+description: 'How the orderbook executes trades on belief prices'
+---
+
+Ascend uses a Central Limit Order Book (CLOB) for price discovery and trade execution. Traders place bids and offers at specific belief prices, and the matching engine pairs compatible orders.
+
+This is the same orderbook model used by major exchanges. No AMM, no bonding curves, no protocol-owned liquidity. Just traders trading with each other.
+
+---
+
+## How the Orderbook Works
+
+The orderbook is a list of all open orders, organized by price and time.
+
+**Bid side:** Orders to go LONG (buy) at a specific belief price or lower
+**Ask side:** Orders to go SHORT (sell) at a specific belief price or higher
+
+**Example orderbook for a Fed rate cut market:**
+
+| Bids (LONG) | Price | Asks (SHORT) |
+|-------------|-------|--------------|
+| | 65% | 500 USDC |
+| | 64% | 1,200 USDC |
+| 800 USDC | 63% | |
+| 2,000 USDC | 62% | |
+| 1,500 USDC | 61% | |
+
+The best bid is 63%. The best ask is 64%. The spread is 1%.
+
+If you want to go LONG immediately, you pay 64% (the best ask). If you want to go SHORT immediately, you receive 63% (the best bid).
+
+---
+
+## Order Types
+
+Ascend supports standard order types:
+
+<Tabs>
+  <Tab title="Limit Orders">
+    You specify a price and size. Your order rests on the book until:
+
+    - It gets matched with an incoming order
+    - You cancel it
+    - It expires (if you set a time limit)
+
+    **Example:** You place a limit order to LONG 500 USDC at 62%. Your order sits on the bid side. If someone comes in willing to SHORT at 62% or lower, you get filled.
+
+    **Use when:** You want a specific price and are willing to wait.
+  </Tab>
+  <Tab title="Market Orders">
+    You specify only size. Your order executes immediately at the best available price.
+
+    **Example:** You place a market order to LONG 500 USDC. The best ask is 64%. You get filled at 64%.
+
+    **Use when:** You want to enter or exit immediately and accept the current price.
+  </Tab>
+</Tabs>
+
+---
+
+## Matching Logic
+
+The matching engine follows price-time priority:
+
+1. **Best price first**: Orders at better prices get filled before orders at worse prices
+2. **Earlier orders first**: At the same price, older orders have priority
+
+This ensures fair execution with no preferential treatment.
+
+**Example:**
+
+Three traders place LONG limit orders at 62%:
+
+| Trader | Time | Size |
+|--------|------|------|
+| Alice | 10:00:01 | 500 USDC |
+| Bob | 10:00:05 | 300 USDC |
+| Carol | 10:00:10 | 400 USDC |
+
+A new SHORT market order comes in for 600 USDC.
+
+Fills:
+- Alice gets filled: 500 USDC (she was first)
+- Bob gets filled: 100 USDC (partial fill, he was second)
+- Carol gets nothing yet (Bob's remaining 200 USDC fills before her)
+
+Bob's remaining 200 USDC order stays on the book.
+
+---
+
+## Partial Fills
+
+Orders can be partially filled when available liquidity is insufficient.
+
+**Example:**
+
+You place a market order to LONG 1,000 USDC. The orderbook looks like:
+
+| Price | Ask Size |
+|-------|----------|
+| 64% | 400 USDC |
+| 65% | 300 USDC |
+| 66% | 500 USDC |
+
+Your order fills across multiple price levels:
+
+- 400 USDC at 64%
+- 300 USDC at 65%
+- 300 USDC at 66%
+
+Total: 1,000 USDC filled at an average price of approximately 64.9%.
+
+This is called "walking the book." Large orders may experience slippage if liquidity is thin.
+
+---
+
+## Spread and Liquidity
+
+The spread is the gap between the best bid and best ask.
+
+| Spread | Meaning |
+|--------|---------|
+| Tight (0.1-0.5%) | High liquidity, active market, low trading cost |
+| Medium (0.5-2%) | Normal liquidity, moderate trading cost |
+| Wide (2%+) | Low liquidity, higher trading cost, use limit orders |
+
+**Example:**
+
+- Best bid: 62%
+- Best ask: 64%
+- Spread: 2%
+
+If you market buy and immediately market sell, you lose 2% just to the spread. In tight markets, this cost is much lower.
+
+---
+
+## Order Validation
+
+Every order is validated before being accepted:
+
+<AccordionGroup>
+  <Accordion title="Margin check" icon="vault">
+    You must have sufficient margin to cover the position if the order fills. Orders that would exceed your available margin are rejected.
+  </Accordion>
+
+  <Accordion title="Leverage check" icon="gauge">
+    The resulting position must stay within the market's maximum leverage. Orders that would create excessive leverage are rejected.
+  </Accordion>
+
+  <Accordion title="Price bounds" icon="arrows-left-right">
+    Orders at extreme prices (far from current market) may be rejected or flagged. This prevents fat-finger errors and manipulation.
+  </Accordion>
+
+  <Accordion title="Size limits" icon="ruler">
+    Orders must meet minimum size requirements and cannot exceed maximum position limits.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Matching vs Risk Management
+
+The matching engine and risk engine are separate:
+
+| System | Responsibility |
+|--------|---------------|
+| Matching Engine | Pairs compatible orders, executes trades |
+| Risk Engine | Enforces margin, leverage, liquidation rules |
+
+The matching engine is "risk-neutral." It only matches orders. All safety guarantees are enforced by the risk engine independently.
+
+**Key invariant:** No order can be matched unless margin and leverage requirements are satisfied at execution time. If a match would violate risk constraints, it is rejected.
+
+---
+
+## Why CLOB for Prediction Markets
+
+The orderbook model provides:
+
+- **Transparent pricing**: All bids and offers are visible
+- **Fair execution**: Price-time priority treats everyone equally
+- **No slippage from curves**: You trade at discrete prices, not along a bonding curve
+- **Real depth**: You can see exactly how much liquidity exists at each price level
+- **Professional compatibility**: Market makers and algorithmic traders can participate using familiar infrastructure
+
+This is what allows Ascend to attract the liquidity that prediction markets need.
+
+---
+
+## Continuous Price Discovery
+
+Prices on Ascend update continuously as orders are placed, matched, and canceled.
+
+Every trade prints a new price. Every new limit order changes the orderbook state. The "current price" is always the midpoint between best bid and best ask, or the last traded price.
+
+This continuous process is how belief prices evolve in real time as traders express their views.
+
+---
+
+<Card
+  title="Next: Settlement & Resolution"
+  icon="arrow-right"
+  href="/market-mechanics/settlement-resolution"
+>
+  Learn how markets resolve and positions settle
+</Card>

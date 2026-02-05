@@ -3,6 +3,228 @@ title: 'PnL & Leverage Basics'
 description: 'How profits and losses actually scale with moves'
 ---
 
-# PnL & Leverage Basics
+On Ascend, you profit or lose based on how the probability price moves relative to your entry price. This is scaled by your position size and leverage.
 
-Content coming soon...
+<Note>
+PnL updates continuously as prices change. You do not have to wait for event resolution to see gains or losses.
+</Note>
+
+---
+
+## The PnL Formula
+
+Unrealized PnL is calculated using four inputs:
+
+| Input | What It Means |
+|-------|---------------|
+| Entry Price | The probability price when you opened the position |
+| Mark Price | The current probability price used for valuation |
+| Position Size | How large your position is |
+| Direction | +1 for LONG, -1 for SHORT |
+
+The formula:
+
+```
+Unrealized PnL = Direction × Position Size × (Mark Price − Entry Price)
+```
+
+This applies symmetrically to LONG and SHORT positions.
+
+---
+
+## PnL Examples
+
+<AccordionGroup>
+  <Accordion title="LONG position, probability rises" icon="arrow-up">
+    You open LONG at 50% with position size 1,000 USDC notional.
+
+    Probability rises to 58%.
+
+    ```
+    PnL = +1 × 1,000 × (0.58 − 0.50)
+        = +1 × 1,000 × 0.08
+        = +80 USDC
+    ```
+
+    You are up 80 USDC.
+  </Accordion>
+
+  <Accordion title="LONG position, probability falls" icon="arrow-down">
+    You open LONG at 50% with position size 1,000 USDC notional.
+
+    Probability falls to 44%.
+
+    ```
+    PnL = +1 × 1,000 × (0.44 − 0.50)
+        = +1 × 1,000 × (−0.06)
+        = −60 USDC
+    ```
+
+    You are down 60 USDC.
+  </Accordion>
+
+  <Accordion title="SHORT position, probability falls" icon="arrow-down">
+    You open SHORT at 65% with position size 1,000 USDC notional.
+
+    Probability falls to 58%.
+
+    ```
+    PnL = −1 × 1,000 × (0.58 − 0.65)
+        = −1 × 1,000 × (−0.07)
+        = +70 USDC
+    ```
+
+    You are up 70 USDC.
+  </Accordion>
+
+  <Accordion title="SHORT position, probability rises" icon="arrow-up">
+    You open SHORT at 65% with position size 1,000 USDC notional.
+
+    Probability rises to 72%.
+
+    ```
+    PnL = −1 × 1,000 × (0.72 − 0.65)
+        = −1 × 1,000 × 0.07
+        = −70 USDC
+    ```
+
+    You are down 70 USDC.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## How Leverage Works
+
+Leverage allows you to control a larger position with less capital.
+
+The relationship between margin and position size:
+
+```
+Initial Margin = Position Notional / Leverage
+```
+
+Or flipped:
+
+```
+Position Notional = Initial Margin × Leverage
+```
+
+<CardGroup cols={2}>
+  <Card title="1x Leverage" icon="1">
+    100 USDC margin controls 100 USDC notional. A 10% probability move means 10 USDC PnL.
+  </Card>
+
+  <Card title="10x Leverage" icon="10">
+    100 USDC margin controls 1,000 USDC notional. A 10% probability move means 100 USDC PnL.
+  </Card>
+</CardGroup>
+
+Higher leverage increases sensitivity to probability movement. The same price change creates a larger PnL impact.
+
+---
+
+## Leverage Example
+
+You have 100 USDC and want to go LONG at 50%.
+
+<Tabs>
+  <Tab title="5x Leverage">
+    **Position notional:** 100 × 5 = 500 USDC
+
+    Probability rises from 50% to 55% (5 point move).
+
+    ```
+    PnL = 500 × 0.05 = +25 USDC
+    ```
+
+    Return on margin: 25%
+  </Tab>
+  <Tab title="10x Leverage">
+    **Position notional:** 100 × 10 = 1,000 USDC
+
+    Probability rises from 50% to 55% (5 point move).
+
+    ```
+    PnL = 1,000 × 0.05 = +50 USDC
+    ```
+
+    Return on margin: 50%
+  </Tab>
+  <Tab title="20x Leverage">
+    **Position notional:** 100 × 20 = 2,000 USDC
+
+    Probability rises from 50% to 55% (5 point move).
+
+    ```
+    PnL = 2,000 × 0.05 = +100 USDC
+    ```
+
+    Return on margin: 100%
+  </Tab>
+</Tabs>
+
+The same 5 point move produces 25, 50, or 100 USDC depending on leverage. This works in both directions. Losses scale the same way.
+
+---
+
+## Leverage Cuts Both Ways
+
+Higher leverage amplifies losses just as it amplifies gains.
+
+| Leverage | 5 Point Gain | 5 Point Loss |
+|----------|--------------|--------------|
+| 5x | +25 USDC | -25 USDC |
+| 10x | +50 USDC | -50 USDC |
+| 20x | +100 USDC | -100 USDC |
+
+With 20x leverage, a 5 point move against you wipes your entire 100 USDC margin.
+
+Leverage operates within explicit market-defined limits to ensure consistent risk behavior.
+
+---
+
+## Mark-to-Market
+
+Positions are continuously marked to the mark price.
+
+This means:
+
+<Check>PnL updates in real time as probabilities move</Check>
+<Check>Your equity (margin + unrealized PnL) changes constantly</Check>
+<Check>Risk checks run against current mark price, not entry price</Check>
+
+You always know where you stand. No waiting for settlement to see your position value.
+
+---
+
+## Position Lifecycle
+
+A position on Ascend follows a clear lifecycle:
+
+<Steps>
+  <Step title="Open">
+    You open a LONG or SHORT position with defined margin and leverage.
+  </Step>
+  <Step title="Update">
+    As probability prices change, PnL and risk metrics update in real time.
+  </Step>
+  <Step title="Manage">
+    You may increase, reduce, or partially close the position at any time within market rules.
+  </Step>
+  <Step title="Close">
+    The position is closed voluntarily by you or through system-defined processes like liquidation or settlement.
+  </Step>
+</Steps>
+
+Each stage follows deterministic mechanics governed by market parameters.
+
+---
+
+<Card
+  title="Next: Index & Oracle Layer"
+  icon="arrow-right"
+  href="/pricing-oracles/index-oracle-layer"
+>
+  Learn how external probability sources anchor Ascend markets
+</Card>

@@ -1,0 +1,283 @@
+---
+title: 'Market Types'
+description: 'The three types of markets on Ascend'
+---
+
+Ascend supports three types of markets, each designed for different trading needs. All three share the same perpetual infrastructure, margin system, and orderbook mechanics. The difference is in what they track and how they settle.
+
+---
+
+## Outcome Markets
+
+Outcome markets represent beliefs about specific real-world events. Will something happen or not? Who will win? What will the result be?
+
+These are the classic prediction markets, now with leverage.
+
+**Examples:**
+
+- Will the Fed cut rates in June?
+- Who will win the 2028 presidential election?
+- Will Company X beat earnings estimates?
+- Will a treaty be signed by year end?
+
+---
+
+### How Outcome Markets Work
+
+Each outcome is priced as a probability between 0% and 100%.
+
+- 0% means the market considers this outcome impossible
+- 100% means the market considers this outcome certain
+- Prices in between reflect the market's confidence level
+
+You can go LONG (betting probability rises) or SHORT (betting probability falls) with leverage.
+
+---
+
+### Single vs Multi-Outcome
+
+<Tabs>
+  <Tab title="Single Outcome">
+    One event with a YES/NO answer.
+
+    **Example:** Will BTC hit $150k in 2025?
+
+    | Outcome | Settlement |
+    |---------|------------|
+    | YES (it happens) | 100% |
+    | NO (it doesn't) | 0% |
+
+    You trade one probability. If you think it will happen, go LONG. If you think it won't, go SHORT.
+  </Tab>
+  <Tab title="Multi-Outcome">
+    One event with multiple possible results.
+
+    **Example:** Who wins the 2028 election?
+
+    | Candidate | Current Price |
+    |-----------|---------------|
+    | Candidate A | 42% |
+    | Candidate B | 35% |
+    | Candidate C | 18% |
+    | Field | 5% |
+
+    Each candidate has their own market. Prices roughly sum to 100%. You can go LONG or SHORT on any candidate independently.
+
+    At settlement, the winner settles at 100%, all others at 0%.
+  </Tab>
+</Tabs>
+
+---
+
+### Settlement
+
+Outcome markets settle when the event resolves:
+
+- Resolution source confirms the outcome
+- Winning outcome settles at 100%
+- Losing outcomes settle at 0%
+- All positions close and PnL is finalized
+
+You can exit anytime before settlement. You don't have to wait for the event.
+
+---
+
+## Rolling Outcome Markets
+
+Rolling outcome markets are designed for recurring predictions, particularly crypto directional bets. Instead of creating new contracts every hour or day, positions roll automatically from one period to the next.
+
+**Examples:**
+
+- Will BTC be up in the next hour?
+- Will ETH close green today?
+- Will SOL outperform BTC this week?
+
+---
+
+### The Problem with Fixed Windows
+
+Traditional prediction platforms handle recurring events with separate contracts:
+
+- Each hour/day is a new contract
+- When one expires, you must manually re-enter the next
+- Liquidity fragments across time windows
+- Profitable traders waste time and gas re-entering
+
+This creates friction and splits liquidity.
+
+---
+
+### How Rolling Markets Work
+
+Ascend treats each time window as a settlement checkpoint, not a terminal contract.
+
+At each checkpoint:
+
+- The current window settles (PnL realized)
+- A new window begins immediately
+- Your position continues automatically
+- Entry price updates to the new window's opening price
+- Direction and leverage are preserved
+
+No action required. Your directional conviction persists.
+
+**Example:**
+
+You go LONG on "BTC up this hour" at 52%.
+
+| Time | Event | Your Position |
+|------|-------|---------------|
+| 2:00 PM | Open LONG at 52% | Active |
+| 3:00 PM | Hour ends. BTC was up. Settles at 100%. | +48% realized. Position rolls. |
+| 3:00 PM | New hour starts at 55% | LONG continues at 55% entry |
+| 4:00 PM | Hour ends. BTC was down. Settles at 0%. | -55% realized. Position rolls. |
+| 4:00 PM | New hour starts at 48% | LONG continues at 48% entry |
+
+Your cumulative PnL: +48% - 55% = -7% over two hours.
+
+---
+
+### What Rolls Forward
+
+When a position rolls:
+
+- **Preserved:** Direction (LONG/SHORT), leverage setting
+- **Updated:** Entry price (to new window's opening), margin (adjusted for realized PnL)
+- **Realized:** PnL from completed window (added to your balance)
+
+---
+
+### Optional Controls
+
+Rolling is the default, but you can customize:
+
+- **Auto-close at settlement:** Exit when each window ends
+- **Take-profit:** Exit if price hits a target
+- **Stop-loss:** Exit if price hits a floor
+- **Manual close:** Exit anytime during a window
+
+You choose how hands-on or hands-off you want to be.
+
+---
+
+### Why Rolling Markets Matter
+
+| Traditional | Rolling |
+|-------------|---------|
+| Re-enter every window | Position persists |
+| Liquidity fragments | Liquidity concentrates |
+| Manual management | Automatic continuation |
+| Miss windows = miss opportunities | Always positioned |
+
+Rolling markets turn recurring predictions into continuous exposure.
+
+---
+
+## Macro Outcome Markets
+
+Macro outcome markets track directional beliefs about traditional assets: equities, metals, commodities, indices. You're not trading the asset itself. You're trading the probability of directional movement.
+
+**Examples:**
+
+- Will gold be up this month?
+- Will the S&P 500 close higher this quarter?
+- Is oil likely to rise given current OPEC policy?
+- Will tech stocks outperform value stocks?
+
+---
+
+### What You're Trading
+
+In macro markets, you trade a belief percentage, not the underlying asset.
+
+**Example:**
+
+Market: "Gold bullish sentiment"
+
+- Current price: 62%
+- This means the market assigns 62% probability to gold having upward pressure
+
+You're not buying gold. You're taking a position on whether the probability of gold strength will rise or fall.
+
+If you think gold sentiment will increase, go LONG. If you think it will decrease, go SHORT.
+
+---
+
+### Belief Price Sources
+
+Macro belief prices come from:
+
+- Spot prediction markets on asset direction
+- Aggregated sentiment oracles
+- Options flow and positioning data
+- Custom composite indicators
+
+Ascend provides the leveraged perpetual layer on top of these belief signals.
+
+---
+
+### Rolling Beliefs for Macro
+
+Macro markets use the same rolling mechanism as crypto directional markets:
+
+- Belief prices evolve continuously
+- Positions persist indefinitely by default
+- Periodic checkpoints may realize PnL
+- No forced expiry
+
+You maintain exposure to macro directional beliefs without managing contract rolls.
+
+---
+
+### Use Cases
+
+<AccordionGroup>
+  <Accordion title="Hedge macro exposure" icon="shield">
+    You hold physical gold and want to hedge short-term downside. Go SHORT on gold bullish sentiment. If sentiment drops, your SHORT profits offset your physical position's decline.
+  </Accordion>
+
+  <Accordion title="Express macro views with leverage" icon="chart-line">
+    You believe the Fed will be hawkish, hurting equities. Go SHORT on S&P bullish sentiment with 5x leverage. Small moves in belief create meaningful returns.
+  </Accordion>
+
+  <Accordion title="Trade relative value" icon="scale-balanced">
+    You think oil will outperform gold. Go LONG oil sentiment, SHORT gold sentiment. You profit if the spread moves in your favor regardless of absolute direction.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Comparison
+
+| Feature | Outcome Markets | Rolling Markets | Macro Markets |
+|---------|-----------------|-----------------|---------------|
+| What you trade | Event probability | Recurring direction | Asset sentiment |
+| Settlement | When event resolves | Each time window | Rolling / continuous |
+| Position persistence | Until settlement | Rolls automatically | Rolls automatically |
+| Typical timeframe | Days to months | Hours to days | Days to months |
+| Examples | Elections, Fed decisions | Hourly BTC up/down | Gold, S&P sentiment |
+
+---
+
+## All Markets Share
+
+Despite their differences, all Ascend markets share:
+
+- Perpetual structure (no forced expiry before resolution)
+- LONG and SHORT with leverage
+- Mark Price and Index Price separation
+- Funding for price alignment
+- CLOB orderbook execution
+- Isolated margin and liquidation logic
+
+The infrastructure is the same. The application differs.
+
+---
+
+<Card
+  title="Back to Core Concepts"
+  icon="arrow-left"
+  href="/core-concepts/outcome-probabilities"
+>
+  Review the fundamentals
+</Card>

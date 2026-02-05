@@ -1,0 +1,202 @@
+---
+title: 'Index & Oracle Layer'
+description: 'How outcome probabilities are sourced, aggregated, and validated'
+---
+
+Ascend does not invent probabilities. Every belief price on the platform is anchored to external sources through the Index Price.
+
+The Index Price represents the best available estimate of the true probability at any moment. It is derived from real prediction markets, oracle feeds, and external data sources. This design ensures that Ascend markets remain grounded in actual market information rather than internal speculation.
+
+---
+
+## What Is the Index Price?
+
+The Index Price is the external reference probability for a market.
+
+Think of it as the "true" probability according to the outside world. Ascend looks at what other prediction markets and data sources say, combines them, and uses that as the benchmark.
+
+It reflects:
+
+- Prices from established prediction markets like Polymarket and Kalshi
+- Oracle feeds for asset-linked markets (crypto, equities, commodities)
+- Weighted aggregation across multiple sources
+
+The Index Price is not used directly for liquidation or PnL. It serves as the ground truth that the trading price should converge toward.
+
+---
+
+## Oracle Sources
+
+Each market defines its oracle sources at creation. The sources depend on the market type.
+
+<Tabs>
+  <Tab title="Event Markets">
+    For elections, policy decisions, and discrete outcomes:
+
+    - Polymarket prices
+    - Kalshi prices
+    - Other regulated prediction venues
+
+    These platforms already price thousands of outcomes with real liquidity. Ascend references them rather than recreating the signal.
+
+    **Example:** A market on "Will the Fed cut rates in March?" might pull prices from both Kalshi and Polymarket, where thousands of traders have already expressed their views.
+  </Tab>
+  <Tab title="Asset-Linked Markets">
+    For crypto, equities, metals, and commodities:
+
+    - Directional sentiment oracles
+    - Spot price feeds from major exchanges
+    - Composite belief indicators
+
+    These oracles translate asset price expectations into probability format.
+
+    **Example:** A market on "Will BTC be above $100k by end of month?" might reference sentiment data from multiple crypto prediction sources combined with options flow data.
+  </Tab>
+  <Tab title="Composite Markets">
+    For markets that combine multiple signals:
+
+    - Weighted baskets of prediction sources
+    - Cross-referenced oracle inputs
+    - Custom aggregation logic per market
+
+    No single source dominates. The Index Price reflects consensus across inputs.
+
+    **Example:** A macro market on "US recession in 2025?" might combine prediction market prices, bond yield signals, and economic indicator oracles.
+  </Tab>
+</Tabs>
+
+---
+
+## What Each Oracle Provides
+
+When an oracle sends data to Ascend, it includes:
+
+| Data | Purpose |
+|------|---------|
+| Belief percentage | The actual probability (e.g. 62%) |
+| Timestamp | When this data was recorded |
+| Confidence/validity metadata | Whether the data should be trusted |
+
+The metadata helps Ascend decide whether to use this oracle input or exclude it. If an oracle flags its own data as low-confidence, Ascend can reduce its weight or ignore it entirely.
+
+---
+
+## Aggregation Logic
+
+The Index Price is computed as a weighted average of valid oracle inputs.
+
+```
+Index Price = Σ (weight × oracle price)
+```
+
+Where:
+
+- Each oracle provides a belief percentage and timestamp
+- Weights are assigned based on liquidity depth, historical accuracy, and update frequency
+- All weights sum to 1
+
+**Example:**
+
+A Fed rate cut market has three oracle sources:
+
+| Source | Price | Weight |
+|--------|-------|--------|
+| Kalshi | 64% | 0.5 |
+| Polymarket | 62% | 0.4 |
+| Oracle C | 68% | 0.1 |
+
+```
+Index Price = (0.5 × 64) + (0.4 × 62) + (0.1 × 68)
+            = 32 + 24.8 + 6.8
+            = 63.6%
+```
+
+Kalshi has the highest weight because it has the deepest liquidity. Oracle C has low weight because it has less trading activity.
+
+---
+
+## Validation Rules
+
+Not all oracle inputs are treated equally. Ascend applies validation rules to maintain price integrity.
+
+<AccordionGroup>
+  <Accordion title="Staleness check" icon="clock">
+    If an oracle has not updated within a defined time window, it is excluded from the Index Price calculation. This prevents outdated information from distorting the reference price.
+
+    **Example:** If Polymarket data is 10 minutes old but the staleness threshold is 5 minutes, that input is excluded until fresh data arrives.
+  </Accordion>
+
+  <Accordion title="Outlier detection" icon="chart-scatter">
+    If an oracle price diverges significantly from other sources, it may be flagged or excluded. This protects against single-source manipulation or erroneous data.
+
+    **Example:** If Kalshi shows 65%, Polymarket shows 64%, but Oracle C suddenly shows 95%, Oracle C would be flagged as an outlier and excluded.
+  </Accordion>
+
+  <Accordion title="Minimum source threshold" icon="list-check">
+    Markets may require a minimum number of valid oracle inputs to compute an Index Price. If too few sources are available, the market may enter a restricted state until data resumes.
+
+    **Example:** If a market requires at least 2 valid sources but only 1 is currently updating, trading may be paused until another source comes online.
+  </Accordion>
+</AccordionGroup>
+
+These rules are deterministic and applied automatically. There is no manual intervention in Index Price computation.
+
+---
+
+## Update Cadence
+
+Index Prices update whenever:
+
+- One or more oracle inputs publish new data
+- A minimum time threshold is reached
+- Market-specific update conditions are satisfied
+
+All updates are timestamped and recorded. The update frequency depends on the underlying oracle infrastructure and market parameters.
+
+For fast-moving markets, updates may happen every few seconds. For slower markets, updates may be less frequent.
+
+---
+
+## Index Price vs Mark Price
+
+The Index Price is not used directly for trading operations. Instead, Ascend derives a Mark Price from the Index Price.
+
+| Price | Purpose |
+|-------|---------|
+| Index Price | External reference. Ground truth from oracles. |
+| Mark Price | Internal reference. Used for PnL, margin, and liquidation. |
+
+**Why the separation?**
+
+Imagine the Index Price suddenly jumps from 60% to 75% for 30 seconds due to a single large trade on Polymarket, then returns to 62%. Without smoothing, traders could get liquidated during that 30-second spike even though the "real" probability never changed.
+
+The Mark Price applies smoothing and stabilization to the Index Price. This prevents short-term noise, sudden spikes, or transient oracle issues from triggering unintended liquidations or PnL swings.
+
+The separation ensures:
+
+- Markets stay anchored to external truth
+- Traders are protected from momentary volatility
+- Risk management operates on stable signals
+
+---
+
+## Why Oracle-Sourced Pricing Matters
+
+Oracle-sourced pricing gives Ascend several advantages:
+
+- **Credibility**: Prices reflect real market consensus, not internal opinion
+- **Interoperability**: Ascend markets connect to the broader prediction ecosystem
+- **Decentralization**: No single venue controls price formation
+- **Transparency**: Oracle sources and weights are defined at market creation
+
+This design allows Ascend to offer leveraged trading on probabilities while maintaining the integrity that prediction markets require.
+
+---
+
+<Card
+  title="Next: Mark Price System"
+  icon="arrow-right"
+  href="/pricing-oracles/mark-price-system"
+>
+  Learn how the Mark Price stabilizes trading and protects positions
+</Card>

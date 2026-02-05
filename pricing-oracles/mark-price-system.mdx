@@ -1,0 +1,250 @@
+---
+title: 'Mark Price System'
+description: 'How Ascend stabilizes pricing for safe leveraged trading'
+---
+
+The Mark Price is the internal reference price used for all critical trading operations on Ascend. It determines your unrealized PnL, margin requirements, and liquidation thresholds.
+
+While the Index Price reflects external oracle data, the Mark Price applies smoothing and stabilization to protect traders from short-term noise and sudden spikes. This separation is fundamental to operating leveraged prediction perpetuals safely.
+
+---
+
+## Why Not Use the Index Price Directly?
+
+Prediction markets are sensitive to:
+
+- Thin liquidity causing price jumps
+- Sudden belief updates from breaking news
+- Oracle update granularity and timing gaps
+
+**Example scenario:**
+
+Breaking news drops. A whale buys $500k on Polymarket, spiking the price from 55% to 72% for 2 minutes. The news turns out to be a rumor. Price returns to 57%.
+
+If Ascend used the Index Price directly:
+
+- Traders with SHORT positions could get liquidated at 72%
+- Their positions would be closed at a loss
+- Two minutes later, they would have been fine
+
+Using the raw Index Price for liquidations and PnL would expose traders to:
+
+- Forced liquidations from short-lived belief spikes
+- PnL volatility unrelated to actual market conditions
+- Manipulation through brief oracle distortion
+
+The Mark Price ensures that risk is assessed on a stable signal, not on momentary noise.
+
+---
+
+## How the Mark Price Is Constructed
+
+The Mark Price is derived from the Index Price through three layers:
+
+<Steps>
+  <Step title="Smoothing (EMA Filter)">
+    An Exponential Moving Average dampens short-term fluctuations in the Index Price.
+
+    ```
+    Mark_t = Mark_t-1 + λ × (Index_t − Mark_t-1)
+    ```
+
+    Where:
+    - Mark_t-1 is the previous Mark Price
+    - Index_t is the current Index Price
+    - λ is the smoothing factor (between 0 and 1)
+
+    **What λ means in practice:**
+
+    | λ Value | Behavior | Use Case |
+    |---------|----------|----------|
+    | 0.1 | Very slow, very stable | Low-volatility event markets |
+    | 0.5 | Balanced | Most markets |
+    | 0.9 | Fast, less smoothing | High-frequency markets |
+
+    Lower λ means more stability and slower reaction. Higher λ means faster response to Index changes. Each market defines its own λ based on expected volatility.
+  </Step>
+  <Step title="Price Clamping">
+    The Mark Price is constrained to stay within a defined range of the Index Price.
+
+    ```
+    If |Mark − Index| > Clamp Limit:
+        Mark = Index ± Clamp Limit
+    ```
+
+    This prevents the Mark Price from drifting too far from reality while still providing stability. Clamp limits are market-specific and defined in percentage terms (e.g. ±1%).
+
+    **Why clamping matters:**
+
+    Without clamping, a very low λ could cause the Mark Price to lag far behind during a sustained move. A trader could enter at 50%, watch the Index move to 70%, but see their Mark Price stuck at 55%. The clamp ensures Mark stays within a reasonable distance of truth.
+  </Step>
+  <Step title="Precision Rounding">
+    The final Mark Price is rounded according to market precision rules (e.g. 2 decimal places).
+
+    This ensures consistent PnL calculation, deterministic settlement, and alignment between the UI and trading engine.
+  </Step>
+</Steps>
+
+---
+
+## Example: No Clamp Triggered
+
+Assume:
+
+- Index Price = 62.0%
+- Previous Mark Price = 60.5%
+- λ = 0.5
+- Clamp Limit = ±1.0%
+
+**Step 1: Apply EMA**
+
+```
+Mark_raw = 60.5 + 0.5 × (62.0 − 60.5)
+         = 60.5 + 0.75
+         = 61.25
+```
+
+**Step 2: Check Clamp**
+
+```
+|61.25 − 62.0| = 0.75
+0.75 < 1.0 → No clamp needed
+```
+
+**Final Mark Price = 61.25%**
+
+The Mark Price moved toward the Index but did not fully reach it due to smoothing.
+
+---
+
+## Example: Clamp Triggered
+
+Now assume a sudden Index spike:
+
+- Index Price = 72.0% (sudden jump)
+- Previous Mark Price = 60.5%
+- λ = 0.5
+- Clamp Limit = ±1.0%
+
+**Step 1: Apply EMA**
+
+```
+Mark_raw = 60.5 + 0.5 × (72.0 − 60.5)
+         = 60.5 + 5.75
+         = 66.25
+```
+
+**Step 2: Check Clamp**
+
+```
+|66.25 − 72.0| = 5.75
+5.75 > 1.0 → Clamp triggered
+```
+
+The Mark Price would be 5.75% away from the Index, which exceeds the 1% clamp limit.
+
+**Apply Clamp:**
+
+```
+Mark = Index − Clamp Limit
+     = 72.0 − 1.0
+     = 71.0
+```
+
+**Final Mark Price = 71.0%**
+
+The clamp pulled the Mark Price closer to the Index, ensuring it does not lag too far behind during a large move.
+
+---
+
+## How the Mark Price Is Used
+
+The Mark Price drives all internal trading operations:
+
+<CardGroup cols={2}>
+  <Card title="Unrealized PnL" icon="calculator">
+    Your position value is calculated using the Mark Price, not the Index Price. This ensures PnL reflects sustained belief movement rather than transient spikes.
+  </Card>
+
+  <Card title="Margin Requirements" icon="vault">
+    Initial and maintenance margin are evaluated against the Mark Price. This prevents sudden oracle jumps from instantly changing your margin status.
+  </Card>
+
+  <Card title="Liquidation Checks" icon="triangle-exclamation">
+    Liquidation thresholds reference the Mark Price. Temporary belief spikes cannot trigger liquidation if the Mark Price remains stable.
+  </Card>
+
+  <Card title="Funding Calculations" icon="arrows-rotate">
+    Funding rates are computed from the difference between Mark Price and Index Price, incentivizing convergence without destabilizing positions.
+  </Card>
+</CardGroup>
+
+---
+
+## Mark Price Behavior in Different Conditions
+
+<AccordionGroup>
+  <Accordion title="Normal trading" icon="check">
+    The Mark Price tracks the Index Price closely with slight smoothing. Traders experience stable PnL that reflects genuine market movement.
+
+    **Example:** Index moves from 60% to 62% over 5 minutes. Mark Price follows, reaching 61.8% in the same period.
+  </Accordion>
+
+  <Accordion title="Sudden Index spike" icon="bolt">
+    The EMA filter slows the Mark Price response. If the spike is temporary, the Mark Price may never fully reach the spike level before the Index returns to normal.
+
+    **Example:** Index spikes from 60% to 75% for 30 seconds, then returns to 62%. Mark Price rises to maybe 65%, then settles back to 62%. No liquidations triggered by the spike.
+  </Accordion>
+
+  <Accordion title="Sustained Index move" icon="arrow-trend-up">
+    The Mark Price converges toward the new Index level over time. The clamp ensures it cannot lag too far behind during sustained moves.
+
+    **Example:** Index moves from 60% to 80% over 10 minutes and stays there. Mark Price follows, staying within 1% of Index throughout the move.
+  </Accordion>
+
+  <Accordion title="Oracle irregularity" icon="circle-exclamation">
+    If oracle data becomes stale or erratic, the Mark Price maintains stability based on recent valid data. The clamp prevents extreme divergence.
+
+    **Example:** One oracle goes offline. Index Price recalculates with remaining sources. Mark Price continues smoothly without sudden jumps.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Parameters by Market
+
+Each market defines its own Mark Price parameters:
+
+| Parameter | Description | Example |
+|-----------|-------------|---------|
+| λ (smoothing factor) | How quickly Mark responds to Index changes | 0.3 to 0.7 |
+| Clamp Limit | Maximum allowed divergence from Index | ±0.5% to ±2% |
+| Precision | Decimal places for final Mark Price | 2 decimals |
+| Update Frequency | How often Mark Price recalculates | Per block or per second |
+
+These parameters are set at market creation and visible to all traders. Higher volatility markets may use higher λ and wider clamps. Stable markets may use lower λ and tighter clamps.
+
+---
+
+## Why This Matters
+
+The Mark Price system allows Ascend to:
+
+- Anchor markets to external truth through the Index Price
+- Protect traders from noise and manipulation through smoothing
+- Maintain stable, continuous trading even during volatile belief updates
+- Apply perpetual-style risk management to probability markets
+
+Without this separation, leveraged prediction markets would be vulnerable to the same issues that plague thin liquidity venues: flash crashes, manipulation, and unfair liquidations.
+
+The Mark Price makes leveraged prediction perpetuals viable.
+
+---
+
+<Card
+  title="Next: Margin & Liquidation"
+  icon="arrow-right"
+  href="/risk-margin/margin-liquidation"
+>
+  Learn how margin requirements and liquidation logic protect positions
+</Card>

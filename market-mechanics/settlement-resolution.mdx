@@ -1,8 +1,250 @@
 ---
 title: 'Settlement & Resolution'
-description: 'What happens when an outcome resolves'
+description: 'How markets resolve and positions settle'
 ---
 
-# Settlement & Resolution
+While Ascend markets trade continuously like perpetuals, many prediction markets are tied to real-world events that eventually resolve. When an event outcome becomes known, the market settles and all positions are finalized.
 
-Content coming soon...
+Settlement is deterministic, transparent, and rule-based. The same inputs always produce the same outcomes.
+
+---
+
+## How Resolution Works
+
+When an underlying event resolves:
+
+1. The final outcome is determined using predefined resolution criteria
+2. The resolved outcome establishes the final belief price
+3. All open positions settle at that price
+4. PnL is calculated and applied to trader balances
+
+**Example:**
+
+Market: "Will the Fed cut rates in June?"
+
+- On June 15, the Fed announces no rate cut
+- Resolution source confirms: NO
+- Final belief price: 0% (the outcome did not happen)
+- All LONG positions settle at 0%
+- All SHORT positions settle at 0%
+
+LONGs who bought at higher prices lose. SHORTs who sold at higher prices win.
+
+---
+
+## Resolution Sources
+
+Each market defines its resolution sources at creation. These are the authorities that determine the final outcome.
+
+<Tabs>
+  <Tab title="Official Sources">
+    Government announcements, regulatory filings, official results.
+
+    **Examples:**
+    - Federal Reserve press releases for rate decisions
+    - State election boards for election results
+    - SEC filings for corporate events
+
+    These are considered highest reliability.
+  </Tab>
+  <Tab title="Prediction Market Consensus">
+    Resolution based on how major prediction markets resolve.
+
+    **Examples:**
+    - Polymarket resolution
+    - Kalshi resolution
+    - Multiple platform consensus
+
+    Used when Ascend references external prediction markets.
+  </Tab>
+  <Tab title="Oracle Networks">
+    Decentralized oracle systems that aggregate multiple data sources.
+
+    **Examples:**
+    - Chainlink data feeds
+    - UMA optimistic oracle
+    - Custom oracle implementations
+
+    Used for asset-linked and composite markets.
+  </Tab>
+</Tabs>
+
+---
+
+## Resolution Criteria
+
+Resolution criteria are defined at market creation and cannot be changed. They specify exactly what outcome maps to what settlement price.
+
+**Example: Binary event market**
+
+Market: "Will BTC be above $100k on Dec 31?"
+
+| Outcome | Settlement Price |
+|---------|-----------------|
+| BTC closes above $100,000 | 100% |
+| BTC closes at or below $100,000 | 0% |
+
+**Example: Multi-outcome market**
+
+Market: "Who wins the 2028 presidential election?"
+
+| Outcome | Settlement Price |
+|---------|-----------------|
+| Candidate A wins | 100% for A, 0% for others |
+| Candidate B wins | 100% for B, 0% for others |
+| Candidate C wins | 100% for C, 0% for others |
+
+Only one outcome settles at 100%. All others settle at 0%.
+
+---
+
+## Settlement Process
+
+When resolution occurs:
+
+<Steps>
+  <Step title="Resolution triggered">
+    The resolution source confirms the outcome. This may happen immediately (election called) or after a delay (official certification).
+  </Step>
+  <Step title="Final price set">
+    The settlement price is set based on resolution criteria. For binary markets, this is 0% or 100%.
+  </Step>
+  <Step title="Positions settled">
+    All open positions are closed at the settlement price. PnL is calculated using entry price vs settlement price.
+  </Step>
+  <Step title="Balances updated">
+    Final PnL is applied to trader balances. Margin is released. The market transitions to settled state.
+  </Step>
+</Steps>
+
+---
+
+## Settlement PnL Calculation
+
+At settlement, your PnL is:
+
+```
+Settlement PnL = Direction × Position Size × (Settlement Price − Entry Price)
+```
+
+**Example: LONG position, outcome happens**
+
+- Entry Price: 55%
+- Settlement Price: 100% (outcome happened)
+- Position Size: 1,000 USDC
+- Direction: LONG (+1)
+
+```
+PnL = +1 × 1,000 × (1.00 − 0.55)
+    = 1,000 × 0.45
+    = +450 USDC
+```
+
+You profit 450 USDC.
+
+**Example: LONG position, outcome does not happen**
+
+- Entry Price: 55%
+- Settlement Price: 0% (outcome did not happen)
+- Position Size: 1,000 USDC
+- Direction: LONG (+1)
+
+```
+PnL = +1 × 1,000 × (0.00 − 0.55)
+    = 1,000 × (−0.55)
+    = −550 USDC
+```
+
+You lose 550 USDC.
+
+---
+
+## Exiting Before Settlement
+
+You do not have to hold until settlement. You can close your position at any time before resolution.
+
+**Why exit early:**
+
+- Lock in profits if the price has moved in your favor
+- Cut losses if conviction has changed
+- Free up margin for other trades
+- Avoid settlement uncertainty
+
+**Example:**
+
+You went LONG at 55%. Price rises to 72% as the event approaches. You can:
+
+- Hold until settlement and hope for 100%
+- Close now and take the 17 point profit
+
+If you close at 72%, your PnL is locked in regardless of the final outcome.
+
+---
+
+## What Happens After Settlement
+
+Once a market settles:
+
+- All positions are closed
+- No new positions can be opened
+- Historical data remains available
+- The market is archived
+
+Settled markets serve as a permanent record of the outcome and trading activity.
+
+---
+
+## Edge Cases
+
+<AccordionGroup>
+  <Accordion title="Ambiguous outcomes" icon="question">
+    Resolution criteria are designed to avoid ambiguity. If an edge case occurs that criteria do not clearly address, the market may use a fallback resolution mechanism defined at creation.
+
+    **Example:** A market on "Will X happen by Dec 31?" might specify that the resolution source's timezone is UTC, eliminating ambiguity.
+  </Accordion>
+
+  <Accordion title="Delayed resolution" icon="clock">
+    Some events take time to resolve (recounts, appeals, verification). Markets remain open for trading until official resolution. Prices may converge toward the expected outcome during this period.
+  </Accordion>
+
+  <Accordion title="Voided markets" icon="ban">
+    In rare cases, a market may be voided if the underlying event is canceled or resolution becomes impossible. Voided markets return all traders to their entry state. No profit or loss is realized.
+
+    **Example:** An election market where the election is postponed indefinitely.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Resolution Timeline
+
+| Phase | What Happens |
+|-------|--------------|
+| Trading | Market is open. Positions can be opened and closed. Prices fluctuate. |
+| Pending Resolution | Event has occurred. Awaiting official confirmation. Trading may continue. |
+| Resolution | Outcome confirmed. Settlement price set. |
+| Settlement | Positions closed. PnL applied. Margin released. |
+| Archived | Market closed permanently. Data preserved. |
+
+---
+
+## Deterministic Settlement
+
+Settlement on Ascend is fully deterministic:
+
+- The same resolution input always produces the same settlement price
+- The same position always produces the same PnL
+- No discretionary intervention is required
+- All calculations are transparent and verifiable
+
+This ensures fairness and predictability for all participants.
+
+---
+
+<Card
+  title="Next: Market Types"
+  icon="arrow-right"
+  href="/market-types/outcome-markets"
+>
+  Learn about the different types of markets on Ascend
+</Card>

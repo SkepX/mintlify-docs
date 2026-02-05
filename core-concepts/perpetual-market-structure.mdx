@@ -1,0 +1,157 @@
+---
+title: 'Perpetual Market Structure'
+description: 'Why Ascend markets never expire and how continuous trading works'
+---
+
+Traditional prediction markets work like bets. You buy a position, wait for the event, and settle. The contract expires. The market closes.
+
+Ascend works differently.
+
+Markets on Ascend are **perpetual**. They do not expire on a fixed date. Positions persist until you close them or the market reaches its defined settlement condition. You can enter, adjust, or exit at any time.
+
+This is the same structure used by the largest crypto derivatives exchanges, applied to prediction markets.
+
+---
+
+## Continuous, Not Discrete
+
+Prediction markets are traditionally structured around discrete contracts with fixed expiry windows.
+
+Ascend removes this constraint.
+
+<CardGroup cols={2}>
+  <Card title="Traditional Prediction Markets" icon="hourglass-end">
+    Fixed expiry date. Contract ends at resolution. Must re-enter for new exposure. Liquidity fragments across time windows.
+  </Card>
+
+  <Card title="Ascend Perpetuals" icon="infinity">
+    No fixed expiry. Positions persist continuously. Adjust exposure anytime. Liquidity concentrates in one venue.
+  </Card>
+</CardGroup>
+
+Belief prices update continuously based on trading activity and oracle inputs. The market is always open.
+
+---
+
+## Persistent Positions
+
+Once you open a position, it remains active until one of three things happens:
+
+<Steps>
+  <Step title="You close it">
+    You decide to exit. You take your PnL and move on.
+  </Step>
+  <Step title="Risk conditions trigger closure">
+    If margin requirements are no longer met, the system may reduce or close your position to protect market integrity.
+  </Step>
+  <Step title="The market settles">
+    The underlying event resolves and all positions settle at the final probability.
+  </Step>
+</Steps>
+
+Until one of these occurs, your position stays open. You are not forced out by a calendar.
+
+---
+
+## Orderbook-Driven Liquidity
+
+Ascend uses an orderbook model for price discovery.
+
+Traders place bids and offers around belief prices. Trades execute directly between participants. There is no AMM, no liquidity pool, no protocol-owned inventory.
+
+<Check>Prices reflect genuine supply and demand</Check>
+<Check>Depth forms organically around conviction levels</Check>
+<Check>Spreads tighten as participation increases</Check>
+<Check>No slippage from bonding curves</Check>
+
+The orderbook is the market.
+
+---
+
+## Price Alignment Mechanisms
+
+Perpetual markets need a way to stay anchored to reality. Without expiry forcing convergence, prices could drift from true belief levels.
+
+Ascend solves this with two mechanisms:
+
+<Tabs>
+  <Tab title="Oracle Anchoring">
+    Belief prices are sourced from external prediction markets and oracles. The **Index Price** represents the best available estimate of the true probability at any moment.
+
+    Ascend does not invent prices. It references them.
+  </Tab>
+  <Tab title="Funding">
+    When the traded price diverges from the Index Price, funding payments transfer between LONG and SHORT positions.
+
+    If traders push the price too high, LONGs pay SHORTs. If traders push the price too low, SHORTs pay LONGs.
+
+    This creates a continuous incentive to keep prices aligned with external signals.
+  </Tab>
+</Tabs>
+
+These mechanisms allow perpetual markets to track belief accurately without requiring forced settlement.
+
+---
+
+## Why Perpetual Structure Matters
+
+The perpetual model unlocks capabilities that traditional prediction markets cannot offer:
+
+| Capability | Traditional | Perpetual |
+|------------|-------------|-----------|
+| Continuous trading | ❌ Ends at expiry | ✅ Always open |
+| Leverage | ❌ Limited or none | ✅ Full margin framework |
+| Active management | ❌ Bet and wait | ✅ Enter, adjust, exit anytime |
+| Liquidity depth | ❌ Fragmented by expiry | ✅ Concentrated |
+| Real-time price discovery | ❌ Stale between trades | ✅ Continuous |
+
+Prediction markets become trading venues, not betting slips.
+
+---
+
+## How Ascend Remains a Perp Despite Resolution
+
+Some prediction markets do resolve. Elections happen. Decisions get announced. Events conclude.
+
+Does resolution break the perpetual model?
+
+No. Here is why:
+
+<AccordionGroup>
+  <Accordion title="Perpetual until resolved" icon="clock">
+    Markets trade continuously right up until the resolution condition is met. There is no arbitrary expiry date forcing closure before the event.
+  </Accordion>
+
+  <Accordion title="Not bound to timestamps" icon="calendar-xmark">
+    Traditional contracts expire on a specific date regardless of whether the event has occurred. Ascend markets expire only when the actual outcome is known.
+  </Accordion>
+
+  <Accordion title="No expiry cycles" icon="rotate">
+    There are no quarterly expiries, no contract migrations, no liquidity fragmentation. One market, one orderbook, continuous trading.
+  </Accordion>
+</AccordionGroup>
+
+Resolution is an endpoint, not an expiry. The market remains perpetual in structure even if it eventually settles.
+
+---
+
+## The Foundation
+
+Perpetual structure is not a feature. It is the foundation that makes everything else possible.
+
+<Check>Leverage requires continuous margin management. Perpetual enables this.</Check>
+<Check>Active trading requires persistent positions. Perpetual enables this.</Check>
+<Check>Deep liquidity requires concentrated venues. Perpetual enables this.</Check>
+<Check>Real-time price discovery requires continuous markets. Perpetual enables this.</Check>
+
+This is why Ascend is built as a perpetual exchange, not a prediction platform.
+
+---
+
+<Card
+  title="Next: Index Price & Oracle Layer"
+  icon="arrow-right"
+  href="/pricing-oracles/index-oracle-layer"
+>
+  Learn how external probability sources anchor Ascend markets
+</Card>

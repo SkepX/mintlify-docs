@@ -1,0 +1,240 @@
+---
+title: 'Margin Model'
+description: 'How margin and leverage define your position risk'
+---
+
+Every position on Ascend is backed by margin. Margin is the capital you commit to a trade. It enables leveraged exposure, absorbs losses, and defines the boundary of your risk.
+
+Understanding margin is essential to managing positions effectively.
+
+---
+
+## How Margin Works
+
+When you open a position, you post margin as collateral. This margin serves three purposes:
+
+- Enables leveraged exposure to probability movement
+- Absorbs unrealized losses as prices move against you
+- Defines the maximum you can lose on the trade
+
+The more margin you post relative to your position size, the more room your position has to absorb adverse price movement.
+
+---
+
+## Initial Margin
+
+Initial Margin (IM) is the capital required to open a position.
+
+It is determined by your position size and selected leverage:
+
+```
+Initial Margin = Position Notional / Leverage
+```
+
+**Example:**
+
+You want to open a 1,000 USDC notional position at 10x leverage.
+
+```
+Initial Margin = 1,000 / 10 = 100 USDC
+```
+
+You post 100 USDC to control 1,000 USDC of exposure.
+
+<CardGroup cols={2}>
+  <Card title="Lower leverage (5x)" icon="shield">
+    1,000 USDC position requires 200 USDC margin. More cushion against adverse moves.
+  </Card>
+
+  <Card title="Higher leverage (20x)" icon="bolt">
+    1,000 USDC position requires only 50 USDC margin. Less room for error.
+  </Card>
+</CardGroup>
+
+---
+
+## Maintenance Margin
+
+Maintenance Margin (MM) is the minimum equity required to keep a position open.
+
+It is defined as a fraction of your position notional:
+
+```
+Maintenance Margin = Maintenance Rate × Position Notional
+```
+
+The maintenance rate is set per market, typically between 1% and 5%.
+
+**Example:**
+
+Your position has 1,000 USDC notional. The market has a 2.5% maintenance rate.
+
+```
+Maintenance Margin = 0.025 × 1,000 = 25 USDC
+```
+
+As long as your equity stays above 25 USDC, your position remains open. If equity drops to or below this level, liquidation may be triggered.
+
+---
+
+## Position Equity
+
+Your position equity represents the real-time value of your position. It fluctuates constantly as prices move.
+
+```
+Equity = Initial Margin + Unrealized PnL − Accrued Funding
+```
+
+Where:
+
+- Initial Margin is what you posted when opening the position
+- Unrealized PnL changes as the Mark Price moves
+- Accrued Funding is the net funding paid or received
+
+**Example: Price moves in your favor**
+
+You open a LONG position with 100 USDC margin. The probability moves up, generating +30 USDC unrealized PnL. You have paid 2 USDC in funding.
+
+```
+Equity = 100 + 30 − 2 = 128 USDC
+```
+
+Your position equity is now 128 USDC.
+
+**Example: Price moves against you**
+
+Same position, but the market moves against you by 30 USDC instead:
+
+```
+Equity = 100 + (−30) − 2 = 68 USDC
+```
+
+Your equity dropped to 68 USDC.
+
+---
+
+## Margin Ratio
+
+The margin ratio shows how healthy your position is relative to the liquidation threshold:
+
+```
+Margin Ratio = Equity / Maintenance Margin
+```
+
+| Margin Ratio | Status |
+|--------------|--------|
+| > 2.0 | Healthy. Comfortable buffer. |
+| 1.5 to 2.0 | Caution. Monitor closely. |
+| 1.0 to 1.5 | Warning. Consider adding margin or reducing position. |
+| ≤ 1.0 | Liquidation zone. Position may be closed. |
+
+**Example:**
+
+Your equity is 68 USDC. Maintenance margin is 25 USDC.
+
+```
+Margin Ratio = 68 / 25 = 2.72
+```
+
+You are in healthy territory. But if equity drops to 30 USDC:
+
+```
+Margin Ratio = 30 / 25 = 1.2
+```
+
+Now you are in the warning zone. Time to consider adding margin or reducing your position.
+
+---
+
+## Isolated Margin
+
+Ascend uses isolated margin at the position level.
+
+This means:
+
+- Each position has its own margin
+- Risk is fully contained within each position
+- One position cannot draw collateral from another
+- Losses on one position do not affect others
+
+**Example:**
+
+You have two positions:
+
+| Position | Margin | Status |
+|----------|--------|--------|
+| BTC directional LONG | 100 USDC | Healthy |
+| Fed rate cut SHORT | 50 USDC | Near liquidation |
+
+If the Fed position gets liquidated, you lose at most 50 USDC. Your BTC position is completely unaffected.
+
+This isolation makes risk predictable. You always know the maximum you can lose on each trade.
+
+---
+
+## Leverage and Risk Relationship
+
+Higher leverage means:
+
+- Less margin required to open the same position
+- Greater sensitivity to price movement
+- Liquidation price closer to entry price
+- Less room for the market to move against you
+
+| Leverage | Margin for 1,000 USDC Position | Price Move to Liquidation |
+|----------|-------------------------------|---------------------------|
+| 5x | 200 USDC | ~17.5% |
+| 10x | 100 USDC | ~7.5% |
+| 20x | 50 USDC | ~2.5% |
+
+The numbers above assume a 2.5% maintenance rate. Actual liquidation prices depend on market parameters.
+
+---
+
+## Managing Your Margin
+
+You can actively manage margin on open positions:
+
+<AccordionGroup>
+  <Accordion title="Add margin" icon="plus">
+    Deposit additional margin to increase your equity buffer. This moves your liquidation price further away from the current price.
+
+    **When to use:** Your position is under pressure but you believe the market will reverse.
+  </Accordion>
+
+  <Accordion title="Remove margin" icon="minus">
+    Withdraw excess margin from a profitable position. This frees up capital for other trades.
+
+    **When to use:** Your position is healthy and you want to deploy capital elsewhere.
+  </Accordion>
+
+  <Accordion title="Reduce position" icon="minimize">
+    Close part of your position to lower your maintenance margin requirement and improve your margin ratio.
+
+    **When to use:** You want to reduce risk without closing entirely.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Risk Parameters by Market
+
+Each market defines its own margin parameters:
+
+| Parameter | Description | Typical Range |
+|-----------|-------------|---------------|
+| Maximum Leverage | Highest allowed leverage | 5x to 50x |
+| Maintenance Rate | Percentage of notional for MM | 1% to 5% |
+| Minimum Position Size | Smallest allowed position | Varies |
+
+These parameters are set at market creation and visible to all traders. Higher volatility markets typically have lower maximum leverage and higher maintenance rates.
+
+---
+
+<Card
+  title="Next: Liquidation Logic"
+  icon="arrow-right"
+  href="/risk-margin/liquidation-logic"
+>
+  Learn when and how positions get liquidated
+</Card>

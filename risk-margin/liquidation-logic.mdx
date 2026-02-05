@@ -1,0 +1,263 @@
+---
+title: 'Liquidation Logic'
+description: 'When and how positions get liquidated'
+---
+
+Liquidation is a protective mechanism that closes positions when they no longer have sufficient margin to absorb further losses. It protects the market from negative equity and ensures the system remains solvent.
+
+Liquidation is not punitive. It is a mechanical safety process that applies equally to all positions.
+
+---
+
+## When Liquidation Happens
+
+A position becomes eligible for liquidation when equity falls to or below the maintenance margin:
+
+```
+Equity ≤ Maintenance Margin
+```
+
+Or equivalently, when the margin ratio falls to 1.0 or below:
+
+```
+Margin Ratio ≤ 1.0
+```
+
+This condition is evaluated continuously using the Mark Price, not the Index Price. This ensures that temporary oracle spikes or manipulation cannot trigger liquidation.
+
+---
+
+## Liquidation Price
+
+The liquidation price is the probability level at which your position hits the liquidation threshold.
+
+**For a LONG position:**
+
+```
+Liquidation Price = Entry Price − (Initial Margin − Maintenance Margin) / Position Size
+```
+
+**For a SHORT position:**
+
+```
+Liquidation Price = Entry Price + (Initial Margin − Maintenance Margin) / Position Size
+```
+
+The difference between Initial Margin and Maintenance Margin represents how much loss your position can absorb before liquidation.
+
+---
+
+## Example: LONG Position Liquidation
+
+You open a LONG position:
+
+- Entry Price: 50%
+- Position Notional: 1,000 USDC
+- Initial Margin: 100 USDC (10x leverage)
+- Maintenance Margin: 25 USDC (2.5% rate)
+
+**Calculate liquidation price:**
+
+```
+Liquidation Price = 0.50 − (100 − 25) / 1,000
+                  = 0.50 − 0.075
+                  = 42.5%
+```
+
+**What happens as price falls:**
+
+| Mark Price | Unrealized PnL | Equity | Margin Ratio | Status |
+|------------|----------------|--------|--------------|--------|
+| 50% | 0 | 100 USDC | 4.0 | Healthy |
+| 48% | −20 USDC | 80 USDC | 3.2 | Healthy |
+| 45% | −50 USDC | 50 USDC | 2.0 | Caution |
+| 43% | −70 USDC | 30 USDC | 1.2 | Warning |
+| 42.5% | −75 USDC | 25 USDC | 1.0 | Liquidation |
+
+At 42.5%, equity equals maintenance margin. The position is now eligible for liquidation.
+
+---
+
+## Example: SHORT Position Liquidation
+
+You open a SHORT position:
+
+- Entry Price: 60%
+- Position Notional: 1,000 USDC
+- Initial Margin: 100 USDC (10x leverage)
+- Maintenance Margin: 25 USDC (2.5% rate)
+
+**Calculate liquidation price:**
+
+```
+Liquidation Price = 0.60 + (100 − 25) / 1,000
+                  = 0.60 + 0.075
+                  = 67.5%
+```
+
+**What happens as price rises:**
+
+| Mark Price | Unrealized PnL | Equity | Margin Ratio | Status |
+|------------|----------------|--------|--------------|--------|
+| 60% | 0 | 100 USDC | 4.0 | Healthy |
+| 63% | −30 USDC | 70 USDC | 2.8 | Healthy |
+| 65% | −50 USDC | 50 USDC | 2.0 | Caution |
+| 67% | −70 USDC | 30 USDC | 1.2 | Warning |
+| 67.5% | −75 USDC | 25 USDC | 1.0 | Liquidation |
+
+At 67.5%, the SHORT position hits the liquidation threshold.
+
+---
+
+## Liquidation Process
+
+When a position meets the liquidation condition:
+
+<Steps>
+  <Step title="Position flagged">
+    The system identifies that equity has fallen to or below maintenance margin.
+  </Step>
+  <Step title="Risk controls applied">
+    The position is queued for liquidation according to market rules.
+  </Step>
+  <Step title="Position reduced or closed">
+    The position is reduced or fully closed using deterministic mechanisms.
+  </Step>
+  <Step title="Settlement">
+    Remaining margin (if any) is returned to your balance. A liquidation fee is deducted. If losses exceed your margin, the insurance fund covers the shortfall.
+  </Step>
+</Steps>
+
+The entire process is automatic and rule-based. No manual intervention occurs.
+
+---
+
+## Partial vs Full Liquidation
+
+Depending on market configuration, Ascend may use different liquidation approaches:
+
+<Tabs>
+  <Tab title="Partial Liquidation">
+    The system gradually reduces your position size to restore equity above maintenance margin.
+
+    **How it works:**
+
+    1. A portion of your position is closed
+    2. This realizes some loss but frees up margin
+    3. If equity recovers above maintenance, liquidation stops
+    4. If not, another portion is closed
+
+    **Example:**
+
+    Your 1,000 USDC position hits liquidation. The system closes 400 USDC worth. Your new position is 600 USDC with lower maintenance requirement. If equity is now healthy, the remaining 600 USDC stays open.
+
+    **Benefit:** You may keep part of your position if the market stabilizes.
+  </Tab>
+  <Tab title="Full Liquidation">
+    The entire position is closed at once.
+
+    **When it happens:**
+
+    - Equity cannot be restored through partial liquidation
+    - Market conditions require immediate risk reduction
+    - Position size is too small to partially liquidate efficiently
+
+    **Example:**
+
+    Your 200 USDC position hits liquidation. Partial liquidation is not practical at this size. The full position is closed and remaining margin (minus fees) is returned.
+
+    **Outcome:** Position is fully closed. You receive any remaining margin.
+  </Tab>
+</Tabs>
+
+---
+
+## Liquidation Fees
+
+A liquidation fee is charged when a position is liquidated:
+
+| Fee Component | Description |
+|---------------|-------------|
+| Liquidation Penalty | Percentage of position notional (typically 0.5% to 2%) |
+| Insurance Fund Contribution | Portion of penalty goes to the insurance fund |
+
+These fees incentivize traders to manage their positions rather than relying on liquidation. They also fund the insurance pool that covers shortfalls.
+
+---
+
+## What the Insurance Fund Does
+
+Sometimes a position moves so fast that it cannot be liquidated before equity goes negative. The insurance fund covers these shortfalls.
+
+**Example:**
+
+- Your equity hits 25 USDC (liquidation threshold)
+- Before liquidation executes, price moves further
+- Position closes at −10 USDC equity (negative)
+- Insurance fund covers the 10 USDC shortfall
+
+The insurance fund is built from:
+
+- Liquidation fees
+- A portion of trading fees
+- Protocol reserves
+
+This ensures counterparties are always made whole, even in extreme conditions.
+
+---
+
+## Avoiding Liquidation
+
+You can take action before liquidation occurs:
+
+<AccordionGroup>
+  <Accordion title="Use lower leverage" icon="shield">
+    Lower leverage means your liquidation price is further from your entry. A 5x position can absorb twice the adverse move of a 10x position.
+
+    | Leverage | Liquidation Distance from Entry |
+    |----------|--------------------------------|
+    | 5x | ~17.5% |
+    | 10x | ~7.5% |
+    | 20x | ~2.5% |
+  </Accordion>
+
+  <Accordion title="Add margin before it's too late" icon="plus">
+    If a position moves against you, adding margin increases your equity and moves the liquidation price further away.
+
+    **Example:** Your liquidation price is 42.5%. You add 50 USDC margin. New liquidation price becomes 37.5%.
+  </Accordion>
+
+  <Accordion title="Reduce position size" icon="minimize">
+    Closing part of your position realizes some loss but reduces your maintenance margin requirement, improving your margin ratio.
+
+    **Example:** You close half your position. Maintenance margin drops from 25 USDC to 12.5 USDC. Your margin ratio improves.
+  </Accordion>
+
+  <Accordion title="Set stop losses" icon="hand">
+    Exit positions at a predetermined loss level rather than waiting for liquidation. This gives you control over your exit price and avoids liquidation fees.
+
+    **Example:** Your liquidation price is 42.5%. You set a stop loss at 45%. You exit with a smaller loss and no liquidation penalty.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Key Points
+
+- Liquidation triggers when equity ≤ maintenance margin
+- Mark Price is used for liquidation checks (not Index Price)
+- Partial liquidation may preserve some of your position
+- Liquidation fees apply and fund the insurance pool
+- You can avoid liquidation by managing leverage, margin, and position size
+
+Liquidation is a last resort. Active position management keeps you in control.
+
+---
+
+<Card
+  title="Next: Funding & Price Alignment"
+  icon="arrow-right"
+  href="/market-mechanics/funding-price-alignment"
+>
+  Learn how funding keeps prices aligned with external signals
+</Card>

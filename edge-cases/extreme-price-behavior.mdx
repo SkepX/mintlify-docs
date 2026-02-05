@@ -1,0 +1,89 @@
+---
+title: 'Extreme Price Behavior'
+description: 'How the system handles extreme price movements'
+---
+
+Prediction markets can experience sudden, dramatic price swings. Breaking news or large trades can push probabilities from 30% to 80% in minutes. Ascend is designed to handle these conditions while protecting traders.
+
+---
+
+## What Counts as Extreme
+
+- Rapid directional moves (20%+ change in minutes)
+- Flash spikes followed by immediate reversals
+- Price approaching boundaries (near 0% or 100%)
+- Thin liquidity causing outsized impact from single trades
+
+---
+
+## Mark Price Protection
+
+During extreme moves, the Mark Price system provides stability through EMA smoothing.
+
+**Example: Flash spike**
+
+| Time | Index | Mark | What Happens |
+|------|-------|------|--------------|
+| 0:00 | 55% | 55% | Normal trading |
+| 0:01 | 78% | 66% | Spike begins. Mark lags. |
+| 0:02 | 82% | 74% | Mark rises but stays behind. |
+| 0:03 | 58% | 66% | Index reverses. Mark smooths. |
+| 0:04 | 56% | 61% | Mark converges back. |
+
+The Mark Price never reached 82%. Traders were not liquidated at the spike peak.
+
+**If Mark lags too far during a sustained move**, clamping pulls it within range of the Index (e.g. ±5%). This ensures Mark tracks real moves while filtering noise.
+
+---
+
+## Liquidation During Volatility
+
+Liquidations use Mark Price, not Index Price.
+
+**Example:** Your LONG has liquidation at 42%. Index spikes to 38% for 30 seconds, then recovers to 52%. Mark only dropped to 45%. You were NOT liquidated.
+
+Without Mark Price smoothing, you would have been liquidated and missed the recovery.
+
+---
+
+## Circuit Breakers
+
+In extreme conditions, Ascend may automatically:
+
+- **Pause trading** temporarily to prevent cascading liquidations
+- **Widen spreads** reflecting increased uncertainty
+- **Reduce max leverage** for new positions during sustained volatility
+
+These activate based on predefined rules, not manual intervention.
+
+---
+
+## Trading Near Boundaries
+
+As prices approach 0% or 100%:
+
+| Position | Near 0% | Near 100% |
+|----------|---------|-----------|
+| LONG | High upside if rises, total loss if settles at 0% | Limited upside, expected settlement |
+| SHORT | Limited downside | High risk if outcome confirms |
+
+Small probability changes near boundaries create outsized PnL.
+
+---
+
+## Key Takeaways
+
+- Mark Price smoothing protects against flash spikes
+- Liquidations use Mark Price, not raw Index
+- Circuit breakers activate automatically in extreme conditions
+- Maintain margin buffer for unexpected volatility
+
+---
+
+<Card
+  title="Next: Belief Drift & Sudden Resolution"
+  icon="arrow-right"
+  href="/edge-cases/belief-drift-sudden-resolution"
+>
+  Learn how gradual drift and sudden resolution events are handled
+</Card>

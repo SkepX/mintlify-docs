@@ -1,8 +1,231 @@
 ---
 title: 'Funding & Price Alignment'
-description: 'How markets stay aligned to real outcome signals'
+description: 'How funding keeps traded prices aligned with external belief signals'
 ---
 
-# Funding & Price Alignment
+Funding is a continuous mechanism that keeps the traded price aligned with the external reference price. Without funding, perpetual markets could drift away from reality since there is no expiry date forcing convergence.
 
-Content coming soon...
+On Ascend, funding transfers value between LONG and SHORT positions based on how far the Mark Price has diverged from the Index Price. This creates a natural incentive for prices to stay anchored to external belief signals.
+
+---
+
+## Why Funding Exists
+
+In traditional futures, contracts expire. At expiry, the futures price must equal the spot price. This forces convergence.
+
+Perpetual markets have no expiry. So what keeps prices aligned?
+
+Funding.
+
+When the traded price diverges from the external reference:
+
+- If the Mark Price is above the Index Price, LONGs pay SHORTs
+- If the Mark Price is below the Index Price, SHORTs pay LONGs
+
+This creates pressure for the price to return to equilibrium. Traders on the "wrong" side of the divergence pay for the privilege. Traders on the "right" side get paid.
+
+---
+
+## The Two Prices
+
+Funding is calculated from the relationship between two prices:
+
+| Price | What It Represents |
+|-------|-------------------|
+| Index Price | External reference from oracles. The "true" belief. |
+| Mark Price | Internal trading price. Smoothed and stabilized. |
+
+When these prices diverge, funding kicks in to push them back together.
+
+---
+
+## Funding Rate Calculation
+
+The funding rate is proportional to the gap between Mark and Index:
+
+```
+Funding Rate = k × (Mark Price − Index Price)
+```
+
+Where:
+
+- k is the funding sensitivity coefficient (set per market)
+- The result is capped within predefined bounds
+
+**Example:**
+
+- Mark Price = 64%
+- Index Price = 62%
+- k = 0.1
+- Funding cap = ±0.05%
+
+```
+Funding Rate = 0.1 × (64 − 62)
+             = 0.1 × 2
+             = 0.2%
+```
+
+But the cap is ±0.05%, so:
+
+```
+Final Funding Rate = 0.05% (capped)
+```
+
+The cap prevents extreme funding rates during volatile periods.
+
+---
+
+## Who Pays Whom
+
+The funding direction depends on which price is higher:
+
+<Tabs>
+  <Tab title="Mark > Index (LONGs pay)">
+    The traded price is higher than external reality suggests.
+
+    - LONGs pay funding to SHORTs
+    - This discourages new LONG positions
+    - It encourages traders to SHORT, pushing price down
+    - Price converges back toward Index
+
+    **Example:** Mark is 64%, Index is 62%. LONGs are paying for the premium.
+  </Tab>
+  <Tab title="Mark < Index (SHORTs pay)">
+    The traded price is lower than external reality suggests.
+
+    - SHORTs pay funding to LONGs
+    - This discourages new SHORT positions
+    - It encourages traders to go LONG, pushing price up
+    - Price converges back toward Index
+
+    **Example:** Mark is 58%, Index is 62%. SHORTs are paying for the discount.
+  </Tab>
+  <Tab title="Mark ≈ Index (minimal funding)">
+    Prices are aligned.
+
+    - Funding rate is near zero
+    - Neither side pays significant funding
+    - Market is in equilibrium
+
+    **Example:** Mark is 62.1%, Index is 62%. Funding is negligible.
+  </Tab>
+</Tabs>
+
+---
+
+## Funding Payment Calculation
+
+Funding payments are proportional to your position size, not your margin:
+
+```
+Funding Payment = Position Notional × Funding Rate
+```
+
+**Example:**
+
+- Your position: 1,000 USDC notional LONG
+- Funding Rate: 0.05% (LONGs pay)
+
+```
+Funding Payment = 1,000 × 0.0005 = 0.50 USDC
+```
+
+You pay 0.50 USDC this funding interval.
+
+If you were SHORT instead, you would receive 0.50 USDC.
+
+---
+
+## Funding Intervals
+
+Funding accrues continuously but is applied at regular intervals:
+
+- Intervals are defined per market (e.g. every hour, every 8 hours)
+- The funding rate shown is typically the rate per interval
+- Payments are automatically added to or deducted from your equity
+
+**Example:**
+
+A market has hourly funding. The current funding rate is 0.01% per hour.
+
+- Over 24 hours, you would pay/receive approximately 0.24% of your position notional
+- This assumes the rate stays constant (it fluctuates based on price divergence)
+
+---
+
+## Funding and Your Equity
+
+Funding affects your position equity directly:
+
+```
+Equity = Initial Margin + Unrealized PnL − Accrued Funding
+```
+
+If you are paying funding:
+
+- Your equity decreases over time
+- This brings you closer to liquidation
+- Large positions in crowded trades can bleed significant funding
+
+If you are receiving funding:
+
+- Your equity increases over time
+- This provides a buffer against adverse price moves
+- You are being compensated for taking the less popular side
+
+---
+
+## Funding During Different Conditions
+
+<AccordionGroup>
+  <Accordion title="Normal markets" icon="check">
+    Mark and Index stay close. Funding rates are small. Neither side pays much.
+
+    **Example:** Mark oscillates between 61.8% and 62.2% around a 62% Index. Funding flips between small positive and negative values.
+  </Accordion>
+
+  <Accordion title="Strong directional bias" icon="arrow-trend-up">
+    Many traders pile into one side. Mark diverges from Index. The crowded side pays heavy funding.
+
+    **Example:** Breaking news makes everyone go LONG. Mark rises to 68% while Index is 64%. LONGs pay 0.05% per hour to SHORTs. This eventually attracts SHORTs and rebalances the market.
+  </Accordion>
+
+  <Accordion title="Low activity periods" icon="moon">
+    Few trades occur. Mark stays close to Index. Funding rates naturally approach zero.
+
+    No artificial pressure is introduced. The market remains fair even when quiet.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Why Funding Matters
+
+Funding serves critical functions:
+
+- **Price accuracy**: Keeps Ascend prices aligned with external prediction markets
+- **Balance**: Prevents one side from dominating indefinitely
+- **Sustainability**: Allows perpetual markets to function without expiry
+- **Incentives**: Rewards contrarian positions when markets get one-sided
+
+Without funding, leveraged prediction perpetuals would not work. Prices could disconnect from reality with no mechanism to pull them back.
+
+---
+
+## Key Points
+
+- Funding transfers value between LONGs and SHORTs based on price divergence
+- LONGs pay when Mark > Index; SHORTs pay when Mark < Index
+- Payments are proportional to position notional
+- Funding accrues continuously and applies at regular intervals
+- Heavy funding on one side signals a crowded trade
+
+---
+
+<Card
+  title="Next: CLOB & Matching"
+  icon="arrow-right"
+  href="/market-mechanics/clob-matching"
+>
+  Learn how the orderbook executes trades
+</Card>

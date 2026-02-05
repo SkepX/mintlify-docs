@@ -8,66 +8,58 @@
     "dark": "#871C08"
   },
   "favicon": "/favicon.svg",
-  "navigation": [
-    {
-      "group": "Start Here",
-      "pages": [
-        "start-here/outcomes-in-motion",
-        "start-here/what-is-ascend",
-        "start-here/vision"
-      ]
-    },
-    {
-      "group": "Core Concepts",
-      "pages": [
-        "core-concepts/outcome-probabilities",
-        "core-concepts/directional-outcome-trading",
-        "core-concepts/pnl-leverage-basics",
-        "core-concepts/index-oracle-layer",
-        "core-concepts/mark-price-system"
-      ]
-    },
-    {
-      "group": "Market Mechanics",
-      "pages": [
-        "market-mechanics/perpetual-outcome-markets",
-        "market-mechanics/settlement-resolution",
-        "market-mechanics/funding-price-alignment",
-        "market-mechanics/margin-risk-framework",
-        "market-mechanics/liquidation-logic"
-      ]
-    },
-    {
-      "group": "Trading Engine",
-      "pages": [
-        "trading-engine/orderbook-execution",
-        "trading-engine/continuous-pricing"
-      ]
-    },
-    {
-      "group": "Market Types",
-      "pages": [
-        "market-types/outcome-markets",
-        "market-types/rolling-outcome-markets",
-        "market-types/macro-outcome-markets"
-      ]
-    },
-    {
-      "group": "User Guides",
-      "pages": [
-        "user-guides/open-a-position",
-        "user-guides/manage-exposure",
-        "user-guides/close-settle-positions"
-      ]
-    },
-    {
-      "group": "Resources",
-      "pages": [
-        "resources/risk-disclosure",
-        "resources/faqs"
-      ]
-    }
-  ],
+  "navigation": {
+    "groups": [
+      {
+        "group": "Start Here",
+        "pages": [
+          "start-here/outcomes-in-motion",
+          "start-here/what-is-ascend",
+          "start-here/vision"
+        ]
+      },
+      {
+        "group": "Core Concepts",
+        "pages": [
+          "core-concepts/outcome-probabilities",
+          "core-concepts/directional-outcome-trading",
+          "core-concepts/pnl-leverage-basics",
+          "core-concepts/perpetual-market-structure",
+          "core-concepts/market-types"
+        ]
+      },
+      {
+        "group": "Pricing & Oracles",
+        "pages": [
+          "pricing-oracles/index-oracle-layer",
+          "pricing-oracles/mark-price-system"
+        ]
+      },
+      {
+        "group": "Risk & Margin",
+        "pages": [
+          "risk-margin/margin-model",
+          "risk-margin/liquidation-logic"
+        ]
+      },
+      {
+        "group": "Market Mechanics",
+        "pages": [
+          "market-mechanics/funding-price-alignment",
+          "market-mechanics/clob-matching",
+          "market-mechanics/settlement-resolution"
+        ]
+      },
+      {
+        "group": "Edge Cases",
+        "pages": [
+          "edge-cases/extreme-price-behavior",
+          "edge-cases/belief-drift-sudden-resolution",
+          "edge-cases/oracle-irregularities"
+        ]
+      }
+    ]
+  },
   "anchors": [
     {
       "name": "Main Site",

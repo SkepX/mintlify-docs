@@ -1,0 +1,81 @@
+---
+title: 'Oracle Irregularities'
+description: 'How oracle failures and irregularities are handled'
+---
+
+Ascend relies on external oracles to source belief prices. Like any external dependency, oracles can experience irregularities. The system is designed to handle these gracefully.
+
+---
+
+## Types of Irregularities
+
+| Type | What Happens | How It's Handled |
+|------|--------------|------------------|
+| Stale data | Oracle stops updating | Flagged and excluded after threshold |
+| Price spike | Extreme value reported | Outlier detection filters it |
+| Source disagreement | Oracles report conflicting prices | Weighted averaging smooths differences |
+| Complete outage | No data received | Fallback to remaining sources or pause |
+
+---
+
+## Layered Protection
+
+Oracle irregularities must pass through multiple defenses:
+
+<Steps>
+  <Step title="Oracle validation">
+    Bad data is flagged and excluded before entering the system. Staleness checks, outlier detection, and confidence metadata filter unreliable inputs.
+  </Step>
+  <Step title="Multi-source aggregation">
+    Index Price averages across multiple sources. No single source can dominate. If one fails, others continue.
+  </Step>
+  <Step title="Mark Price smoothing">
+    Even if bad data reaches the Index, the EMA smoothing dampens its impact on Mark Price.
+  </Step>
+  <Step title="Clamping">
+    Mark Price cannot diverge too far from Index too fast, limiting damage from any single irregularity.
+  </Step>
+</Steps>
+
+---
+
+## Example: Oracle Spike
+
+| Time | Index | Mark | Explanation |
+|------|-------|------|-------------|
+| 0:00 | 55% | 55% | Normal state |
+| 0:01 | 88% | 71% | Spike hits Index. Mark smooths. |
+| 0:02 | 56% | 63% | Index corrects. Mark follows. |
+| 0:03 | 55% | 59% | Convergence continues. |
+
+The Mark Price never reached 88%. Positions were protected.
+
+---
+
+## Market Restrictions
+
+If data quality is compromised:
+
+- **Single source outage**: Remaining sources continue. Weights renormalize.
+- **Multiple sources fail**: Market may enter restricted state. New positions blocked.
+- **Total outage**: Trading paused. No liquidations. Positions preserved until data returns.
+
+---
+
+## Key Takeaways
+
+- Multiple validation layers protect against bad data
+- Mark Price smoothing adds another buffer
+- Markets may pause if oracle quality is compromised
+- All oracle handling is deterministic and transparent
+- Brief irregularities typically don't affect your positions
+
+---
+
+<Card
+  title="Back to Start"
+  icon="arrow-left"
+  href="/start-here/outcomes-in-motion"
+>
+  Return to the beginning
+</Card>
