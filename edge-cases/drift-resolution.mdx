@@ -1,0 +1,96 @@
+---
+title: 'Drift & Resolution'
+description: 'How prices move gradually vs jump instantly at the end'
+---
+
+Prices move in two ways: slowly over time, or all at once when the event resolves. Both matter for how you manage positions.
+
+---
+
+## Slow Drift
+
+Drift is when prices creep in one direction as news trickles in.
+
+**Example:** A market on "Will Company X be acquired?" moves from 25% to 61% over three months. No single event caused a big jump. It just drifted.
+
+**What to watch:**
+
+- **Funding adds up**: Holding a crowded position for weeks means paying funding the whole time
+- **Margin shrinks quietly**: A slow move against you can bring you close to liquidation before you notice
+
+**Tip:** Check your margin daily if the price is drifting against you. Add margin early.
+
+---
+
+## Instant Resolution
+
+Resolution is when the outcome becomes known and the price jumps to 0% or 100% in seconds.
+
+**Examples:** Election results, Fed decisions, merger announcements.
+
+**What happens:**
+
+1. The outcome is confirmed
+2. Price jumps to 0% or 100%
+3. All positions settle instantly
+4. Your PnL is locked in
+
+---
+
+## What You Make (or Lose) at Resolution
+
+| Entry | Direction | If settles at 100% | If settles at 0% |
+|-------|-----------|-------------------|------------------|
+| 40% | LONG | +60% | -40% |
+| 40% | SHORT | -60% | +40% |
+| 70% | LONG | +30% | -70% |
+| 70% | SHORT | -30% | +70% |
+
+**The higher your entry, the more a LONG can lose.** At 70%, a LONG only gains 30% if right, but loses 70% if wrong.
+
+---
+
+## You Do Not Have to Hold Through Resolution
+
+<Tabs>
+  <Tab title="Take profit early">
+    If price moved from 40% to 75%, you can close and take the 35 point gain. You do not have to wait for the final outcome.
+  </Tab>
+  <Tab title="Reduce size">
+    Lower your position or leverage before known events. Smaller position means smaller max loss.
+  </Tab>
+  <Tab title="Hold through">
+    Some traders want the full payout. If your thesis is strong and your size is right, holding through is fine.
+  </Tab>
+</Tabs>
+
+---
+
+## When Resolution Surprises You
+
+Sometimes things resolve earlier or differently than expected:
+
+- A candidate drops out
+- A deal gets announced ahead of schedule
+- Results are contested
+
+Ascend uses predefined rules for every market. No one decides manually. If the outcome cannot be determined, the market may be voided and positions returned.
+
+---
+
+## Summary
+
+- Drift is slow. Watch funding costs and margin erosion.
+- Resolution is instant. Price jumps to 0% or 100%.
+- You can exit anytime before resolution.
+- Higher entry = more downside for LONGs.
+
+---
+
+<Card
+  title="Next: Oracle Irregularities"
+  icon="arrow-right"
+  href="/edge-cases/oracle-irregularities"
+>
+  Learn how oracle failures are handled
+</Card>

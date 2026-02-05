@@ -54,7 +54,7 @@
         "group": "Edge Cases",
         "pages": [
           "edge-cases/extreme-price-behavior",
-          "edge-cases/probability-drift-sudden-resolution",
+          "edge-cases/drift-resolution",
           "edge-cases/oracle-irregularities"
         ]
       }
