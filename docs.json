@@ -73,7 +73,7 @@
   ],
   "logo": {
     "light": "/images/Dark.svg",
-    "dark": "/images/Dark.svg"
+    "dark": "/images/Light.svg"
   },
   "topbarLinks": [
     {
