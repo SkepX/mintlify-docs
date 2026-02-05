@@ -9,7 +9,7 @@ Ascend supports three types of markets, each designed for different trading need
 
 ## Outcome Markets
 
-Outcome markets represent beliefs about specific real-world events. Will something happen or not? Who will win? What will the result be?
+Outcome markets represent probabilities for specific real-world events. Will something happen or not? Who will win? What will the result be?
 
 These are the classic prediction markets, now with leverage.
 
@@ -175,7 +175,7 @@ Rolling markets turn recurring predictions into continuous exposure.
 
 ## Macro Outcome Markets
 
-Macro outcome markets track directional beliefs about traditional assets: equities, metals, commodities, indices. You're not trading the asset itself. You're trading the probability of directional movement.
+Macro outcome markets track directional probabilities about traditional assets: equities, metals, commodities, indices. You're not trading the asset itself. You're trading the probability of directional movement.
 
 **Examples:**
 
@@ -188,7 +188,7 @@ Macro outcome markets track directional beliefs about traditional assets: equiti
 
 ### What You're Trading
 
-In macro markets, you trade a belief percentage, not the underlying asset.
+In macro markets, you trade a probability, not the underlying asset.
 
 **Example:**
 
@@ -203,29 +203,29 @@ If you think gold sentiment will increase, go LONG. If you think it will decreas
 
 ---
 
-### Belief Price Sources
+### Probability Price Sources
 
-Macro belief prices come from:
+Macro probability prices come from:
 
 - Spot prediction markets on asset direction
 - Aggregated sentiment oracles
 - Options flow and positioning data
 - Custom composite indicators
 
-Ascend provides the leveraged perpetual layer on top of these belief signals.
+Ascend provides the leveraged perpetual layer on top of these probability signals.
 
 ---
 
-### Rolling Beliefs for Macro
+### Rolling Probabilities for Macro
 
 Macro markets use the same rolling mechanism as crypto directional markets:
 
-- Belief prices evolve continuously
+- Probability prices evolve continuously
 - Positions persist indefinitely by default
 - Periodic checkpoints may realize PnL
 - No forced expiry
 
-You maintain exposure to macro directional beliefs without managing contract rolls.
+You maintain exposure to macro directional probabilities without managing contract rolls.
 
 ---
 
@@ -237,7 +237,7 @@ You maintain exposure to macro directional beliefs without managing contract rol
   </Accordion>
 
   <Accordion title="Express macro views with leverage" icon="chart-line">
-    You believe the Fed will be hawkish, hurting equities. Go SHORT on S&P bullish sentiment with 5x leverage. Small moves in belief create meaningful returns.
+    You believe the Fed will be hawkish, hurting equities. Go SHORT on S&P bullish sentiment with 5x leverage. Small moves in probability create meaningful returns.
   </Accordion>
 
   <Accordion title="Trade relative value" icon="scale-balanced">

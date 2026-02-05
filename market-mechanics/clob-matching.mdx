@@ -1,9 +1,9 @@
 ---
 title: 'CLOB & Matching'
-description: 'How the orderbook executes trades on belief prices'
+description: 'How the orderbook executes trades on probability prices'
 ---
 
-Ascend uses a Central Limit Order Book (CLOB) for price discovery and trade execution. Traders place bids and offers at specific belief prices, and the matching engine pairs compatible orders.
+Ascend uses a Central Limit Order Book (CLOB) for price discovery and trade execution. Traders place bids and offers at specific probability prices, and the matching engine pairs compatible orders.
 
 This is the same orderbook model used by major exchanges. No AMM, no bonding curves, no protocol-owned liquidity. Just traders trading with each other.
 
@@ -11,12 +11,14 @@ This is the same orderbook model used by major exchanges. No AMM, no bonding cur
 
 ## How the Orderbook Works
 
-The orderbook is a list of all open orders, organized by price and time.
+The orderbook is a live list of open orders, split into two sides:
 
-**Bid side:** Orders to go LONG (buy) at a specific belief price or lower
-**Ask side:** Orders to go SHORT (sell) at a specific belief price or higher
+- **Bids (LONG):** Buyers posting "I will pay up to this price." The highest bid is the best one. It is closest to getting filled.
+- **Asks (SHORT):** Sellers posting "I will accept this price or higher." The lowest ask is the best one. It is closest to getting filled.
 
-**Example orderbook for a Fed rate cut market:**
+The gap between the best bid and the best ask is called the **spread**. That is the cost of trading immediately.
+
+**Example: Fed rate cut market:**
 
 | Bids (LONG) | Price | Asks (SHORT) |
 |-------------|-------|--------------|
@@ -26,9 +28,12 @@ The orderbook is a list of all open orders, organized by price and time.
 | 2,000 USDC | 62% | |
 | 1,500 USDC | 61% | |
 
-The best bid is 63%. The best ask is 64%. The spread is 1%.
+Reading this: the best bid is **63%** (the highest price a buyer posted). The best ask is **64%** (the lowest price a seller posted). The spread is **1%**, the gap between them.
 
-If you want to go LONG immediately, you pay 64% (the best ask). If you want to go SHORT immediately, you receive 63% (the best bid).
+- Want to go **LONG** right now? You match the best ask and pay **64%**.
+- Want to go **SHORT** right now? You match the best bid and receive **63%**.
+
+Want a better price? Place a limit order and wait for someone to match you.
 
 ---
 
@@ -194,7 +199,7 @@ Prices on Ascend update continuously as orders are placed, matched, and canceled
 
 Every trade prints a new price. Every new limit order changes the orderbook state. The "current price" is always the midpoint between best bid and best ask, or the last traded price.
 
-This continuous process is how belief prices evolve in real time as traders express their views.
+This continuous process is how probability prices evolve in real time as traders express their views.
 
 ---
 

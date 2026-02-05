@@ -14,7 +14,7 @@ While the Index Price reflects external oracle data, the Mark Price applies smoo
 Prediction markets are sensitive to:
 
 - Thin liquidity causing price jumps
-- Sudden belief updates from breaking news
+- Sudden probability updates from breaking news
 - Oracle update granularity and timing gaps
 
 **Example scenario:**
@@ -29,7 +29,7 @@ If Ascend used the Index Price directly:
 
 Using the raw Index Price for liquidations and PnL would expose traders to:
 
-- Forced liquidations from short-lived belief spikes
+- Forced liquidations from short-lived probability spikes
 - PnL volatility unrelated to actual market conditions
 - Manipulation through brief oracle distortion
 
@@ -163,7 +163,7 @@ The Mark Price drives all internal trading operations:
 
 <CardGroup cols={2}>
   <Card title="Unrealized PnL" icon="calculator">
-    Your position value is calculated using the Mark Price, not the Index Price. This ensures PnL reflects sustained belief movement rather than transient spikes.
+    Your position value is calculated using the Mark Price, not the Index Price. This ensures PnL reflects sustained probability movement rather than transient spikes.
   </Card>
 
   <Card title="Margin Requirements" icon="vault">
@@ -171,7 +171,7 @@ The Mark Price drives all internal trading operations:
   </Card>
 
   <Card title="Liquidation Checks" icon="triangle-exclamation">
-    Liquidation thresholds reference the Mark Price. Temporary belief spikes cannot trigger liquidation if the Mark Price remains stable.
+    Liquidation thresholds reference the Mark Price. Temporary probability spikes cannot trigger liquidation if the Mark Price remains stable.
   </Card>
 
   <Card title="Funding Calculations" icon="arrows-rotate">
@@ -232,7 +232,7 @@ The Mark Price system allows Ascend to:
 
 - Anchor markets to external truth through the Index Price
 - Protect traders from noise and manipulation through smoothing
-- Maintain stable, continuous trading even during volatile belief updates
+- Maintain stable, continuous trading even during volatile probability updates
 - Apply perpetual-style risk management to probability markets
 
 Without this separation, leveraged prediction markets would be vulnerable to the same issues that plague thin liquidity venues: flash crashes, manipulation, and unfair liquidations.

@@ -29,7 +29,7 @@ Ascend removes this constraint.
   </Card>
 </CardGroup>
 
-Belief prices update continuously based on trading activity and oracle inputs. The market is always open.
+Probability prices update continuously based on trading activity and oracle inputs. The market is always open.
 
 ---
 
@@ -57,7 +57,7 @@ Until one of these occurs, your position stays open. You are not forced out by a
 
 Ascend uses an orderbook model for price discovery.
 
-Traders place bids and offers around belief prices. Trades execute directly between participants. There is no AMM, no liquidity pool, no protocol-owned inventory.
+Traders place bids and offers around probability prices. Trades execute directly between participants. There is no AMM, no liquidity pool, no protocol-owned inventory.
 
 <Check>Prices reflect genuine supply and demand</Check>
 <Check>Depth forms organically around conviction levels</Check>
@@ -70,13 +70,13 @@ The orderbook is the market.
 
 ## Price Alignment Mechanisms
 
-Perpetual markets need a way to stay anchored to reality. Without expiry forcing convergence, prices could drift from true belief levels.
+Perpetual markets need a way to stay anchored to reality. Without expiry forcing convergence, prices could drift from true probability levels.
 
 Ascend solves this with two mechanisms:
 
 <Tabs>
   <Tab title="Oracle Anchoring">
-    Belief prices are sourced from external prediction markets and oracles. The **Index Price** represents the best available estimate of the true probability at any moment.
+    Probability prices are sourced from external prediction markets and oracles. The **Index Price** represents the best available estimate of the true probability at any moment.
 
     Ascend does not invent prices. It references them.
   </Tab>
@@ -89,7 +89,7 @@ Ascend solves this with two mechanisms:
   </Tab>
 </Tabs>
 
-These mechanisms allow perpetual markets to track belief accurately without requiring forced settlement.
+These mechanisms allow perpetual markets to track probability accurately without requiring forced settlement.
 
 ---
 

@@ -3,7 +3,7 @@ title: 'Index & Oracle Layer'
 description: 'How outcome probabilities are sourced, aggregated, and validated'
 ---
 
-Ascend does not invent probabilities. Every belief price on the platform is anchored to external sources through the Index Price.
+Ascend does not invent probabilities. Every probability price on the platform is anchored to external sources through the Index Price.
 
 The Index Price represents the best available estimate of the true probability at any moment. It is derived from real prediction markets, oracle feeds, and external data sources. This design ensures that Ascend markets remain grounded in actual market information rather than internal speculation.
 
@@ -46,7 +46,7 @@ Each market defines its oracle sources at creation. The sources depend on the ma
 
     - Directional sentiment oracles
     - Spot price feeds from major exchanges
-    - Composite belief indicators
+    - Composite probability indicators
 
     These oracles translate asset price expectations into probability format.
 
@@ -73,7 +73,7 @@ When an oracle sends data to Ascend, it includes:
 
 | Data | Purpose |
 |------|---------|
-| Belief percentage | The actual probability (e.g. 62%) |
+| Probability | The actual probability (e.g. 62%) |
 | Timestamp | When this data was recorded |
 | Confidence/validity metadata | Whether the data should be trusted |
 
@@ -91,7 +91,7 @@ Index Price = Σ (weight × oracle price)
 
 Where:
 
-- Each oracle provides a belief percentage and timestamp
+- Each oracle provides a probability and timestamp
 - Weights are assigned based on liquidity depth, historical accuracy, and update frequency
 - All weights sum to 1
 

@@ -1,11 +1,11 @@
 ---
 title: 'Funding & Price Alignment'
-description: 'How funding keeps traded prices aligned with external belief signals'
+description: 'How funding keeps traded prices aligned with external probability signals'
 ---
 
 Funding is a continuous mechanism that keeps the traded price aligned with the external reference price. Without funding, perpetual markets could drift away from reality since there is no expiry date forcing convergence.
 
-On Ascend, funding transfers value between LONG and SHORT positions based on how far the Mark Price has diverged from the Index Price. This creates a natural incentive for prices to stay anchored to external belief signals.
+On Ascend, funding transfers value between LONG and SHORT positions based on how far the Mark Price has diverged from the Index Price. This creates a natural incentive for prices to stay anchored to external probability signals.
 
 ---
 
@@ -32,7 +32,7 @@ Funding is calculated from the relationship between two prices:
 
 | Price | What It Represents |
 |-------|-------------------|
-| Index Price | External reference from oracles. The "true" belief. |
+| Index Price | External reference from oracles. The "true" probability. |
 | Mark Price | Internal trading price. Smoothed and stabilized. |
 
 When these prices diverge, funding kicks in to push them back together.
