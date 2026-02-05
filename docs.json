@@ -103,5 +103,6 @@
       "github": "https://github.com/ascend",
       "discord": "https://discord.gg/ascend"
     }
-  }
+  },
+  "isWhiteLabeled": true
 }
