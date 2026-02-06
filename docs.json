@@ -50,6 +50,12 @@
           "market-mechanics/settlement-resolution",
           "market-mechanics/edge-cases"
         ]
+      },
+      {
+        "group": "$ASCEND",
+        "pages": [
+          "ascend/tokenomics"
+        ]
       }
     ]
   },
