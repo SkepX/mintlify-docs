@@ -56,6 +56,13 @@
         "pages": [
           "ascend/tokenomics"
         ]
+      },
+      {
+        "group": "Tech Docs",
+        "pages": [
+          "tech-docs/architecture",
+          "tech-docs/api-docs"
+        ]
       }
     ]
   },

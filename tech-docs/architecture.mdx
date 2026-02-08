@@ -1,0 +1,135 @@
+---
+title: "Architecture Overview"
+description: "Technical architecture of the Ascend protocol"
+---
+
+## Introduction
+
+Ascend is a **fully verifiable event perpetuals decentralized exchange** enabling leveraged trading on **outcome probabilities**. Ascend supports **Cardano, EVM, and Solana environments**, while enforcing all trading, risk, account, and settlement logic within Midnight, a **Cardano partnerchain** with **multi-resource consensus and native privacy.**
+
+Ascend inspires from Midnight's **Minotaur philosophy** for **multichain DeFi execution**, privacy focused, policy-driven model to:
+
+- Order execution
+- Margin and leverage enforcement
+- Liquidation logic
+- Event settlement
+
+This allows execution rights, capital, risk, and permissions to be treated as **distinct yet composable resources**, all enforced under zero-knowledge guarantees.
+
+Ascend adopts a **ZK-enforced execution architecture**, where all user actions are finalized on Midnight.
+
+The architecture is designed to:
+
+- Maximize throughput
+- Preserve user privacy
+- Provide cryptographic guarantees of correctness
+- Maintain a single canonical execution state
+
+<Frame>
+  <img src="/images/architecture-diagram.png" alt="Ascend Architecture Diagram" />
+</Frame>
+
+---
+
+## Ascend Engines
+
+Instead of separating execution into off-chain and on-chain domains, Ascend structures protocol logic into **deterministic execution engines**, each enforced through Midnight ZK verification.
+
+### Core Engines
+
+| Ascend Engine | Responsibility |
+|---------------|----------------|
+| Matching Engine | Executes probability-priced event perpetual orders |
+| Risk Engine | Evaluates margin, leverage, and liquidation conditions |
+| Account Engine | Manages funding and trading account state |
+| Fund Control Engine | Handles internal and external fund movements |
+| Event Engine | Governs event lifecycle and resolution |
+
+All engine outputs are subject to **ZK-verified constraints** and committed via Midnight.
+
+---
+
+## Execution & Verification
+
+### Trade Execution
+
+- Orders are signed using **native ecosystem credentials** (Cardano, EVM or Solana)
+- Orders are interpreted by the Ascend Matching Engine
+- Execution results are validated by the Risk Engine
+- Final state transitions are proven and committed on Midnight
+
+### Risk & Liquidation Enforcement
+
+- Margin requirements are evaluated per trading account
+- Liquidation conditions are checked deterministically
+- Liquidation actions are only applied if ZK-verified as fair
+
+---
+
+## Accounts & Users
+
+### Funding Account
+
+A **Funding Account** represents the primary on-chain ownership entity within Ascend.
+
+Its responsibilities include:
+
+- Accepting and managing deposits
+- Processing withdrawals
+- Transferring funds to other funding accounts
+- Allocating capital to associated trading accounts
+
+Each funding account tracks:
+
+- Available and locked collateral
+- Associated trading accounts
+- Assigned permissions and roles
+- Configured multi-signature approval thresholds
+
+---
+
+### Trading Account
+
+- Trading accounts are **subordinate accounts** associated with a funding account
+- Dedicated exclusively to trading operations
+- Enforce isolated margin per account
+- Maintain independent liquidation conditions
+
+A single funding account can be linked to **multiple trading accounts**, consistent with the account hierarchy used in comparable ZK-enabled exchange architectures.
+
+---
+
+## Account State Model
+
+### On-Chain Accounting
+
+All account-related state is maintained as **zero-knowledge–verified state on Midnight**.
+
+**Funding Account state** includes:
+
+- Aggregate collateral balance
+- References to linked trading accounts
+- Role and permission assignments
+- Multi-signature policy configuration
+
+**Trading Account state** includes:
+
+- Active positions
+- Margin utilization
+- Accrued funding adjustments
+- Liquidation eligibility status
+
+---
+
+## Identity & Credentials
+
+Ascend implements a **fully cryptographic identity framework** working with existing KYC, KYB and identity providers.
+
+### Identity Principles
+
+- A single user may control multiple protocol accounts
+- Account ownership is tied to one or more cryptographic keys
+- Authorization is enforced through signed actions
+- No separate Web2 identity layer is required for protocol-level execution
+
+This model removes the need for a Web2/Web3 credential split while preserving equivalent permissioning and access guarantees found in other institutional-grade trading systems.
