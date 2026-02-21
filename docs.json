@@ -52,12 +52,6 @@
         ]
       },
       {
-        "group": "$ASCEND",
-        "pages": [
-          "ascend/tokenomics"
-        ]
-      },
-      {
         "group": "Tech Docs",
         "pages": [
           "tech-docs/architecture",
