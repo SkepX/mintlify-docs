@@ -61,7 +61,8 @@
         "group": "Tech Docs",
         "pages": [
           "tech-docs/architecture",
-          "tech-docs/api-reference"
+          "tech-docs/api-reference",
+          "tech-docs/testnet-guide"
         ]
       }
     ]
