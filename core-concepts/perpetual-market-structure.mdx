@@ -78,7 +78,7 @@ Ascend solves this with two mechanisms:
   <Tab title="Oracle Anchoring">
     Probability prices are sourced from external prediction markets and oracles. The **Index Price** represents the best available estimate of the true probability at any moment.
 
-    Ascend does not invent prices. It references them.
+    Ascend does not invent prices. They are pulled from external sources.
   </Tab>
   <Tab title="Funding">
     When the traded price diverges from the Index Price, funding payments transfer between LONG and SHORT positions.
@@ -106,32 +106,6 @@ The perpetual model unlocks capabilities that traditional prediction markets can
 | Real-time price discovery | ❌ Stale between trades | ✅ Continuous |
 
 Prediction markets become trading venues, not betting slips.
-
----
-
-## How Ascend Remains a Perp Despite Resolution
-
-Some prediction markets do resolve. Elections happen. Decisions get announced. Events conclude.
-
-Does resolution break the perpetual model?
-
-No. Here is why:
-
-<AccordionGroup>
-  <Accordion title="Perpetual until resolved" icon="clock">
-    Markets trade continuously right up until the resolution condition is met. There is no arbitrary expiry date forcing closure before the event.
-  </Accordion>
-
-  <Accordion title="Not bound to timestamps" icon="calendar-xmark">
-    Traditional contracts expire on a specific date regardless of whether the event has occurred. Ascend markets expire only when the actual outcome is known.
-  </Accordion>
-
-  <Accordion title="No expiry cycles" icon="rotate">
-    There are no quarterly expiries, no contract migrations, no liquidity fragmentation. One market, one orderbook, continuous trading.
-  </Accordion>
-</AccordionGroup>
-
-Resolution is an endpoint, not an expiry. The market remains perpetual in structure even if it eventually settles.
 
 ---
 

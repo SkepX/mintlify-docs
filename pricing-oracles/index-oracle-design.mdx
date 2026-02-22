@@ -37,7 +37,7 @@ Each market defines its oracle sources at creation. The sources depend on the ma
     - Kalshi prices
     - Other regulated prediction venues
 
-    These platforms already price thousands of outcomes with real liquidity. Ascend references them rather than recreating the signal.
+    These platforms already price thousands of outcomes with real liquidity. Ascend uses them for reference.
 
     **Example:** A market on "Who will win the 2028 election?" might pull prices from both Kalshi and Polymarket, where thousands of traders have already expressed their views.
   </Tab>
@@ -184,7 +184,7 @@ The separation ensures:
 
 Oracle-sourced pricing gives Ascend several advantages:
 
-- **Credibility**: Prices reflect real market consensus, not internal opinion
+- **Credibility**: Prices reflect real market consensus
 - **Interoperability**: Ascend markets connect to the broader prediction ecosystem
 - **Decentralization**: No single venue controls price formation
 - **Transparency**: Oracle sources and weights are defined at market creation
