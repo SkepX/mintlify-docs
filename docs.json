@@ -66,16 +66,6 @@
       "name": "Main Site",
       "icon": "globe",
       "url": "https://ascend.com"
-    },
-    {
-      "name": "Twitter",
-      "icon": "twitter",
-      "url": "https://x.com/ascend"
-    },
-    {
-      "name": "Discord",
-      "icon": "discord",
-      "url": "https://discord.gg/ascend"
     }
   ],
   "logo": {
@@ -88,10 +78,6 @@
       "url": "https://ascend.com"
     }
   ],
-  "topbarCtaButton": {
-    "type": "github",
-    "url": "https://github.com/ascend"
-  },
   "contextual": {
     "options": [
       "copy",
