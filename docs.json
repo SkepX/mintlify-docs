@@ -104,12 +104,6 @@
       "vscode"
     ]
   },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/ascend",
-      "github": "https://github.com/ascend",
-      "discord": "https://discord.gg/ascend"
-    }
-  },
+  "footer": {},
   "isWhiteLabeled": true
 }
