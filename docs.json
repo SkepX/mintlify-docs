@@ -52,11 +52,17 @@
         ]
       },
       {
+        "group": "Ascend Testnet",
+        "pages": [
+          "ascend-testnet/testnet-guide",
+          "ascend-testnet/trading-competition"
+        ]
+      },
+      {
         "group": "Tech Docs",
         "pages": [
           "tech-docs/architecture",
-          "tech-docs/api-reference",
-          "tech-docs/testnet-guide"
+          "tech-docs/api-reference"
         ]
       }
     ]
