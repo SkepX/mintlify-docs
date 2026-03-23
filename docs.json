@@ -19,6 +19,13 @@
         ]
       },
       {
+        "group": "Ascend Testnet",
+        "pages": [
+          "ascend-testnet/testnet-guide",
+          "ascend-testnet/trading-competition"
+        ]
+      },
+      {
         "group": "Core Concepts",
         "pages": [
           "core-concepts/outcome-probabilities",
@@ -49,13 +56,6 @@
           "market-mechanics/clob-matching",
           "market-mechanics/settlement-resolution",
           "market-mechanics/edge-cases"
-        ]
-      },
-      {
-        "group": "Ascend Testnet",
-        "pages": [
-          "ascend-testnet/testnet-guide",
-          "ascend-testnet/trading-competition"
         ]
       },
       {
