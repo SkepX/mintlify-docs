@@ -1,0 +1,71 @@
+---
+title: "Agent Skills"
+description: "How AI agents use Ascend Skills to research markets, place orders, and manage positions programmatically."
+---
+
+# Agent Skills on Ascend
+
+Ascend exposes a set of **agent skills** - structured capability definitions that let any AI agent (Claude, GPT, Cursor, or a custom agent) interact with the Ascend trading API safely and reliably.
+
+A skill is a plain file (`SKILL.md`) that an agent runtime loads as context. It describes what endpoints exist, how auth works, what safety rules to follow, and what format to return results in - so agents don't have to infer this from scratch.
+
+**What agents can do:**
+
+- **Market Research** - Public endpoints, no auth required. Fetch live markets, event history, orderbook depth, and ticker data.
+- **Order Placement** - Authenticated endpoints. Place market or limit orders with pre-trade balance and price checks.
+- **Position Management** - Monitor open positions, PnL, and liquidation levels. Close or cancel orders programmatically.
+- **Masumi Integration** - Masumi MIP-003 agents can trigger Ascend skills via `startJob`.
+
+---
+
+## How Skills Work
+
+1. **Load the skill** - The agent runtime (Claude Code, Cursor, or a custom agent) loads `SKILL.md` from the `/skills` directory. This file defines endpoints, auth modes, workflow templates, and safety rules.
+2. **Read before acting** - The agent fetches read-only data first (live markets, orderbook, current balance) before proposing or executing any trade.
+3. **Confirm intent** - For order placement, the agent presents a structured pre-trade summary and waits for explicit user confirmation unless operating in autonomous mode (e.g. via Masumi MIP-003).
+4. **Execute and poll** - The agent places the order via `POST /v1/order`, then polls `GET /v1/orders/{client_order_id}` until accepted or failed.
+
+---
+
+## Supported Agent Runtimes
+
+| Runtime | How to load the skill |
+|---|---|
+| **Claude Code / Claude Desktop** | Place `SKILL.md` in `.claude/skills/` or point to it via MCP |
+| **Cursor** | Add `/skills/SKILL.md` to the project; Cursor picks it up as context |
+| **Masumi agents** | Call `POST /start_job` on the Masumi Adapter - the skill runs server-side |
+| **Custom agents** | Read `SKILL.md` + `openapi.yaml` at startup and inject as system context |
+
+---
+
+## Base URL
+
+All API calls target:
+
+```
+https://masumi-ascend-preview-mc952.ondigitalocean.app
+```
+
+No trailing slash. Use this consistently as `ASCEND_API_URL` in your agent environment.
+
+---
+
+## Authentication
+
+**Public endpoints (no auth required):**
+
+- `GET /v1/markets` - list all markets
+- `GET /v1/markets/{slug}` - single market detail
+- `GET /v1/orderbook/{slug}` - live orderbook
+- `GET /v1/events/{slug}` - event price history
+- `GET /v1/ticker/{id}` - latest ticker
+- `GET /v1/leaderboard` - trader leaderboard
+
+**API key auth** - send `x-api-key: <ASCEND_API_KEY>` for all account and order endpoints:
+
+- `GET /v1/auth/accounts` - list linked addresses and balances
+- `POST /v1/order` - place order
+- `GET /v1/positions/{address}` - open positions
+- `POST /v1/order/close` / `POST /v1/order/cancel`
+
+**Wallet intent signatures** - some flows require a deterministic intent JSON signed by the wallet private key. See `openapi.yaml` for the full signature middleware spec and field definitions via `GET /v1/input_schema`.

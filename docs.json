@@ -10,59 +10,87 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "groups": [
+    "tabs": [
       {
-        "group": "Intro",
-        "pages": [
-          "start-here/what-is-ascend",
-          "start-here/vision"
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Intro",
+            "pages": [
+              "start-here/what-is-ascend",
+              "start-here/vision"
+            ]
+          },
+          {
+            "group": "Ascend Testnet",
+            "pages": [
+              "ascend-testnet/testnet-guide",
+              "ascend-testnet/trading-competition"
+            ]
+          },
+          {
+            "group": "Core Concepts",
+            "pages": [
+              "core-concepts/outcome-probabilities",
+              "core-concepts/directional-outcome-trading",
+              "core-concepts/pnl-leverage-basics",
+              "core-concepts/perpetual-market-structure",
+              "core-concepts/market-types"
+            ]
+          },
+          {
+            "group": "Pricing & Oracles",
+            "pages": [
+              "pricing-oracles/index-oracle-design",
+              "pricing-oracles/mark-price-system"
+            ]
+          },
+          {
+            "group": "Risk & Margin",
+            "pages": [
+              "risk-margin/margin-model",
+              "risk-margin/liquidation-logic"
+            ]
+          },
+          {
+            "group": "Market Mechanics",
+            "pages": [
+              "market-mechanics/funding-price-alignment",
+              "market-mechanics/clob-matching",
+              "market-mechanics/settlement-resolution",
+              "market-mechanics/edge-cases"
+            ]
+          },
+          {
+            "group": "Tech Docs",
+            "pages": [
+              "tech-docs/architecture",
+              "tech-docs/api-reference"
+            ]
+          }
         ]
       },
       {
-        "group": "Ascend Testnet",
-        "pages": [
-          "ascend-testnet/testnet-guide",
-          "ascend-testnet/trading-competition"
-        ]
-      },
-      {
-        "group": "Core Concepts",
-        "pages": [
-          "core-concepts/outcome-probabilities",
-          "core-concepts/directional-outcome-trading",
-          "core-concepts/pnl-leverage-basics",
-          "core-concepts/perpetual-market-structure",
-          "core-concepts/market-types"
-        ]
-      },
-      {
-        "group": "Pricing & Oracles",
-        "pages": [
-          "pricing-oracles/index-oracle-design",
-          "pricing-oracles/mark-price-system"
-        ]
-      },
-      {
-        "group": "Risk & Margin",
-        "pages": [
-          "risk-margin/margin-model",
-          "risk-margin/liquidation-logic"
-        ]
-      },
-      {
-        "group": "Market Mechanics",
-        "pages": [
-          "market-mechanics/funding-price-alignment",
-          "market-mechanics/clob-matching",
-          "market-mechanics/settlement-resolution",
-          "market-mechanics/edge-cases"
-        ]
-      },
-      {
-        "group": "Tech Docs",
-        "pages": [
-          "tech-docs/architecture",
-          "tech-docs/api-reference"
+        "tab": "Agent Skills",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "agent-skills/overview"
+            ]
+          },
+          {
+            "group": "Masumi Integration",
+            "pages": [
+              "agent-skills/masumi-mip003"
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "agent-skills/skill-reference"
+            ]
+          }
         ]
       }
     ]

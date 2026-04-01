@@ -1,0 +1,106 @@
+---
+title: "Skill Reference"
+description: "Complete reference for the Ascend trading skill - endpoints, workflows, safety rules, and output format for agents."
+---
+
+# Ascend Trading Skill Reference
+
+Copy the block below directly into your agent's system prompt or save it as `SKILL.md` in your project.
+
+```md
+# ascend-trading-api
+
+Guides an agent to use the Ascend Trading API safely (markets, orderbook, positions, accounts, orders).
+Use when the user asks to call Ascend endpoints, place/cancel/close orders, fetch positions/PnL, or work with Ascend auth.
+
+## Base URL
+
+https://masumi-ascend-preview-mc952.ondigitalocean.app
+
+No trailing slash. Use this as ASCEND_API_URL in your environment.
+
+## Authentication
+
+Public endpoints (no auth):
+- GET /v1/markets
+- GET /v1/markets/{slug}
+- GET /v1/orderbook/{slug}
+- GET /v1/events/{slug}?range=1D|1W|1M|ALL
+- GET /v1/ticker/{id}
+- GET /v1/leaderboard
+
+API key auth - send x-api-key: <ASCEND_API_KEY>:
+- GET /v1/auth/accounts
+- GET /v1/positions/{address}
+- POST /v1/order
+- GET /v1/orders/{client_order_id}?type=MARKET|LIMIT
+- POST /v1/order/close
+- GET /v1/orders/{client_order_id}/close
+- POST /v1/order/cancel
+- GET /v1/orders/{order_id}/cancel
+
+## Workflows
+
+### Market research (no auth)
+
+1. GET /v1/markets
+2. GET /v1/markets/{slug}
+3. GET /v1/events/{slug}?range=1D|1W|1M|ALL
+4. GET /v1/orderbook/{slug}
+
+### Place an order (authenticated)
+
+Before placing:
+- Confirm wallet address, chain_type, and available balance via GET /v1/auth/accounts
+- Pull current mark_price and orderbook to check side and trigger price
+
+Then:
+1. POST /v1/order
+   {
+     "address": "0xabc...",
+     "chain_type": "EVM",
+     "slug": "btc-100k-eoy",
+     "side": "YES",
+     "order_type": "MARKET",
+     "margin": 10,
+     "leverage": 2
+   }
+2. Poll: GET /v1/orders/{client_order_id}?type=MARKET|LIMIT
+3. Monitor: GET /v1/positions/{address}
+
+### Close or cancel
+
+- Close position: POST /v1/order/close, then poll GET /v1/orders/{client_order_id}/close
+- Cancel limit: POST /v1/order/cancel, then poll GET /v1/orders/{order_id}/cancel
+
+## Safety rules
+
+- Never trade without explicit user intent. If the user asks for analysis only, do not place orders.
+- Validate limit order prices (probabilities are 0-1):
+  - YES LIMIT: trigger_price must be <= mark_price
+  - NO LIMIT: trigger_price must be >= mark_price
+- On 429 Too Many Requests, read the Retry-After header and wait before retrying.
+- On 403, the address is not linked to the API key - stop and surface this to the user.
+
+## Output format
+
+When the user asks for a trade, respond with:
+
+### Proposed action
+- Side: YES | NO
+- Type: MARKET | LIMIT (trigger_price if LIMIT)
+- Margin: <number>
+- Leverage: <number>
+- Market: <slug>
+- Address / chain: <address> / <chain_type>
+
+### Pre-trade checks
+- mark_price: <value>
+- orderbook summary: best bid/ask + depth note
+- balance check: <value>
+- risk notes: liquidation/profit targets if returned by API
+
+### Execution (only if user asked to execute)
+- open order result: success / client_order_id
+- polling outcome: accepted | error | timeout
+```

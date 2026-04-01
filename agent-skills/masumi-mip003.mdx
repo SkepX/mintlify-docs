@@ -1,0 +1,112 @@
+---
+title: "Masumi MIP-003"
+description: "How Masumi agents trigger Ascend skills via the MIP-003 startJob protocol."
+---
+
+# Trading via Masumi MIP-003
+
+[Masumi](https://masumi.network) is an agent payment and coordination protocol. **MIP-003** is its standard job-execution interface - a single `POST /start_job` endpoint that any buyer agent calls to trigger work from a service agent.
+
+Ascend exposes a **Masumi Adapter** that maps MIP-003 `startJob` calls to Ascend trading API actions. This means any Masumi-compatible agent can research markets, place orders, and manage positions on Ascend without needing direct API key access.
+
+---
+
+## How It Works
+
+1. **Buyer agent calls startJob** - The buyer agent sends a `POST /start_job` to the Ascend Masumi Adapter with an `identifier_from_purchaser` and `input_data` array describing the desired action.
+2. **Adapter executes the Ascend action** - The adapter calls the appropriate Ascend API endpoint using its own credentials.
+3. **Buyer polls for status** - The buyer agent polls `GET /status?job_id={uuid}` until the job is complete, then retrieves the result.
+
+---
+
+## startJob Endpoint
+
+Full API docs: https://masumi.ascend.market/docs#/mip003/startJob
+
+**`POST /start_job`**
+
+```json
+{
+  "identifier_from_purchaser": "sample-buyer-01",
+  "input_data": [
+    { "key": "action", "value": "list_markets" }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `identifier_from_purchaser` | string | Buyer reference. Hex 14-26 chars used as-is; any other string is hashed to a Masumi purchaser ID. |
+| `input_data` | array | Key-value pairs describing the job. See input actions below. |
+
+**Response (200):**
+
+```json
+{
+  "job_id": "3f2a1b...",
+  "status": "pending"
+}
+```
+
+---
+
+## Input Actions
+
+The `action` key in `input_data` maps to Ascend API operations.
+
+### list_markets
+
+Returns all active markets with current mark prices.
+
+```json
+{ "key": "action", "value": "list_markets" }
+```
+
+### get_market
+
+Returns detail for a single market by slug.
+
+```json
+[
+  { "key": "action", "value": "get_market" },
+  { "key": "slug", "value": "btc-100k-eoy" }
+]
+```
+
+### place_order
+
+Places a market or limit order on behalf of the buyer's linked address.
+
+```json
+[
+  { "key": "action", "value": "place_order" },
+  { "key": "slug", "value": "btc-100k-eoy" },
+  { "key": "side", "value": "YES" },
+  { "key": "order_type", "value": "MARKET" },
+  { "key": "margin", "value": "10" },
+  { "key": "leverage", "value": "2" }
+]
+```
+
+The adapter validates that `trigger_price <= mark_price` for YES LIMIT orders and `trigger_price >= mark_price` for NO LIMIT orders before executing.
+
+### get_positions
+
+Returns all open positions for the buyer's linked wallet address.
+
+```json
+[
+  { "key": "action", "value": "get_positions" },
+  { "key": "address", "value": "0xabc..." }
+]
+```
+
+---
+
+## Related Endpoints
+
+| Endpoint | Description |
+|---|---|
+| `GET /availability` | Check if the Masumi Adapter is live and accepting jobs |
+| `GET /input_schema` | Full field definitions for all supported actions |
+| `GET /status?job_id={uuid}` | Poll job status: `pending`, `running`, `complete`, `failed` |

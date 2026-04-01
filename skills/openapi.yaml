@@ -1,0 +1,589 @@
+openapi: 3.1.0
+info:
+  title: Ascend Trading API (skill-minimal)
+  version: 1.0.0
+  description: |
+    Minimal OpenAPI spec containing only the endpoints referenced by the Cursor skill
+    `.cursor/skills/ascend-trading-api/SKILL.md`.
+
+servers:
+  - url: https://masumi-ascend-preview-mc952.ondigitalocean.app
+    description: Masumi preview (DigitalOcean)
+
+tags:
+  - name: Auth
+  - name: Markets
+  - name: Prices
+  - name: Orderbook
+  - name: Orders
+  - name: Positions
+  - name: Leaderboard
+
+paths:
+  /v1/auth/accounts:
+    get:
+      operationId: getAuthAccounts
+      tags: [Auth]
+      summary: List accounts for API key (addresses and balances)
+      security:
+        - ApiKeyAuth: []
+      responses:
+        "200":
+          description: Accounts linked to API key
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthAccountsResponse"
+        "401":
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /v1/markets:
+    get:
+      operationId: getMarkets
+      tags: [Markets]
+      summary: List active markets
+      responses:
+        "200":
+          description: Array of markets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Market"
+
+  /v1/markets/{slug}:
+    get:
+      operationId: getMarketBySlug
+      tags: [Markets]
+      summary: Get market details by slug
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+      responses:
+        "200":
+          description: Market
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Market"
+
+  /v1/events/{slug}:
+    get:
+      operationId: getMarketEvents
+      tags: [Prices]
+      summary: Price history for a market
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+        - name: range
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [1H, 1D, 1W, 1M, ALL]
+            default: 1M
+      responses:
+        "200":
+          description: Price points
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/MarketPricePoint"
+                  lastSequenceId:
+                    type: integer
+                    nullable: true
+                  length:
+                    type: integer
+
+  /v1/orderbook/{slug}:
+    get:
+      operationId: getOrderbook
+      tags: [Orderbook]
+      summary: Aggregated limit orderbook for a market
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+      responses:
+        "200":
+          description: Bids and asks
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Orderbook"
+
+  /v1/ticker/{id}:
+    get:
+      operationId: getTicker
+      tags: [Prices]
+      summary: Get live spot price for a ticker
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Current ticker price
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TickerResponse"
+
+  /v1/leaderboard:
+    get:
+      operationId: getLeaderboard
+      tags: [Leaderboard]
+      summary: Trader leaderboard
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 50
+        - name: range
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [today, weekly, monthly, all]
+            default: all
+      responses:
+        "200":
+          description: Leaderboard entries
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/LeaderboardEntry"
+
+  /v1/positions/{address}:
+    get:
+      operationId: getPositions
+      tags: [Positions]
+      summary: Positions for a wallet address
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - $ref: "#/components/parameters/Address"
+      responses:
+        "200":
+          description: Positions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Position"
+        "401":
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Address does not belong to API key
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /v1/order:
+    post:
+      operationId: createOrder
+      tags: [Orders]
+      summary: Open a MARKET or LIMIT order
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrderRequest"
+      responses:
+        "200":
+          description: Order accepted for processing
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateOrderResponse"
+        "401":
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /v1/orders/{client_order_id}:
+    get:
+      operationId: getOrder
+      tags: [Orders]
+      summary: Poll order acceptance by client_order_id
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: client_order_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: type
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [MARKET, LIMIT]
+      responses:
+        "200":
+          description: Poll result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PollOrderResponse"
+
+  /v1/order/close:
+    post:
+      operationId: closeOrder
+      tags: [Orders]
+      summary: Close an open position
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CloseOrderRequest"
+      responses:
+        "200":
+          description: Close accepted for processing
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloseOrderResponse"
+
+  /v1/orders/{client_order_id}/close:
+    get:
+      operationId: getCloseOrder
+      tags: [Orders]
+      summary: Poll close settlement by client_order_id
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: client_order_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Close settlement result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PollCloseOrderResponse"
+
+  /v1/order/cancel:
+    post:
+      operationId: cancelLimitOrder
+      tags: [Orders]
+      summary: Cancel a pending LIMIT order
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CloseOrderRequest"
+      responses:
+        "200":
+          description: Cancel accepted for processing
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloseOrderResponse"
+
+  /v1/orders/{order_id}/cancel:
+    get:
+      operationId: getCancelLimitOrder
+      tags: [Orders]
+      summary: Poll cancel result by order_id
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Cancellation result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PollCancelOrderResponse"
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+
+  parameters:
+    Slug:
+      name: slug
+      in: path
+      required: true
+      schema:
+        type: string
+    Address:
+      name: address
+      in: path
+      required: true
+      schema:
+        type: string
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+
+    Market:
+      type: object
+      properties:
+        id: { type: integer }
+        slug: { type: string }
+        title: { type: string }
+        mark_price: { type: number, nullable: true }
+        icon: { type: string, nullable: true }
+        category: { type: string, nullable: true }
+        country: { type: string, nullable: true }
+        closed: { type: boolean }
+        closed_price: { type: number, nullable: true }
+        end_date: { type: string, nullable: true }
+
+    MarketPricePoint:
+      type: object
+      properties:
+        index: { type: integer }
+        timestamp: { type: string }
+        mark_price: { type: number }
+        yes_percent: { type: integer }
+        no_percent: { type: integer }
+
+    OrderbookLevel:
+      type: object
+      properties:
+        price: { type: number }
+        size: { type: number }
+        total: { type: number }
+
+    Orderbook:
+      type: object
+      properties:
+        bids:
+          type: array
+          items: { $ref: "#/components/schemas/OrderbookLevel" }
+        asks:
+          type: array
+          items: { $ref: "#/components/schemas/OrderbookLevel" }
+
+    TickerResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id: { type: string }
+            price: { type: number }
+            source: { type: string }
+
+    LeaderboardEntry:
+      type: object
+      properties:
+        address: { type: string }
+        score: { type: number }
+        total_pnl: { type: number }
+        pnl_percent: { type: number }
+        trade_count: { type: integer }
+        active_days: { type: integer }
+        winning_trades: { type: integer }
+        win_rate: { type: number }
+        avg_pnl_per_trade: { type: number }
+        username: { type: string, nullable: true }
+        avatar_url: { type: string, nullable: true }
+
+    AuthAccount:
+      type: object
+      properties:
+        id: { type: integer }
+        created_at: { type: string }
+        address: { type: string, nullable: true }
+        balance: { type: number, nullable: true }
+        chain_type: { type: string, nullable: true }
+
+    AuthAccountsResponse:
+      type: object
+      properties:
+        accounts:
+          type: array
+          items: { $ref: "#/components/schemas/AuthAccount" }
+
+    CreateOrderRequest:
+      type: object
+      required: [chain_type, address, market, side, margin, leverage, type]
+      properties:
+        chain_type:
+          type: string
+          enum: [ETH, SOL, CARDANO, MIDNIGHT]
+        address: { type: string }
+        market: { type: string }
+        side:
+          type: string
+          enum: [YES, NO]
+        margin: { type: number }
+        leverage: { type: number }
+        type:
+          type: string
+          enum: [MARKET, LIMIT]
+        trigger_price:
+          type: number
+          description: Required for LIMIT orders
+
+    CreateOrderResponse:
+      type: object
+      properties:
+        success: { type: boolean }
+        liquidation_price: { type: number, nullable: true }
+        profit_price: { type: number, nullable: true }
+        order: { type: object }
+        client_order_id: { type: string, nullable: true }
+        type:
+          type: string
+          enum: [MARKET, LIMIT]
+
+    OrderAccepted:
+      type: object
+      nullable: true
+      properties:
+        id: { type: integer }
+        created_at: { type: string }
+        sequence_id: { type: integer }
+        event_type: { type: string }
+        timestamp: { type: string }
+        payload:
+          type: object
+          properties:
+            address: { type: string }
+            client_order_id: { type: string }
+            side: { type: string }
+            margin: { type: number }
+            price: { type: number, nullable: true }
+            trigger_price: { type: number, nullable: true }
+            leverage: { type: number }
+            liquidation_price: { type: number, nullable: true }
+            profit_price: { type: number, nullable: true }
+        slug: { type: string }
+
+    PollOrderResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          nullable: true
+          properties:
+            message: { type: string }
+            timestamp: { type: string }
+        data:
+          $ref: "#/components/schemas/OrderAccepted"
+
+    Position:
+      type: object
+      properties:
+        id: { type: integer }
+        created_at: { type: string }
+        address: { type: string, nullable: true }
+        size: { type: number, nullable: true }
+        pnl: { type: number, nullable: true }
+        side: { type: string, nullable: true }
+        updated_at: { type: string, nullable: true }
+        entry_price: { type: number, nullable: true }
+        slug: { type: string, nullable: true }
+        margin_balance: { type: number, nullable: true }
+        initial_margin: { type: number, nullable: true }
+        entry_time: { type: string, nullable: true }
+        liquidation_price: { type: number, nullable: true }
+        leverage: { type: number, nullable: true }
+        equity: { type: number, nullable: true }
+        status: { type: string, nullable: true }
+        capped_pnl: { type: number, nullable: true }
+        exit_price: { type: number, nullable: true }
+
+    CloseOrderRequest:
+      type: object
+      required: [chain_type, order_id, user_address]
+      properties:
+        chain_type:
+          type: string
+          enum: [ETH, SOL, CARDANO, MIDNIGHT]
+        order_id:
+          type: integer
+          description: Position ID to close/cancel
+        user_address:
+          type: string
+
+    CloseOrderResponse:
+      type: object
+      properties:
+        success: { type: boolean }
+        client_order_id: { type: string }
+        order: { type: object }
+
+    PollCloseOrderResponse:
+      type: object
+      properties:
+        success: { type: boolean }
+        data: { type: object, nullable: true }
+        error:
+          type: object
+          nullable: true
+          properties:
+            message: { type: string }
+            timestamp: { type: string }
+
+    PollCancelOrderResponse:
+      type: object
+      properties:
+        success: { type: boolean }
+        data: { type: object, nullable: true }
+        error: { type: object, nullable: true }
+
