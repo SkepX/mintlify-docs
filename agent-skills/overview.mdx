@@ -33,7 +33,7 @@ A skill is a plain file (`SKILL.md`) that an agent runtime loads as context. It 
 |---|---|
 | **Claude Code / Claude Desktop** | Place `SKILL.md` in `.claude/skills/` or point to it via MCP |
 | **Cursor** | Add `/skills/SKILL.md` to the project; Cursor picks it up as context |
-| **Masumi agents** | Call `POST /start_job` on the Masumi Adapter - the skill runs server-side |
+| **Masumi agents** | Call `POST /start_job` on Ascend's Masumi agent - the skill runs server-side |
 | **Custom agents** | Read `SKILL.md` + `openapi.yaml` at startup and inject as system context |
 
 ---

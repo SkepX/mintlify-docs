@@ -7,13 +7,13 @@ description: "How Masumi agents trigger Ascend skills via the MIP-003 startJob p
 
 [Masumi](https://masumi.network) is an agent payment and coordination protocol. **MIP-003** is its standard job-execution interface - a single `POST /start_job` endpoint that any buyer agent calls to trigger work from a service agent.
 
-Ascend exposes a **Masumi Adapter** that maps MIP-003 `startJob` calls to Ascend trading API actions. This means any Masumi-compatible agent can research markets, place orders, and manage positions on Ascend without needing direct API key access.
+Ascend runs a **Masumi agent** that maps MIP-003 `startJob` calls to Ascend trading API actions. This means any Masumi-compatible agent can research markets, place orders, and manage positions on Ascend without needing direct API key access.
 
 ---
 
 ## How It Works
 
-1. **Buyer agent calls startJob** - The buyer agent sends a `POST /start_job` to the Ascend Masumi Adapter with an `identifier_from_purchaser` and `input_data` array describing the desired action.
+1. **Buyer agent calls startJob** - The buyer agent sends a `POST /start_job` to Ascend's Masumi agent with an `identifier_from_purchaser` and `input_data` array describing the desired action.
 2. **Adapter executes the Ascend action** - The adapter calls the appropriate Ascend API endpoint using its own credentials.
 3. **Buyer polls for status** - The buyer agent polls `GET /status?job_id={uuid}` until the job is complete, then retrieves the result.
 
@@ -107,6 +107,6 @@ Returns all open positions for the buyer's linked wallet address.
 
 | Endpoint | Description |
 |---|---|
-| `GET /availability` | Check if the Masumi Adapter is live and accepting jobs |
+| `GET /availability` | Check if Ascend's Masumi agent is live and accepting jobs |
 | `GET /input_schema` | Full field definitions for all supported actions |
 | `GET /status?job_id={uuid}` | Poll job status: `pending`, `running`, `complete`, `failed` |
