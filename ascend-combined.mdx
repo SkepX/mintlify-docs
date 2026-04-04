@@ -1,0 +1,3125 @@
+---
+title: "Ascend Documentation"
+description: "Complete Ascend documentation"
+---
+
+# Intro
+
+---
+
+# Start Here
+
+
+A lot of action happens before a particular event outcome is even finalized. Narratives and opinions shift as new information emerges. With old trading models your only option for participation was indirect. Buy a stock, sell an option, wait for the outcome.
+
+With Ascend, you now have the opportunity to trade on the probability of a particular outcome in real-time. Perpetually, with leverage.
+
+## What is Ascend?
+
+Ascend is a **fully verifiable events perpetuals platform** for leveraged trading on probability of **outcomes, metals, commodities, stocks, and crypto.**
+
+<Frame>
+  <img src="/images/platform.png" alt="Ascend Platform" />
+</Frame>
+
+Ascend is built on Midnight, enabling fast, private, and institution-ready execution across Cardano, EVM, and Solana with multi chain trade settlement enforced by zero-knowledge proofs while inheriting Cardano's security through Midnight.
+
+Traders take directional positions on **prediction percentages** across **outcomes, metals, commodities, stocks, and crypto**, using a **perpetual market structure** with **continuous pricing** and **deterministic settlement mechanics**. Markets on Ascend express exposure through **LONG / SHORT positions on probabilities**, while offering the **depth, flexibility, and tooling of a modern perpetuals exchange**.
+
+
+## Markets on Ascend
+
+<CardGroup cols={2}>
+  <Card title="Prediction markets" icon="ballot-check">
+    Markets based on real-world outcomes such as elections, policy decisions, court rulings, or economic releases. Each outcome is priced as a probability that moves as new information appears.
+  </Card>
+
+  <Card title="Real world event markets" icon="calendar">
+    Short and medium horizon markets tied to specific events. These focus on how expectations shift leading up to a clear resolution.
+  </Card>
+
+  <Card title="Crypto outcome markets" icon="bitcoin-sign">
+    Markets that express probabilities for crypto related conditions, such as short term price direction or network events. Example: *Will BTC reach a specific level within a defined window?*
+  </Card>
+
+  <Card title="Macro outcome markets" icon="chart-line">
+    Markets for equities, metals, and commodities such as stocks, gold, or silver. These markets express directional probability rather than asset ownership.
+  </Card>
+</CardGroup>
+
+
+## How Ascend Works
+
+<Steps>
+  <Step title="Choose a Market">
+    Select an **outcome market** expressed as a percentage, covering **outcomes, metals, commodities, stocks, or crypto**.
+
+    Each market represents the current probability price.
+
+    Trade the probability you think the market is mispricing.
+  </Step>
+
+  <Step title="Long or Short the Probability %">
+    Take a **LONG** position if you believe the probability will move higher, or a **SHORT** position if you believe it will move lower.
+
+    Set your **position size and leverage** within the market's margin framework.
+
+    Your exposure scales with leverage, while risk is governed by explicit market rules.
+  </Step>
+
+  <Step title="Trade the Move">
+    As the probability price moves in your favor, **PnL scales with your leveraged exposure**.
+
+    Positions update continuously, and you can **close or adjust at any time**, settling according to deterministic market mechanics.
+  </Step>
+</Steps>
+
+
+## What Makes Ascend Different
+
+<AccordionGroup>
+  <Accordion title="Perpetual Mechanics on Prediction Prices" icon="infinity">
+    Ascend applies **perpetual exchange mechanics** including continuous markets, leverage, margin frameworks, and orderbook based trading to **prediction prices rather than underlying assets**.
+
+    This allows traders to operate fully within a **prediction market context**, while accessing familiar perp style functionality.
+  </Accordion>
+
+  <Accordion title="Leveraged Directional Exposure" icon="arrow-trend-up">
+    Traders express **directional conviction** on probability prices using leverage, scaling exposure according to **explicit margin and risk parameters**.
+
+    Position behavior is governed by market rules, position size, and pricing dynamics.
+  </Accordion>
+
+  <Accordion title="Continuous Pricing and Trading" icon="clock">
+    Prediction markets on Ascend operate as **always on markets**.
+
+    Probability prices update continuously, and positions may be opened, adjusted, or closed at any time within the market's trading rules.
+  </Accordion>
+
+  <Accordion title="Deterministic Settlement" icon="scale-balanced">
+    Positions settle according to **deterministic rules tied to prediction price movement and market state**.
+
+    Settlement outcomes follow predefined formulas and processes, providing consistent and transparent behavior across all markets.
+  </Accordion>
+</AccordionGroup>
+
+
+<Card
+  title="Next: Vision"
+  icon="arrow-right"
+  href="/start-here/vision"
+>
+  Understand why prediction perpetuals are the future of outcome markets
+</Card>
+
+
+---
+
+# Vision
+
+
+Ascend is built on the idea that **markets work best when outcomes can be traded freely, continuously, and at scale**.
+
+Outcome prices are signals. They tell you what people collectively think will happen. When these signals are liquid and actively traded, they become one of the most reliable forms of market intelligence you can find.
+
+Prediction markets have already proven this. They beat polls in elections. They anticipate macro data before official releases. They price geopolitical risk faster than any other instrument. Despite being more accurate, they're limited to narrow participation with constrained, no-scale design. 
+
+Ascend changes this forever.
+
+
+## The Timing
+
+Why now? Four things have aligned.
+
+<CardGroup cols={2}>
+  <Card title="Perpetual infrastructure is mature" icon="server">
+    Platforms like Hyperliquid, dYdX, and Vertex process billions in daily volume with sub second settlement. These systems already handle leveraged trading at scale. The same infrastructure can power outcome markets.
+  </Card>
+
+  <Card title="Traders already bet on events, just indirectly" icon="chart-mixed">
+    Think the Fed will cut rates? You trade Fed funds futures. Think oil will spike after OPEC meets? You trade crude futures. Traders already bet on outcomes through proxies. Outcome perpetuals let you trade the event itself. Will the Fed cut? Yes or no. Direct.
+  </Card>
+
+  <Card title="Leverage unlocks capital efficiency" icon="coins">
+    On Polymarket, betting 10,000 USDC means locking 10,000 USDC until resolution. With leverage, you put up 1,000 USDC as margin for the same exposure. The rest stays liquid.
+  </Card>
+
+  <Card title="Demand for outcome exposure keeps growing" icon="globe">
+    Elections, tariffs, central bank decisions, earnings. Every major event moves markets. Traders want direct exposure. Right now they use proxies like sector ETFs or options. Outcome perpetuals are the native instrument.
+  </Card>
+</CardGroup>
+
+
+## What Is Broken Today
+
+Prediction markets work. But they hit real limits.
+
+<AccordionGroup>
+  <Accordion title="Liquidity disappears outside headline events" icon="droplet-slash">
+    Presidential elections get millions in volume. But a Fed rate decision next month? A company hitting its earnings target? These markets exist on Polymarket and Kalshi, but orderbooks are thin. Try placing 50,000 USDC and slippage destroys your entry. Professional traders cannot deploy real size, so they stay away. The signal never forms.
+  </Accordion>
+
+  <Accordion title="Positions are frozen until resolution" icon="lock">
+    You buy YES at 0.50 because you think there is an 80% chance. You might be right. But that capital is stuck until the event resolves. Could be 6 months. Could be a year. And if new information pushes your conviction to 95%, there is no efficient way to add exposure. Binary payoffs cap what you can do with strong conviction.
+  </Accordion>
+
+  <Accordion title="No way to manage risk" icon="ban">
+    In traditional markets, you hedge. You scale in and out. You react to new information. In prediction markets, you bet and wait. News shifts probability by 20 points? You sell at whatever the thin orderbook offers, or you hold and hope.
+  </Accordion>
+
+  <Accordion title="Sophisticated traders stay out" icon="user-slash">
+    Market makers and quant traders make markets efficient. They provide liquidity, tighten spreads, and arbitrage mispricings. But without leverage and proper risk tools, they stick to traditional derivatives. Prediction markets lose the participants who would make them most accurate.
+  </Accordion>
+</AccordionGroup>
+
+The result: prediction markets function as **passive betting pools** when they could be **active trading venues**.
+
+
+## The Endgame
+
+Prediction perpetuals are not a niche product. They are a new asset class.
+
+Every market satisfies the same question: **What do people think will happen?**
+
+Elections. Central bank moves. Earnings. Geopolitics. Climate policy. Court rulings. Tech milestones.
+
+Today, these views are scattered across polls, surveys, options flow, and commentary. None of it trades cleanly. None of it scales.
+
+Ascend changes that.
+
+<Note>
+The goal is not to build a better prediction market. The goal is to build a global market for expectations.
+</Note>
+
+A system where:
+
+<Check>Any outcome can be priced</Check>
+<Check>Any view can be expressed as a position</Check>
+<Check>Liquidity flows toward conviction</Check>
+<Check>Better market design produces better forecasts</Check>
+
+
+<Card
+  title="Next: Core Concepts"
+  icon="arrow-right"
+  href="/core-concepts/outcome-probabilities"
+>
+  Understand how outcome probabilities work on Ascend
+</Card>
+
+
+# Core Concepts
+
+---
+
+# Outcome Probabilities
+
+
+On Ascend, every market is priced as a probability between 0% and 100%.
+
+This probability represents the market's collective assessment of how likely something is to happen. It is not an opinion. It is not a prediction from a single source. It is the aggregated result of continuous trading activity across all participants.
+
+When you see a price of 62%, it means the market currently assigns a 62% likelihood to that outcome. When you see 35%, the market thinks it is less likely. When you see 88%, the market thinks it is highly probable.
+
+You are not buying or selling an asset. You are taking a position on whether that probability will move up or down.
+
+
+## Reading 0–100% Prices
+
+The percentage scale is intuitive:
+
+<CardGroup cols={3}>
+  <Card title="0%" icon="circle-xmark">
+    The market considers this outcome impossible.
+  </Card>
+
+  <Card title="50%" icon="scale-balanced">
+    The market is evenly split. Could go either way.
+  </Card>
+
+  <Card title="100%" icon="circle-check">
+    The market considers this outcome certain.
+  </Card>
+</CardGroup>
+
+Most prices sit somewhere in between. A few examples:
+
+| Price | What It Means |
+|-------|---------------|
+| 23% | Unlikely, but possible |
+| 47% | Slightly less than a coin flip |
+| 61% | More likely than not |
+| 84% | Highly probable |
+
+
+## Price Movement Is the Signal
+
+Probability prices move as new information arrives and traders reassess.
+
+<AccordionGroup>
+  <Accordion title="Price rising: 55% → 68%" icon="arrow-up">
+    The market is becoming more confident this outcome will happen. Traders are buying YES, pushing the price up. New information may have increased the perceived likelihood.
+  </Accordion>
+
+  <Accordion title="Price falling: 72% → 58%" icon="arrow-down">
+    The market is becoming less confident. Traders are selling YES or buying NO. Something changed the collective expectation.
+  </Accordion>
+
+  <Accordion title="Price stable: 64% → 65% → 63%" icon="arrows-left-right">
+    No major new information. The market has reached temporary consensus around this probability.
+  </Accordion>
+</AccordionGroup>
+
+Your PnL comes from these movements. If you go LONG at 55% and the price rises to 68%, you'd be in profit. If it drops to 45%, you'd have unrealized losses. The final event resolution matters for settlement, but you can trade in and out based on probability movement alone.
+
+
+## Where Do These Probabilities Come From?
+
+Ascend does not invent probabilities. Prices are anchored to external sources.
+
+<Steps>
+  <Step title="External prediction markets">
+    Platforms like Polymarket and Kalshi already price thousands of outcomes. Ascend references these prices as a baseline.
+  </Step>
+  <Step title="Oracle feeds">
+    For asset-linked markets (crypto, equities, commodities), specialized oracles provide probability data based on directional sentiment.
+  </Step>
+  <Step title="Aggregation">
+    Multiple sources are combined using weighted averages. No single source dominates. Stale or invalid data is excluded automatically.
+  </Step>
+</Steps>
+
+This oracle-sourced design keeps Ascend prices grounded in real market information while allowing leveraged trading on top.
+
+
+## Why Percentages?
+
+Percentages work because they are universal.
+
+<Check>A 70% probability means the same thing whether you are trading an election, a Fed decision, or a crypto price target</Check>
+<Check>No need to understand contract mechanics or notional values</Check>
+<Check>Directional trading is intuitive: higher percentage means more likely, lower means less likely</Check>
+
+This abstraction lets you focus on one question: **Where do I think this probability is going?**
+
+
+## Single vs Multi-Outcome Markets
+
+Some markets have one outcome. Others have several.
+
+<Tabs>
+  <Tab title="Single Outcome">
+    **Example:** Will BTC hit $100k by December 31st?
+
+    One probability. One YES/NO. The price reflects the likelihood of YES.
+
+    Price at 72% means the market thinks it is likely. You go LONG if you think it will rise toward 100%. You go SHORT if you think it will fall toward 0%.
+  </Tab>
+  <Tab title="Multi-Outcome">
+    **Example:** Who will win the 2028 presidential election?
+
+    Multiple candidates. Each has a separate probability.
+
+    | Candidate | Probability |
+    |-----------|-------------|
+    | Candidate A | 38% |
+    | Candidate B | 31% |
+    | Candidate C | 22% |
+    | Field (others) | 9% |
+
+    The probabilities roughly sum to 100%. You can go LONG or SHORT on any individual candidate. If you think Candidate B is undervalued, you go LONG on B. If you think A is overvalued, you go SHORT on A.
+  </Tab>
+</Tabs>
+
+
+## What Happens at Resolution?
+
+When an event resolves, the probability snaps to its final value.
+
+The winning outcome settles at **100%**. All other outcomes settle at **0%**.
+
+If you are LONG on the winning outcome, your position settles at maximum value. If you are LONG on a losing outcome, it settles at zero.
+
+But remember: you do not have to hold until resolution. You can exit anytime based on probability movement.
+
+<Note>
+Resolution follows predefined rules announced at market creation. There is no discretionary judgment. The same inputs always produce the same settlement.
+</Note>
+
+
+<Card
+  title="Next: Directional Outcome Trading"
+  icon="arrow-right"
+  href="/core-concepts/directional-outcome-trading"
+>
+  Learn how to go LONG and SHORT on probabilities
+</Card>
+
+
+---
+
+# Directional Outcome Trading
+
+
+On Ascend, you do not trade ownership of an asset or a fixed event contract. You take positions on how a probability will move over time.
+
+This means you can express conviction in either direction:
+
+<Check>**LONG** if you believe the probability will increase</Check>
+<Check>**SHORT** if you believe the probability will decrease</Check>
+
+Leverage allows you to scale exposure relative to posted margin, amplifying gains and losses according to market rules.
+
+
+## LONG Positions
+
+A LONG position expresses the view that a probability will increase.
+
+<CardGroup cols={2}>
+  <Card title="Example: LONG 55% → 62%" icon="arrow-trend-up">
+    You enter LONG at 55%. The probability rises to 62%. You profit from the 7 point move.
+  </Card>
+
+  <Card title="Example: LONG 48% → 51%" icon="arrow-trend-up">
+    You enter LONG at 48%. The probability rises to 51%. You profit from the 3 point move.
+  </Card>
+</CardGroup>
+
+If the probability rises, a LONG position gains.
+
+If the probability falls, a LONG position loses.
+
+
+## SHORT Positions
+
+A SHORT position expresses the view that a probability will decrease.
+
+<CardGroup cols={2}>
+  <Card title="Example: SHORT 68% → 60%" icon="arrow-trend-down">
+    You enter SHORT at 68%. The probability falls to 60%. You profit from the 8 point move.
+  </Card>
+
+  <Card title="Example: SHORT 52% → 45%" icon="arrow-trend-down">
+    You enter SHORT at 52%. The probability falls to 45%. You profit from the 7 point move.
+  </Card>
+</CardGroup>
+
+If the probability falls, a SHORT position gains.
+
+If the probability rises, a SHORT position loses.
+
+
+## Probability Movement, Not Event Resolution
+
+PnL on Ascend is driven by changes in probability prices, not solely by final outcome resolution.
+
+This is a key difference from traditional prediction markets where you bet and wait.
+
+<AccordionGroup>
+  <Accordion title="Enter and exit dynamically" icon="right-left">
+    You do not have to hold until the event resolves. If the probability moves in your favor, you can close and take profit. If it moves against you, you can cut losses.
+  </Accordion>
+
+  <Accordion title="Trade changing expectations" icon="rotate">
+    As new information arrives, probabilities shift. You can trade these shifts in real time, capturing value from how probabilities evolve.
+  </Accordion>
+
+  <Accordion title="Manage risk continuously" icon="shield-halved">
+    Traditional prediction markets lock you in. On Ascend, you can adjust position size, add margin, or exit entirely as conditions change.
+  </Accordion>
+</AccordionGroup>
+
+Probability prices are treated as tradable signals, not static forecasts.
+
+
+## Symmetric Exposure
+
+LONG and SHORT positions on Ascend are structurally symmetric.
+
+| Property | LONG | SHORT |
+|----------|------|-------|
+| Profits when | Probability rises | Probability falls |
+| Loses when | Probability falls | Probability rises |
+| Margin rules | Same | Same |
+| Risk framework | Same | Same |
+| Mark price reference | Same | Same |
+
+This ensures fair and consistent exposure regardless of direction. No side has a structural advantage.
+
+
+## How Leverage Applies
+
+Leverage on Ascend scales exposure to probability movement, not to asset ownership.
+
+<Steps>
+  <Step title="Margin determines capital at risk">
+    The margin you post is the capital backing your position. This is the maximum you can lose on the trade.
+  </Step>
+  <Step title="Leverage determines sensitivity">
+    Higher leverage means a smaller probability move creates a larger PnL impact. A 2 point move at 10x leverage has 10 times the effect of a 2 point move at 1x.
+  </Step>
+  <Step title="PnL scales with both">
+    Your profit or loss depends on: probability movement, position size, and leverage. A small change in probability can result in meaningful PnL when leverage is applied.
+  </Step>
+</Steps>
+
+Leverage operates within explicit market-defined limits to ensure consistent risk behavior.
+
+
+## Why This Matters
+
+Leveraged LONG and SHORT trading on probabilities enables:
+
+<Check>**Active participation** in prediction markets, not passive betting</Check>
+<Check>**Scalable expression of conviction** through leverage</Check>
+<Check>**Continuous price discovery** around changing probabilities</Check>
+
+This is the core mechanic that transforms prediction markets into perpetual trading venues.
+
+
+<Card
+  title="Next: PnL & Leverage Basics"
+  icon="arrow-right"
+  href="/core-concepts/pnl-leverage-basics"
+>
+  Understand how PnL is calculated and how leverage affects your positions
+</Card>
+
+
+---
+
+# PnL & Leverage Basics
+
+
+On Ascend, you profit or lose based on how the probability price moves relative to your entry price. This is scaled by your position size and leverage.
+
+<Note>
+PnL updates continuously as prices change. You do not have to wait for event resolution to see gains or losses.
+</Note>
+
+
+## The PnL Formula
+
+Unrealized PnL is calculated using four inputs:
+
+| Input | What It Means |
+|-------|---------------|
+| Entry Price | The probability price when you opened the position |
+| Mark Price | The current probability price used for valuation |
+| Position Size | How large your position is |
+| Direction | +1 for LONG, -1 for SHORT |
+
+The formula:
+
+```
+Unrealized PnL = Direction × Position Size × (Mark Price − Entry Price)
+```
+
+This applies symmetrically to LONG and SHORT positions.
+
+
+## PnL Examples
+
+<AccordionGroup>
+  <Accordion title="LONG position, probability rises" icon="arrow-up">
+    You open LONG at 50% with position size 1,000 USDC notional.
+
+    Probability rises to 58%.
+
+    ```
+    PnL = +1 × 1,000 × (0.58 − 0.50)
+        = +1 × 1,000 × 0.08
+        = +80 USDC
+    ```
+
+    You are up 80 USDC.
+  </Accordion>
+
+  <Accordion title="LONG position, probability falls" icon="arrow-down">
+    You open LONG at 50% with position size 1,000 USDC notional.
+
+    Probability falls to 44%.
+
+    ```
+    PnL = +1 × 1,000 × (0.44 − 0.50)
+        = +1 × 1,000 × (−0.06)
+        = −60 USDC
+    ```
+
+    You are down 60 USDC.
+  </Accordion>
+
+  <Accordion title="SHORT position, probability falls" icon="arrow-down">
+    You open SHORT at 65% with position size 1,000 USDC notional.
+
+    Probability falls to 58%.
+
+    ```
+    PnL = −1 × 1,000 × (0.58 − 0.65)
+        = −1 × 1,000 × (−0.07)
+        = +70 USDC
+    ```
+
+    You are up 70 USDC.
+  </Accordion>
+
+  <Accordion title="SHORT position, probability rises" icon="arrow-up">
+    You open SHORT at 65% with position size 1,000 USDC notional.
+
+    Probability rises to 72%.
+
+    ```
+    PnL = −1 × 1,000 × (0.72 − 0.65)
+        = −1 × 1,000 × 0.07
+        = −70 USDC
+    ```
+
+    You are down 70 USDC.
+  </Accordion>
+</AccordionGroup>
+
+
+## How Leverage Works
+
+Leverage allows you to control a larger position with less capital.
+
+The relationship between margin and position size:
+
+```
+Initial Margin = Position Notional / Leverage
+```
+
+Or flipped:
+
+```
+Position Notional = Initial Margin × Leverage
+```
+
+<CardGroup cols={2}>
+  <Card title="1x Leverage" icon="1">
+    100 USDC margin controls 100 USDC notional. A 10% probability move means 10 USDC PnL.
+  </Card>
+
+  <Card title="10x Leverage" icon="10">
+    100 USDC margin controls 1,000 USDC notional. A 10% probability move means 100 USDC PnL.
+  </Card>
+</CardGroup>
+
+Higher leverage increases sensitivity to probability movement. The same price change creates a larger PnL impact.
+
+
+## Leverage Example
+
+You have 100 USDC and want to go LONG at 50%.
+
+<Tabs>
+  <Tab title="5x Leverage">
+    **Position notional:** 100 × 5 = 500 USDC
+
+    Probability rises from 50% to 55% (5 point move).
+
+    ```
+    PnL = 500 × 0.05 = +25 USDC
+    ```
+
+    Return on margin: 25%
+  </Tab>
+  <Tab title="10x Leverage">
+    **Position notional:** 100 × 10 = 1,000 USDC
+
+    Probability rises from 50% to 55% (5 point move).
+
+    ```
+    PnL = 1,000 × 0.05 = +50 USDC
+    ```
+
+    Return on margin: 50%
+  </Tab>
+  <Tab title="20x Leverage">
+    **Position notional:** 100 × 20 = 2,000 USDC
+
+    Probability rises from 50% to 55% (5 point move).
+
+    ```
+    PnL = 2,000 × 0.05 = +100 USDC
+    ```
+
+    Return on margin: 100%
+  </Tab>
+</Tabs>
+
+The same 5 point move produces 25, 50, or 100 USDC depending on leverage. This works in both directions. Losses scale the same way.
+
+
+## Leverage Cuts Both Ways
+
+Higher leverage amplifies losses just as it amplifies gains.
+
+| Leverage | 5 Point Gain | 5 Point Loss |
+|----------|--------------|--------------|
+| 5x | +25 USDC | -25 USDC |
+| 10x | +50 USDC | -50 USDC |
+| 20x | +100 USDC | -100 USDC |
+
+With 20x leverage, a 5 point move against you wipes your entire 100 USDC margin.
+
+Leverage operates within explicit market-defined limits to ensure consistent risk behavior.
+
+
+## Mark-to-Market
+
+Positions are continuously marked to the mark price.
+
+This means:
+
+<Check>PnL updates in real time as probabilities move</Check>
+<Check>Your equity (margin + unrealized PnL) changes constantly</Check>
+<Check>Risk checks run against current mark price, not entry price</Check>
+
+You always know where you stand. No waiting for settlement to see your position value.
+
+
+## Position Lifecycle
+
+A position on Ascend follows a clear lifecycle:
+
+<Steps>
+  <Step title="Open">
+    You open a LONG or SHORT position with defined margin and leverage.
+  </Step>
+  <Step title="Update">
+    As probability prices change, PnL and risk metrics update in real time.
+  </Step>
+  <Step title="Manage">
+    You may increase, reduce, or partially close the position at any time within market rules.
+  </Step>
+  <Step title="Close">
+    The position is closed voluntarily by you or through system-defined processes like liquidation or settlement.
+  </Step>
+</Steps>
+
+Each stage follows deterministic mechanics governed by market parameters.
+
+
+<Card
+  title="Next: Perpetual Market Structure"
+  icon="arrow-right"
+  href="/core-concepts/perpetual-market-structure"
+>
+  Learn how perpetual markets work without expiry
+</Card>
+
+
+---
+
+# Perpetual Market Structure
+
+
+Traditional prediction markets work like bets. You buy a position, wait for the event, and settle. The contract expires. The market closes.
+
+Ascend works differently.
+
+Markets on Ascend are **perpetual**. They do not expire on a fixed date. Positions persist until you close them or the market reaches its defined settlement condition. You can enter, adjust, or exit at any time.
+
+This is the same structure used by the largest crypto derivatives exchanges, applied to prediction markets.
+
+
+## Continuous, Not Discrete
+
+Prediction markets are traditionally structured around discrete contracts with fixed expiry windows.
+
+Ascend removes this constraint.
+
+<CardGroup cols={2}>
+  <Card title="Traditional Prediction Markets" icon="hourglass-end">
+    Fixed expiry date. Contract ends at resolution. Must re-enter for new exposure. Liquidity fragments across time windows.
+  </Card>
+
+  <Card title="Ascend Perpetuals" icon="infinity">
+    No fixed expiry. Positions persist continuously. Adjust exposure anytime. Liquidity concentrates in one venue.
+  </Card>
+</CardGroup>
+
+Probability prices update continuously based on trading activity and oracle inputs. The market is always open.
+
+
+## Persistent Positions
+
+Once you open a position, it remains active until one of three things happens:
+
+<Steps>
+  <Step title="You close it">
+    You decide to exit. You take your PnL and move on.
+  </Step>
+  <Step title="Risk conditions trigger closure">
+    If margin requirements are no longer met, the system may reduce or close your position to protect market integrity.
+  </Step>
+  <Step title="The market settles">
+    The underlying event resolves and all positions settle at the final probability.
+  </Step>
+</Steps>
+
+Until one of these occurs, your position stays open. You are not forced out by a calendar.
+
+
+## Orderbook-Driven Liquidity
+
+Ascend uses an orderbook model for price discovery.
+
+Traders place bids and offers around probability prices. Trades execute directly between participants. There is no AMM, no liquidity pool, no protocol-owned inventory.
+
+<Check>Prices reflect genuine supply and demand</Check>
+<Check>Depth forms organically around conviction levels</Check>
+<Check>Spreads tighten as participation increases</Check>
+<Check>No slippage from bonding curves</Check>
+
+The orderbook is the market.
+
+
+## Price Alignment Mechanisms
+
+Perpetual markets need a way to stay anchored to reality. Without expiry forcing convergence, prices could drift from true probability levels.
+
+Ascend solves this with two mechanisms:
+
+<Tabs>
+  <Tab title="Oracle Anchoring">
+    Probability prices are sourced from external prediction markets and oracles. The **Index Price** represents the best available estimate of the true probability at any moment.
+
+    Ascend does not invent prices. It references them.
+  </Tab>
+  <Tab title="Funding">
+    When the traded price diverges from the Index Price, funding payments transfer between LONG and SHORT positions.
+
+    If traders push the price too high, LONGs pay SHORTs. If traders push the price too low, SHORTs pay LONGs.
+
+    This creates a continuous incentive to keep prices aligned with external signals.
+  </Tab>
+</Tabs>
+
+These mechanisms allow perpetual markets to track probability accurately without requiring forced settlement.
+
+
+## Why Perpetual Structure Matters
+
+The perpetual model unlocks capabilities that traditional prediction markets cannot offer:
+
+| Capability | Traditional | Perpetual |
+|------------|-------------|-----------|
+| Continuous trading | ❌ Ends at expiry | ✅ Always open |
+| Leverage | ❌ Limited or none | ✅ Full margin framework |
+| Active management | ❌ Bet and wait | ✅ Enter, adjust, exit anytime |
+| Liquidity depth | ❌ Fragmented by expiry | ✅ Concentrated |
+| Real-time price discovery | ❌ Stale between trades | ✅ Continuous |
+
+Prediction markets become trading venues, not betting slips.
+
+
+## How Ascend Remains a Perp Despite Resolution
+
+Some prediction markets do resolve. Elections happen. Decisions get announced. Events conclude.
+
+Does resolution break the perpetual model?
+
+No. Here is why:
+
+<AccordionGroup>
+  <Accordion title="Perpetual until resolved" icon="clock">
+    Markets trade continuously right up until the resolution condition is met. There is no arbitrary expiry date forcing closure before the event.
+  </Accordion>
+
+  <Accordion title="Not bound to timestamps" icon="calendar-xmark">
+    Traditional contracts expire on a specific date regardless of whether the event has occurred. Ascend markets expire only when the actual outcome is known.
+  </Accordion>
+
+  <Accordion title="No expiry cycles" icon="rotate">
+    There are no quarterly expiries, no contract migrations, no liquidity fragmentation. One market, one orderbook, continuous trading.
+  </Accordion>
+</AccordionGroup>
+
+Resolution is an endpoint, not an expiry. The market remains perpetual in structure even if it eventually settles.
+
+
+## The Foundation
+
+Perpetual structure is not a feature. It is the foundation that makes everything else possible.
+
+<Check>Leverage requires continuous margin management. Perpetual enables this.</Check>
+<Check>Active trading requires persistent positions. Perpetual enables this.</Check>
+<Check>Deep liquidity requires concentrated venues. Perpetual enables this.</Check>
+<Check>Real-time price discovery requires continuous markets. Perpetual enables this.</Check>
+
+This is why Ascend is built as a perpetual exchange, not a prediction platform.
+
+
+<Card
+  title="Next: Market Types"
+  icon="arrow-right"
+  href="/core-concepts/market-types"
+>
+  Learn about the different types of markets on Ascend
+</Card>
+
+
+---
+
+# Market Types
+
+
+Ascend supports three types of markets, each designed for different trading needs. All three share the same perpetual infrastructure, margin system, and orderbook mechanics. The difference is in what they track and how they settle.
+
+
+## Outcome Markets
+
+Outcome markets represent probabilities for specific real-world events. Will something happen or not? Who will win? What will the result be?
+
+These are the classic prediction markets, now with leverage.
+
+**Examples:**
+
+- Will BTC hit $100k by year end?
+- Who will win the 2028 presidential election?
+- Will Apple beat Q2 earnings?
+- Will Company X be acquired this quarter?
+
+
+### How Outcome Markets Work
+
+Each outcome is priced as a probability between 0% and 100%.
+
+- 0% means the market considers this outcome impossible
+- 100% means the market considers this outcome certain
+- Prices in between reflect the market's confidence level
+
+You can go LONG (betting probability rises) or SHORT (betting probability falls) with leverage.
+
+
+### Single vs Multi-Outcome
+
+<Tabs>
+  <Tab title="Single Outcome">
+    One event with a YES/NO answer.
+
+    **Example:** Will BTC hit $150k in 2025?
+
+    | Outcome | Settlement |
+    |---------|------------|
+    | YES (it happens) | 100% |
+    | NO (it doesn't) | 0% |
+
+    You trade one probability. If you think it will happen, go LONG. If you think it won't, go SHORT.
+  </Tab>
+  <Tab title="Multi-Outcome">
+    One event with multiple possible results.
+
+    **Example:** Who wins the 2028 election?
+
+    | Candidate | Current Price |
+    |-----------|---------------|
+    | Candidate A | 42% |
+    | Candidate B | 35% |
+    | Candidate C | 18% |
+    | Field | 5% |
+
+    Each candidate has their own market. Prices roughly sum to 100%. You can go LONG or SHORT on any candidate independently.
+
+    At settlement, the winner settles at 100%, all others at 0%.
+  </Tab>
+</Tabs>
+
+
+### Settlement
+
+Outcome markets settle when the event resolves:
+
+- Resolution source confirms the outcome
+- Winning outcome settles at 100%
+- Losing outcomes settle at 0%
+- All positions close and PnL is finalized
+
+You can exit anytime before settlement. You don't have to wait for the event.
+
+
+## Rolling Outcome Asset Markets
+
+Rolling outcome asset markets are designed for recurring predictions, particularly crypto directional bets. Instead of creating new contracts every hour or day, positions roll automatically from one period to the next.
+
+**Examples:**
+
+- Will BTC be up in the next hour?
+- Will ETH close green today?
+- Will SOL outperform BTC this week?
+
+
+### The Problem with Fixed Windows
+
+Traditional prediction platforms handle recurring events with separate contracts:
+
+- Each hour/day is a new contract
+- When one expires, you must manually re-enter the next
+- Liquidity fragments across time windows
+- Profitable traders waste time and gas re-entering
+
+This creates friction and splits liquidity.
+
+
+### How Rolling Markets Work
+
+Ascend treats each time window as a settlement checkpoint, not a terminal contract.
+
+At each checkpoint:
+
+- The current window settles (PnL realized)
+- A new window begins immediately
+- Your position continues automatically
+- Entry price updates to the new window's opening price
+- Direction and leverage are preserved
+
+No action required. Your directional conviction persists.
+
+**Example:**
+
+You go LONG on "BTC up this hour" at 52%.
+
+| Time | Event | Your Position |
+|------|-------|---------------|
+| 2:00 PM | Open LONG at 52% | Active |
+| 3:00 PM | Hour ends. BTC was up. Settles at 100%. | +48% realized. Position rolls. |
+| 3:00 PM | New hour starts at 55% | LONG continues at 55% entry |
+| 4:00 PM | Hour ends. BTC was down. Settles at 0%. | -55% realized. Position rolls. |
+| 4:00 PM | New hour starts at 48% | LONG continues at 48% entry |
+
+Your cumulative PnL: +48% - 55% = -7% over two hours.
+
+
+### What Rolls Forward
+
+When a position rolls:
+
+- **Preserved:** Direction (LONG/SHORT), leverage setting
+- **Updated:** Entry price (to new window's opening), margin (adjusted for realized PnL)
+- **Realized:** PnL from completed window (added to your balance)
+
+
+### Optional Controls
+
+Rolling is the default, but you can customize:
+
+- **Auto-close at settlement:** Exit when each window ends
+- **Take-profit:** Exit if price hits a target
+- **Stop-loss:** Exit if price hits a floor
+- **Manual close:** Exit anytime during a window
+
+You choose how hands-on or hands-off you want to be.
+
+
+### Why Rolling Markets Matter
+
+| Traditional | Rolling |
+|-------------|---------|
+| Re-enter every window | Position persists |
+| Liquidity fragments | Liquidity concentrates |
+| Manual management | Automatic continuation |
+| Miss windows = miss opportunities | Always positioned |
+
+Rolling markets turn recurring predictions into continuous exposure.
+
+
+## Macro Outcome Markets
+
+Macro outcome markets track directional probabilities about traditional assets: equities, metals, commodities, indices. You're not trading the asset itself. You're trading the probability of directional movement.
+
+**Examples:**
+
+- Will gold be up this month?
+- Will the S&P 500 close higher this quarter?
+- Is oil likely to rise given current OPEC policy?
+- Will tech stocks outperform value stocks?
+
+
+### What You're Trading
+
+In macro markets, you trade a probability, not the underlying asset.
+
+**Example:**
+
+Market: "Gold bullish sentiment"
+
+- Current price: 62%
+- This means the market assigns 62% probability to gold having upward pressure
+
+You're not buying gold. You're taking a position on whether the probability of gold strength will rise or fall.
+
+If you think gold sentiment will increase, go LONG. If you think it will decrease, go SHORT.
+
+
+### Probability Price Sources
+
+Macro probability prices come from:
+
+- Spot prediction markets on asset direction
+- Aggregated sentiment oracles
+- Options flow and positioning data
+- Custom composite indicators
+
+Ascend provides the leveraged perpetual layer on top of these probability signals.
+
+
+### Rolling Probabilities for Macro
+
+Macro markets use the same rolling mechanism as crypto directional markets:
+
+- Probability prices evolve continuously
+- Positions persist indefinitely by default
+- Periodic checkpoints may realize PnL
+- No forced expiry
+
+You maintain exposure to macro directional probabilities without managing contract rolls.
+
+
+### Use Cases
+
+<AccordionGroup>
+  <Accordion title="Hedge macro exposure" icon="shield">
+    You hold physical gold and want to hedge short-term downside. Go SHORT on gold bullish sentiment. If sentiment drops, your SHORT profits offset your physical position's decline.
+  </Accordion>
+
+  <Accordion title="Express macro views with leverage" icon="chart-line">
+    You believe the Fed will be hawkish, hurting equities. Go SHORT on S&P bullish sentiment with 5x leverage. Small moves in probability create meaningful returns.
+  </Accordion>
+
+  <Accordion title="Trade relative value" icon="scale-balanced">
+    You think oil will outperform gold. Go LONG oil sentiment, SHORT gold sentiment. You profit if the spread moves in your favor regardless of absolute direction.
+  </Accordion>
+</AccordionGroup>
+
+
+## Comparison
+
+| Feature | Outcome Markets | Rolling Markets | Macro Markets |
+|---------|-----------------|-----------------|---------------|
+| What you trade | Event probability | Recurring direction | Asset sentiment |
+| Settlement | When event resolves | Each time window | Rolling / continuous |
+| Position persistence | Until settlement | Rolls automatically | Rolls automatically |
+| Typical timeframe | Days to months | Hours to days | Days to months |
+| Examples | Elections, Fed decisions | Hourly BTC up/down | Gold, S&P sentiment |
+
+
+## All Markets Share
+
+Despite their differences, all Ascend markets share:
+
+- Perpetual structure (no forced expiry before resolution)
+- LONG and SHORT with leverage
+- Mark Price and Index Price separation
+- Funding for price alignment
+- CLOB orderbook execution
+- Isolated margin and liquidation logic
+
+The infrastructure is the same. The application differs.
+
+
+<Card
+  title="Next: Index & Oracle Design"
+  icon="arrow-right"
+  href="/pricing-oracles/index-oracle-design"
+>
+  Learn how external probability sources anchor Ascend markets
+</Card>
+
+
+# Pricing & Oracles
+
+---
+
+# Index & Oracle Design
+
+
+Ascend does not invent probabilities. Every probability price on the platform is anchored to external sources through the Index Price.
+
+The Index Price represents the best available estimate of the true probability at any moment. It is derived from real prediction markets, oracle feeds, and external data sources. This design ensures that Ascend markets remain grounded in actual market information rather than internal speculation.
+
+
+## What Is the Index Price?
+
+The Index Price is the external reference probability for a market.
+
+Think of it as the "true" probability according to the outside world. Ascend looks at what other prediction markets and data sources say, combines them, and uses that as the benchmark.
+
+It reflects:
+
+- Prices from established prediction markets like Polymarket and Kalshi
+- Oracle feeds for asset-linked markets (crypto, equities, commodities)
+- Weighted aggregation across multiple sources
+
+The Index Price is not used directly for liquidation or PnL. It serves as the ground truth that the trading price should converge toward.
+
+
+## Oracle Sources
+
+Each market defines its oracle sources at creation. The sources depend on the market type.
+
+<Tabs>
+  <Tab title="Event Markets">
+    For elections, policy decisions, and discrete outcomes:
+
+    - Polymarket prices
+    - Kalshi prices
+    - Other regulated prediction venues
+
+    These platforms already price thousands of outcomes with real liquidity. Ascend references them rather than recreating the signal.
+
+    **Example:** A market on "Who will win the 2028 election?" might pull prices from both Kalshi and Polymarket, where thousands of traders have already expressed their views.
+  </Tab>
+  <Tab title="Asset-Linked Markets">
+    For crypto, equities, metals, and commodities:
+
+    - Directional sentiment oracles
+    - Spot price feeds from major exchanges
+    - Composite probability indicators
+
+    These oracles translate asset price expectations into probability format.
+
+    **Example:** A market on "Will BTC be above $100k by end of month?" might reference sentiment data from multiple crypto prediction sources combined with options flow data.
+  </Tab>
+  <Tab title="Composite Markets">
+    For markets that combine multiple signals:
+
+    - Weighted baskets of prediction sources
+    - Cross-referenced oracle inputs
+    - Custom aggregation logic per market
+
+    No single source dominates. The Index Price reflects consensus across inputs.
+
+    **Example:** A macro market on "US recession in 2025?" might combine prediction market prices, bond yield signals, and economic indicator oracles.
+  </Tab>
+</Tabs>
+
+
+## What Each Oracle Provides
+
+When an oracle sends data to Ascend, it includes:
+
+| Data | Purpose |
+|------|---------|
+| Probability | The actual probability (e.g. 62%) |
+| Timestamp | When this data was recorded |
+| Confidence/validity metadata | Whether the data should be trusted |
+
+The metadata helps Ascend decide whether to use this oracle input or exclude it. If an oracle flags its own data as low-confidence, Ascend can reduce its weight or ignore it entirely.
+
+
+## Aggregation Logic
+
+The Index Price is computed as a weighted average of valid oracle inputs.
+
+```
+Index Price = Σ (weight × oracle price)
+```
+
+Where:
+
+- Each oracle provides a probability and timestamp
+- Weights are assigned based on liquidity depth, historical accuracy, and update frequency
+- All weights sum to 1
+
+**Example:**
+
+A Fed rate cut market has three oracle sources:
+
+| Source | Price | Weight |
+|--------|-------|--------|
+| Kalshi | 64% | 0.5 |
+| Polymarket | 62% | 0.4 |
+| Oracle C | 68% | 0.1 |
+
+```
+Index Price = (0.5 × 64) + (0.4 × 62) + (0.1 × 68)
+            = 32 + 24.8 + 6.8
+            = 63.6%
+```
+
+Kalshi has the highest weight because it has the deepest liquidity. Oracle C has low weight because it has less trading activity.
+
+
+## Validation Rules
+
+Not all oracle inputs are treated equally. Ascend applies validation rules to maintain price integrity.
+
+<AccordionGroup>
+  <Accordion title="Staleness check" icon="clock">
+    If an oracle has not updated within a defined time window, it is excluded from the Index Price calculation. This prevents outdated information from distorting the reference price.
+
+    **Example:** If Polymarket data is 10 minutes old but the staleness threshold is 5 minutes, that input is excluded until fresh data arrives.
+  </Accordion>
+
+  <Accordion title="Outlier detection" icon="chart-scatter">
+    If an oracle price diverges significantly from other sources, it may be flagged or excluded. This protects against single-source manipulation or erroneous data.
+
+    **Example:** If Kalshi shows 65%, Polymarket shows 64%, but Oracle C suddenly shows 95%, Oracle C would be flagged as an outlier and excluded.
+  </Accordion>
+
+  <Accordion title="Minimum source threshold" icon="list-check">
+    Markets may require a minimum number of valid oracle inputs to compute an Index Price. If too few sources are available, the market may enter a restricted state until data resumes.
+
+    **Example:** If a market requires at least 2 valid sources but only 1 is currently updating, trading may be paused until another source comes online.
+  </Accordion>
+</AccordionGroup>
+
+These rules are deterministic and applied automatically. There is no manual intervention in Index Price computation.
+
+
+## Update Cadence
+
+Index Prices update whenever:
+
+- One or more oracle inputs publish new data
+- A minimum time threshold is reached
+- Market-specific update conditions are satisfied
+
+All updates are timestamped and recorded. The update frequency depends on the underlying oracle infrastructure and market parameters.
+
+For fast-moving markets, updates may happen every few seconds. For slower markets, updates may be less frequent.
+
+
+## Index Price vs Mark Price
+
+The Index Price is not used directly for trading operations. Instead, Ascend derives a Mark Price from the Index Price.
+
+| Price | Purpose |
+|-------|---------|
+| Index Price | External reference. Ground truth from oracles. |
+| Mark Price | Internal reference. Used for PnL, margin, and liquidation. |
+
+**Why the separation?**
+
+Imagine the Index Price suddenly jumps from 60% to 75% for 30 seconds due to a single large trade on Polymarket, then returns to 62%. Without smoothing, traders could get liquidated during that 30-second spike even though the "real" probability never changed.
+
+The Mark Price applies smoothing and stabilization to the Index Price. This prevents short-term noise, sudden spikes, or transient oracle issues from triggering unintended liquidations or PnL swings.
+
+The separation ensures:
+
+- Markets stay anchored to external truth
+- Traders are protected from momentary volatility
+- Risk management operates on stable signals
+
+
+## Why Oracle-Sourced Pricing Matters
+
+Oracle-sourced pricing gives Ascend several advantages:
+
+- **Credibility**: Prices reflect real market consensus, not internal opinion
+- **Interoperability**: Ascend markets connect to the broader prediction ecosystem
+- **Decentralization**: No single venue controls price formation
+- **Transparency**: Oracle sources and weights are defined at market creation
+
+This design allows Ascend to offer leveraged trading on probabilities while maintaining the integrity that prediction markets require.
+
+
+<Card
+  title="Next: Mark Price System"
+  icon="arrow-right"
+  href="/pricing-oracles/mark-price-system"
+>
+  Learn how the Mark Price stabilizes trading and protects positions
+</Card>
+
+
+---
+
+# Mark Price System
+
+
+The Mark Price is the internal reference price used for all critical trading operations on Ascend. It determines your unrealized PnL, margin requirements, and liquidation thresholds.
+
+While the Index Price reflects external oracle data, the Mark Price applies smoothing and stabilization to protect traders from short-term noise and sudden spikes. This separation is fundamental to operating leveraged prediction perpetuals safely.
+
+
+## Why Not Use the Index Price Directly?
+
+Prediction markets are sensitive to:
+
+- Thin liquidity causing price jumps
+- Sudden probability updates from breaking news
+- Oracle update granularity and timing gaps
+
+**Example scenario:**
+
+Breaking news drops. A whale buys $500k on Polymarket, spiking the price from 55% to 72% for 2 minutes. The news turns out to be a rumor. Price returns to 57%.
+
+If Ascend used the Index Price directly:
+
+- Traders with SHORT positions could get liquidated at 72%
+- Their positions would be closed at a loss
+- Two minutes later, they would have been fine
+
+Using the raw Index Price for liquidations and PnL would expose traders to:
+
+- Forced liquidations from short-lived probability spikes
+- PnL volatility unrelated to actual market conditions
+- Manipulation through brief oracle distortion
+
+The Mark Price ensures that risk is assessed on a stable signal, not on momentary noise.
+
+
+## How the Mark Price Is Constructed
+
+The Mark Price is derived from the Index Price through three layers:
+
+<Steps>
+  <Step title="Smoothing (EMA Filter)">
+    An Exponential Moving Average dampens short-term fluctuations in the Index Price.
+
+    ```
+    Mark_t = Mark_t-1 + λ × (Index_t − Mark_t-1)
+    ```
+
+    Where:
+    - Mark_t-1 is the previous Mark Price
+    - Index_t is the current Index Price
+    - λ is the smoothing factor (between 0 and 1)
+
+    **What λ means in practice:**
+
+    | λ Value | Behavior | Use Case |
+    |---------|----------|----------|
+    | 0.1 | Very slow, very stable | Low-volatility event markets |
+    | 0.5 | Balanced | Most markets |
+    | 0.9 | Fast, less smoothing | High-frequency markets |
+
+    Lower λ means more stability and slower reaction. Higher λ means faster response to Index changes. Each market defines its own λ based on expected volatility.
+  </Step>
+  <Step title="Price Clamping">
+    The Mark Price is constrained to stay within a defined range of the Index Price.
+
+    ```
+    If |Mark − Index| > Clamp Limit:
+        Mark = Index ± Clamp Limit
+    ```
+
+    This prevents the Mark Price from drifting too far from reality while still providing stability. Clamp limits are market-specific and defined in percentage terms (e.g. ±1%).
+
+    **Why clamping matters:**
+
+    Without clamping, a very low λ could cause the Mark Price to lag far behind during a sustained move. A trader could enter at 50%, watch the Index move to 70%, but see their Mark Price stuck at 55%. The clamp ensures Mark stays within a reasonable distance of truth.
+  </Step>
+  <Step title="Precision Rounding">
+    The final Mark Price is rounded according to market precision rules (e.g. 2 decimal places).
+
+    This ensures consistent PnL calculation, deterministic settlement, and alignment between the UI and trading engine.
+  </Step>
+</Steps>
+
+
+## Example: No Clamp Triggered
+
+Assume:
+
+- Index Price = 62.0%
+- Previous Mark Price = 60.5%
+- λ = 0.5
+- Clamp Limit = ±1.0%
+
+**Step 1: Apply EMA**
+
+```
+Mark_raw = 60.5 + 0.5 × (62.0 − 60.5)
+         = 60.5 + 0.75
+         = 61.25
+```
+
+**Step 2: Check Clamp**
+
+```
+|61.25 − 62.0| = 0.75
+0.75 < 1.0 → No clamp needed
+```
+
+**Final Mark Price = 61.25%**
+
+The Mark Price moved toward the Index but did not fully reach it due to smoothing.
+
+
+## Example: Clamp Triggered
+
+Now assume a sudden Index spike:
+
+- Index Price = 72.0% (sudden jump)
+- Previous Mark Price = 60.5%
+- λ = 0.5
+- Clamp Limit = ±1.0%
+
+**Step 1: Apply EMA**
+
+```
+Mark_raw = 60.5 + 0.5 × (72.0 − 60.5)
+         = 60.5 + 5.75
+         = 66.25
+```
+
+**Step 2: Check Clamp**
+
+```
+|66.25 − 72.0| = 5.75
+5.75 > 1.0 → Clamp triggered
+```
+
+The Mark Price would be 5.75% away from the Index, which exceeds the 1% clamp limit.
+
+**Apply Clamp:**
+
+```
+Mark = Index − Clamp Limit
+     = 72.0 − 1.0
+     = 71.0
+```
+
+**Final Mark Price = 71.0%**
+
+The clamp pulled the Mark Price closer to the Index, ensuring it does not lag too far behind during a large move.
+
+
+## How the Mark Price Is Used
+
+The Mark Price drives all internal trading operations:
+
+<CardGroup cols={2}>
+  <Card title="Unrealized PnL" icon="calculator">
+    Your position value is calculated using the Mark Price, not the Index Price. This ensures PnL reflects sustained probability movement rather than transient spikes.
+  </Card>
+
+  <Card title="Margin Requirements" icon="vault">
+    Initial and maintenance margin are evaluated against the Mark Price. This prevents sudden oracle jumps from instantly changing your margin status.
+  </Card>
+
+  <Card title="Liquidation Checks" icon="triangle-exclamation">
+    Liquidation thresholds reference the Mark Price. Temporary probability spikes cannot trigger liquidation if the Mark Price remains stable.
+  </Card>
+
+  <Card title="Funding Calculations" icon="arrows-rotate">
+    Funding rates are computed from the difference between Mark Price and Index Price, incentivizing convergence without destabilizing positions.
+  </Card>
+</CardGroup>
+
+
+## Mark Price Behavior in Different Conditions
+
+<AccordionGroup>
+  <Accordion title="Normal trading" icon="check">
+    The Mark Price tracks the Index Price closely with slight smoothing. Traders experience stable PnL that reflects genuine market movement.
+
+    **Example:** Index moves from 60% to 62% over 5 minutes. Mark Price follows, reaching 61.8% in the same period.
+  </Accordion>
+
+  <Accordion title="Sudden Index spike" icon="bolt">
+    The EMA filter slows the Mark Price response. If the spike is temporary, the Mark Price may never fully reach the spike level before the Index returns to normal.
+
+    **Example:** Index spikes from 60% to 75% for 30 seconds, then returns to 62%. Mark Price rises to maybe 65%, then settles back to 62%. No liquidations triggered by the spike.
+  </Accordion>
+
+  <Accordion title="Sustained Index move" icon="arrow-trend-up">
+    The Mark Price converges toward the new Index level over time. The clamp ensures it cannot lag too far behind during sustained moves.
+
+    **Example:** Index moves from 60% to 80% over 10 minutes and stays there. Mark Price follows, staying within 1% of Index throughout the move.
+  </Accordion>
+
+  <Accordion title="Oracle irregularity" icon="circle-exclamation">
+    If oracle data becomes stale or erratic, the Mark Price maintains stability based on recent valid data. The clamp prevents extreme divergence.
+
+    **Example:** One oracle goes offline. Index Price recalculates with remaining sources. Mark Price continues smoothly without sudden jumps.
+  </Accordion>
+</AccordionGroup>
+
+
+## Parameters by Market
+
+Each market defines its own Mark Price parameters:
+
+| Parameter | Description | Example |
+|-----------|-------------|---------|
+| λ (smoothing factor) | How quickly Mark responds to Index changes | 0.3 to 0.7 |
+| Clamp Limit | Maximum allowed divergence from Index | ±0.5% to ±2% |
+| Precision | Decimal places for final Mark Price | 2 decimals |
+| Update Frequency | How often Mark Price recalculates | Per block or per second |
+
+These parameters are set at market creation and visible to all traders. Higher volatility markets may use higher λ and wider clamps. Stable markets may use lower λ and tighter clamps.
+
+
+## Why This Matters
+
+The Mark Price system allows Ascend to:
+
+- Anchor markets to external truth through the Index Price
+- Protect traders from noise and manipulation through smoothing
+- Maintain stable, continuous trading even during volatile probability updates
+- Apply perpetual-style risk management to probability markets
+
+Without this separation, leveraged prediction markets would be vulnerable to the same issues that plague thin liquidity venues: flash crashes, manipulation, and unfair liquidations.
+
+The Mark Price makes leveraged prediction perpetuals viable.
+
+
+<Card
+  title="Next: Margin Model"
+  icon="arrow-right"
+  href="/risk-margin/margin-model"
+>
+  Learn how margin requirements and liquidation logic protect positions
+</Card>
+
+
+# Risk & Margin
+
+---
+
+# Margin Model
+
+
+Every position on Ascend is backed by margin. Margin is the capital you commit to a trade. It enables leveraged exposure, absorbs losses, and defines the boundary of your risk.
+
+Understanding margin is essential to managing positions effectively.
+
+
+## How Margin Works
+
+When you open a position, you post margin as collateral. This margin serves three purposes:
+
+- Enables leveraged exposure to probability movement
+- Absorbs unrealized losses as prices move against you
+- Defines the maximum you can lose on the trade
+
+The more margin you post relative to your position size, the more room your position has to absorb adverse price movement.
+
+
+## Initial Margin
+
+Initial Margin (IM) is the capital required to open a position.
+
+It is determined by your position size and selected leverage:
+
+```
+Initial Margin = Position Notional / Leverage
+```
+
+**Example:**
+
+You want to open a 1,000 USDC notional position at 10x leverage.
+
+```
+Initial Margin = 1,000 / 10 = 100 USDC
+```
+
+You post 100 USDC to control 1,000 USDC of exposure.
+
+<CardGroup cols={2}>
+  <Card title="Lower leverage (5x)" icon="shield">
+    1,000 USDC position requires 200 USDC margin. More cushion against adverse moves.
+  </Card>
+
+  <Card title="Higher leverage (20x)" icon="bolt">
+    1,000 USDC position requires only 50 USDC margin. Less room for error.
+  </Card>
+</CardGroup>
+
+
+## Maintenance Margin
+
+Maintenance Margin (MM) is the minimum equity required to keep a position open.
+
+It is defined as a fraction of your position notional:
+
+```
+Maintenance Margin = Maintenance Rate × Position Notional
+```
+
+The maintenance rate is set per market, typically between 1% and 5%.
+
+**Example:**
+
+Your position has 1,000 USDC notional. The market has a 2.5% maintenance rate.
+
+```
+Maintenance Margin = 0.025 × 1,000 = 25 USDC
+```
+
+As long as your equity stays above 25 USDC, your position remains open. If equity drops to or below this level, liquidation may be triggered.
+
+
+## Position Equity
+
+Your position equity represents the real-time value of your position. It fluctuates constantly as prices move.
+
+```
+Equity = Initial Margin + Unrealized PnL − Accrued Funding
+```
+
+Where:
+
+- Initial Margin is what you posted when opening the position
+- Unrealized PnL changes as the Mark Price moves
+- Accrued Funding is the net funding paid or received
+
+**Example: Price moves in your favor**
+
+You open a LONG position with 100 USDC margin. The probability moves up, generating +30 USDC unrealized PnL. You have paid 2 USDC in funding.
+
+```
+Equity = 100 + 30 − 2 = 128 USDC
+```
+
+Your position equity is now 128 USDC.
+
+**Example: Price moves against you**
+
+Same position, but the market moves against you by 30 USDC instead:
+
+```
+Equity = 100 + (−30) − 2 = 68 USDC
+```
+
+Your equity dropped to 68 USDC.
+
+
+## Margin Ratio
+
+The margin ratio shows how healthy your position is relative to the liquidation threshold:
+
+```
+Margin Ratio = Equity / Maintenance Margin
+```
+
+| Margin Ratio | Status |
+|--------------|--------|
+| > 2.0 | Healthy. Comfortable buffer. |
+| 1.5 to 2.0 | Caution. Monitor closely. |
+| 1.0 to 1.5 | Warning. Consider adding margin or reducing position. |
+| ≤ 1.0 | Liquidation zone. Position may be closed. |
+
+**Example:**
+
+Your equity is 68 USDC. Maintenance margin is 25 USDC.
+
+```
+Margin Ratio = 68 / 25 = 2.72
+```
+
+You are in healthy territory. But if equity drops to 30 USDC:
+
+```
+Margin Ratio = 30 / 25 = 1.2
+```
+
+Now you are in the warning zone. Time to consider adding margin or reducing your position.
+
+
+## Isolated Margin
+
+Ascend uses isolated margin at the position level.
+
+This means:
+
+- Each position has its own margin
+- Risk is fully contained within each position
+- One position cannot draw collateral from another
+- Losses on one position do not affect others
+
+**Example:**
+
+You have two positions:
+
+| Position | Margin | Status |
+|----------|--------|--------|
+| BTC directional LONG | 100 USDC | Healthy |
+| Election outcome SHORT | 50 USDC | Near liquidation |
+
+If the election position gets liquidated, you lose at most 50 USDC. Your BTC position is completely unaffected.
+
+This isolation makes risk predictable. You always know the maximum you can lose on each trade.
+
+
+## Leverage and Risk Relationship
+
+Higher leverage means:
+
+- Less margin required to open the same position
+- Greater sensitivity to price movement
+- Liquidation price closer to entry price
+- Less room for the market to move against you
+
+| Leverage | Margin for 1,000 USDC Position | Price Move to Liquidation |
+|----------|-------------------------------|---------------------------|
+| 5x | 200 USDC | ~17.5% |
+| 10x | 100 USDC | ~7.5% |
+| 20x | 50 USDC | ~2.5% |
+
+The numbers above assume a 2.5% maintenance rate. Actual liquidation prices depend on market parameters.
+
+
+## Managing Your Margin
+
+You can actively manage margin on open positions:
+
+<AccordionGroup>
+  <Accordion title="Add margin" icon="plus">
+    Deposit additional margin to increase your equity buffer. This moves your liquidation price further away from the current price.
+
+    **When to use:** Your position is under pressure but you believe the market will reverse.
+  </Accordion>
+
+  <Accordion title="Remove margin" icon="minus">
+    Withdraw excess margin from a profitable position. This frees up capital for other trades.
+
+    **When to use:** Your position is healthy and you want to deploy capital elsewhere.
+  </Accordion>
+
+  <Accordion title="Reduce position" icon="minimize">
+    Close part of your position to lower your maintenance margin requirement and improve your margin ratio.
+
+    **When to use:** You want to reduce risk without closing entirely.
+  </Accordion>
+</AccordionGroup>
+
+
+## Risk Parameters by Market
+
+Each market defines its own margin parameters:
+
+| Parameter | Description | Typical Range |
+|-----------|-------------|---------------|
+| Maximum Leverage | Highest allowed leverage | 5x to 50x |
+| Maintenance Rate | Percentage of notional for MM | 1% to 5% |
+| Minimum Position Size | Smallest allowed position | Varies |
+
+These parameters are set at market creation and visible to all traders. Higher volatility markets typically have lower maximum leverage and higher maintenance rates.
+
+
+<Card
+  title="Next: Liquidation Logic"
+  icon="arrow-right"
+  href="/risk-margin/liquidation-logic"
+>
+  Learn when and how positions get liquidated
+</Card>
+
+
+---
+
+# Liquidation Logic
+
+
+Liquidation is a protective mechanism that closes positions when they no longer have sufficient margin to absorb further losses. It protects the market from negative equity and ensures the system remains solvent.
+
+Liquidation is not punitive. It is a mechanical safety process that applies equally to all positions.
+
+
+## When Liquidation Happens
+
+A position becomes eligible for liquidation when equity falls to or below the maintenance margin:
+
+```
+Equity ≤ Maintenance Margin
+```
+
+Or equivalently, when the margin ratio falls to 1.0 or below:
+
+```
+Margin Ratio ≤ 1.0
+```
+
+This condition is evaluated continuously using the Mark Price, not the Index Price. This ensures that temporary oracle spikes or manipulation cannot trigger liquidation.
+
+
+## Liquidation Price
+
+The liquidation price is the probability level at which your position hits the liquidation threshold.
+
+**For a LONG position:**
+
+```
+Liquidation Price = Entry Price − (Initial Margin − Maintenance Margin) / Position Size
+```
+
+**For a SHORT position:**
+
+```
+Liquidation Price = Entry Price + (Initial Margin − Maintenance Margin) / Position Size
+```
+
+The difference between Initial Margin and Maintenance Margin represents how much loss your position can absorb before liquidation.
+
+
+## Example: LONG Position Liquidation
+
+You open a LONG position:
+
+- Entry Price: 50%
+- Position Notional: 1,000 USDC
+- Initial Margin: 100 USDC (10x leverage)
+- Maintenance Margin: 25 USDC (2.5% rate)
+
+**Calculate liquidation price:**
+
+```
+Liquidation Price = 0.50 − (100 − 25) / 1,000
+                  = 0.50 − 0.075
+                  = 42.5%
+```
+
+**What happens as price falls:**
+
+| Mark Price | Unrealized PnL | Equity | Margin Ratio | Status |
+|------------|----------------|--------|--------------|--------|
+| 50% | 0 | 100 USDC | 4.0 | Healthy |
+| 48% | −20 USDC | 80 USDC | 3.2 | Healthy |
+| 45% | −50 USDC | 50 USDC | 2.0 | Caution |
+| 43% | −70 USDC | 30 USDC | 1.2 | Warning |
+| 42.5% | −75 USDC | 25 USDC | 1.0 | Liquidation |
+
+At 42.5%, equity equals maintenance margin. The position is now eligible for liquidation.
+
+
+## Example: SHORT Position Liquidation
+
+You open a SHORT position:
+
+- Entry Price: 60%
+- Position Notional: 1,000 USDC
+- Initial Margin: 100 USDC (10x leverage)
+- Maintenance Margin: 25 USDC (2.5% rate)
+
+**Calculate liquidation price:**
+
+```
+Liquidation Price = 0.60 + (100 − 25) / 1,000
+                  = 0.60 + 0.075
+                  = 67.5%
+```
+
+**What happens as price rises:**
+
+| Mark Price | Unrealized PnL | Equity | Margin Ratio | Status |
+|------------|----------------|--------|--------------|--------|
+| 60% | 0 | 100 USDC | 4.0 | Healthy |
+| 63% | −30 USDC | 70 USDC | 2.8 | Healthy |
+| 65% | −50 USDC | 50 USDC | 2.0 | Caution |
+| 67% | −70 USDC | 30 USDC | 1.2 | Warning |
+| 67.5% | −75 USDC | 25 USDC | 1.0 | Liquidation |
+
+At 67.5%, the SHORT position hits the liquidation threshold.
+
+
+## Liquidation Process
+
+When a position meets the liquidation condition:
+
+<Steps>
+  <Step title="Position flagged">
+    The system identifies that equity has fallen to or below maintenance margin.
+  </Step>
+  <Step title="Risk controls applied">
+    The position is queued for liquidation according to market rules.
+  </Step>
+  <Step title="Position reduced or closed">
+    The position is reduced or fully closed using deterministic mechanisms.
+  </Step>
+  <Step title="Settlement">
+    Remaining margin (if any) is returned to your balance. A liquidation fee is deducted. If losses exceed your margin, the insurance fund covers the shortfall.
+  </Step>
+</Steps>
+
+The entire process is automatic and rule-based. No manual intervention occurs.
+
+
+## Partial vs Full Liquidation
+
+Depending on market configuration, Ascend may use different liquidation approaches:
+
+<Tabs>
+  <Tab title="Partial Liquidation">
+    The system gradually reduces your position size to restore equity above maintenance margin.
+
+    **How it works:**
+
+    1. A portion of your position is closed
+    2. This realizes some loss but frees up margin
+    3. If equity recovers above maintenance, liquidation stops
+    4. If not, another portion is closed
+
+    **Example:**
+
+    Your 1,000 USDC position hits liquidation. The system closes 400 USDC worth. Your new position is 600 USDC with lower maintenance requirement. If equity is now healthy, the remaining 600 USDC stays open.
+
+    **Benefit:** You may keep part of your position if the market stabilizes.
+  </Tab>
+  <Tab title="Full Liquidation">
+    The entire position is closed at once.
+
+    **When it happens:**
+
+    - Equity cannot be restored through partial liquidation
+    - Market conditions require immediate risk reduction
+    - Position size is too small to partially liquidate efficiently
+
+    **Example:**
+
+    Your 200 USDC position hits liquidation. Partial liquidation is not practical at this size. The full position is closed and remaining margin (minus fees) is returned.
+
+    **Outcome:** Position is fully closed. You receive any remaining margin.
+  </Tab>
+</Tabs>
+
+
+## Liquidation Fees
+
+A liquidation fee is charged when a position is liquidated:
+
+| Fee Component | Description |
+|---------------|-------------|
+| Liquidation Penalty | Percentage of position notional (typically 0.5% to 2%) |
+| Insurance Fund Contribution | Portion of penalty goes to the insurance fund |
+
+These fees incentivize traders to manage their positions rather than relying on liquidation. They also fund the insurance pool that covers shortfalls.
+
+
+## What the Insurance Fund Does
+
+Sometimes a position moves so fast that it cannot be liquidated before equity goes negative. The insurance fund covers these shortfalls.
+
+**Example:**
+
+- Your equity hits 25 USDC (liquidation threshold)
+- Before liquidation executes, price moves further
+- Position closes at −10 USDC equity (negative)
+- Insurance fund covers the 10 USDC shortfall
+
+The insurance fund is built from:
+
+- Liquidation fees
+- A portion of trading fees
+- Protocol reserves
+
+This ensures counterparties are always made whole, even in extreme conditions.
+
+
+## Avoiding Liquidation
+
+You can take action before liquidation occurs:
+
+<AccordionGroup>
+  <Accordion title="Use lower leverage" icon="shield">
+    Lower leverage means your liquidation price is further from your entry. A 5x position can absorb twice the adverse move of a 10x position.
+
+    | Leverage | Liquidation Distance from Entry |
+    |----------|--------------------------------|
+    | 5x | ~17.5% |
+    | 10x | ~7.5% |
+    | 20x | ~2.5% |
+  </Accordion>
+
+  <Accordion title="Add margin before it's too late" icon="plus">
+    If a position moves against you, adding margin increases your equity and moves the liquidation price further away.
+
+    **Example:** Your liquidation price is 42.5%. You add 50 USDC margin. New liquidation price becomes 37.5%.
+  </Accordion>
+
+  <Accordion title="Reduce position size" icon="minimize">
+    Closing part of your position realizes some loss but reduces your maintenance margin requirement, improving your margin ratio.
+
+    **Example:** You close half your position. Maintenance margin drops from 25 USDC to 12.5 USDC. Your margin ratio improves.
+  </Accordion>
+
+  <Accordion title="Set stop losses" icon="hand">
+    Exit positions at a predetermined loss level rather than waiting for liquidation. This gives you control over your exit price and avoids liquidation fees.
+
+    **Example:** Your liquidation price is 42.5%. You set a stop loss at 45%. You exit with a smaller loss and no liquidation penalty.
+  </Accordion>
+</AccordionGroup>
+
+
+## Key Points
+
+- Liquidation triggers when equity ≤ maintenance margin
+- Mark Price is used for liquidation checks (not Index Price)
+- Partial liquidation may preserve some of your position
+- Liquidation fees apply and fund the insurance pool
+- You can avoid liquidation by managing leverage, margin, and position size
+
+Liquidation is a last resort. Active position management keeps you in control.
+
+
+<Card
+  title="Next: Funding & Price Alignment"
+  icon="arrow-right"
+  href="/market-mechanics/funding-price-alignment"
+>
+  Learn how funding keeps prices aligned with external signals
+</Card>
+
+
+# Market Mechanics
+
+---
+
+# Funding & Price Alignment
+
+
+Funding is a continuous mechanism that keeps the traded price aligned with the external reference price. Without funding, perpetual markets could drift away from reality since there is no expiry date forcing convergence.
+
+On Ascend, funding transfers value between LONG and SHORT positions based on how far the Mark Price has diverged from the Index Price. This creates a natural incentive for prices to stay anchored to external probability signals.
+
+
+## Why Funding Exists
+
+In traditional futures, contracts expire. At expiry, the futures price must equal the spot price. This forces convergence.
+
+Perpetual markets have no expiry. So what keeps prices aligned?
+
+Funding.
+
+When the traded price diverges from the external reference:
+
+- If the Mark Price is above the Index Price, LONGs pay SHORTs
+- If the Mark Price is below the Index Price, SHORTs pay LONGs
+
+This creates pressure for the price to return to equilibrium. Traders on the "wrong" side of the divergence pay for the privilege. Traders on the "right" side get paid.
+
+
+## The Two Prices
+
+Funding is calculated from the relationship between two prices:
+
+| Price | What It Represents |
+|-------|-------------------|
+| Index Price | External reference from oracles. The "true" probability. |
+| Mark Price | Internal trading price. Smoothed and stabilized. |
+
+When these prices diverge, funding kicks in to push them back together.
+
+
+## Funding Rate Calculation
+
+The funding rate is proportional to the gap between Mark and Index:
+
+```
+Funding Rate = k × (Mark Price − Index Price)
+```
+
+Where:
+
+- k is the funding sensitivity coefficient (set per market)
+- The result is capped within predefined bounds
+
+**Example:**
+
+- Mark Price = 64%
+- Index Price = 62%
+- k = 0.1
+- Funding cap = ±0.05%
+
+```
+Funding Rate = 0.1 × (64 − 62)
+             = 0.1 × 2
+             = 0.2%
+```
+
+But the cap is ±0.05%, so:
+
+```
+Final Funding Rate = 0.05% (capped)
+```
+
+The cap prevents extreme funding rates during volatile periods.
+
+
+## Who Pays Whom
+
+The funding direction depends on which price is higher:
+
+<Tabs>
+  <Tab title="Mark > Index (LONGs pay)">
+    The traded price is higher than external reality suggests.
+
+    - LONGs pay funding to SHORTs
+    - This discourages new LONG positions
+    - It encourages traders to SHORT, pushing price down
+    - Price converges back toward Index
+
+    **Example:** Mark is 64%, Index is 62%. LONGs are paying for the premium.
+  </Tab>
+  <Tab title="Mark < Index (SHORTs pay)">
+    The traded price is lower than external reality suggests.
+
+    - SHORTs pay funding to LONGs
+    - This discourages new SHORT positions
+    - It encourages traders to go LONG, pushing price up
+    - Price converges back toward Index
+
+    **Example:** Mark is 58%, Index is 62%. SHORTs are paying for the discount.
+  </Tab>
+  <Tab title="Mark ≈ Index (minimal funding)">
+    Prices are aligned.
+
+    - Funding rate is near zero
+    - Neither side pays significant funding
+    - Market is in equilibrium
+
+    **Example:** Mark is 62.1%, Index is 62%. Funding is negligible.
+  </Tab>
+</Tabs>
+
+
+## Funding Payment Calculation
+
+Funding payments are proportional to your position size, not your margin:
+
+```
+Funding Payment = Position Notional × Funding Rate
+```
+
+**Example:**
+
+- Your position: 1,000 USDC notional LONG
+- Funding Rate: 0.05% (LONGs pay)
+
+```
+Funding Payment = 1,000 × 0.0005 = 0.50 USDC
+```
+
+You pay 0.50 USDC this funding interval.
+
+If you were SHORT instead, you would receive 0.50 USDC.
+
+
+## Funding Intervals
+
+Funding accrues continuously but is applied at regular intervals:
+
+- Intervals are defined per market (e.g. every hour, every 8 hours)
+- The funding rate shown is typically the rate per interval
+- Payments are automatically added to or deducted from your equity
+
+**Example:**
+
+A market has hourly funding. The current funding rate is 0.01% per hour.
+
+- Over 24 hours, you would pay/receive approximately 0.24% of your position notional
+- This assumes the rate stays constant (it fluctuates based on price divergence)
+
+
+## Funding and Your Equity
+
+Funding affects your position equity directly:
+
+```
+Equity = Initial Margin + Unrealized PnL − Accrued Funding
+```
+
+If you are paying funding:
+
+- Your equity decreases over time
+- This brings you closer to liquidation
+- Large positions in crowded trades can bleed significant funding
+
+If you are receiving funding:
+
+- Your equity increases over time
+- This provides a buffer against adverse price moves
+- You are being compensated for taking the less popular side
+
+
+## Funding During Different Conditions
+
+<AccordionGroup>
+  <Accordion title="Normal markets" icon="check">
+    Mark and Index stay close. Funding rates are small. Neither side pays much.
+
+    **Example:** Mark oscillates between 61.8% and 62.2% around a 62% Index. Funding flips between small positive and negative values.
+  </Accordion>
+
+  <Accordion title="Strong directional bias" icon="arrow-trend-up">
+    Many traders pile into one side. Mark diverges from Index. The crowded side pays heavy funding.
+
+    **Example:** Breaking news makes everyone go LONG. Mark rises to 68% while Index is 64%. LONGs pay 0.05% per hour to SHORTs. This eventually attracts SHORTs and rebalances the market.
+  </Accordion>
+
+  <Accordion title="Low activity periods" icon="moon">
+    Few trades occur. Mark stays close to Index. Funding rates naturally approach zero.
+
+    No artificial pressure is introduced. The market remains fair even when quiet.
+  </Accordion>
+</AccordionGroup>
+
+
+## Why Funding Matters
+
+Funding serves critical functions:
+
+- **Price accuracy**: Keeps Ascend prices aligned with external prediction markets
+- **Balance**: Prevents one side from dominating indefinitely
+- **Sustainability**: Allows perpetual markets to function without expiry
+- **Incentives**: Rewards contrarian positions when markets get one-sided
+
+Without funding, leveraged prediction perpetuals would not work. Prices could disconnect from reality with no mechanism to pull them back.
+
+
+## Key Points
+
+- Funding transfers value between LONGs and SHORTs based on price divergence
+- LONGs pay when Mark > Index; SHORTs pay when Mark < Index
+- Payments are proportional to position notional
+- Funding accrues continuously and applies at regular intervals
+- Heavy funding on one side signals a crowded trade
+
+
+<Card
+  title="Next: CLOB & Matching"
+  icon="arrow-right"
+  href="/market-mechanics/clob-matching"
+>
+  Learn how the orderbook executes trades
+</Card>
+
+
+---
+
+# CLOB & Matching
+
+
+Ascend uses a Central Limit Order Book (CLOB) for price discovery and trade execution. Traders place bids and offers at specific probability prices, and the matching engine pairs compatible orders.
+
+This is the same orderbook model used by major exchanges. No AMM, no bonding curves, no protocol-owned liquidity. Just traders trading with each other.
+
+
+## How the Orderbook Works
+
+The orderbook is a live list of open orders, split into two sides:
+
+- **Bids (LONG):** Buyers posting "I will pay up to this price." The highest bid is the best one. It is closest to getting filled.
+- **Asks (SHORT):** Sellers posting "I will accept this price or higher." The lowest ask is the best one. It is closest to getting filled.
+
+The gap between the best bid and the best ask is called the **spread**. That is the cost of trading immediately.
+
+**Example: BTC $100k market:**
+
+| Bids (LONG) | Price | Asks (SHORT) |
+|-------------|-------|--------------|
+| | 65% | 500 USDC |
+| | 64% | 1,200 USDC |
+| 800 USDC | 63% | |
+| 2,000 USDC | 62% | |
+| 1,500 USDC | 61% | |
+
+Reading this: the best bid is **63%** (the highest price a buyer posted). The best ask is **64%** (the lowest price a seller posted). The spread is **1%**, the gap between them.
+
+- Want to go **LONG** right now? You match the best ask and pay **64%**.
+- Want to go **SHORT** right now? You match the best bid and receive **63%**.
+
+Want a better price? Place a limit order and wait for someone to match you.
+
+
+## Order Types
+
+Ascend supports standard order types:
+
+<Tabs>
+  <Tab title="Limit Orders">
+    You specify a price and size. Your order rests on the book until:
+
+    - It gets matched with an incoming order
+    - You cancel it
+    - It expires (if you set a time limit)
+
+    **Example:** You place a limit order to LONG 500 USDC at 62%. Your order sits on the bid side. If someone comes in willing to SHORT at 62% or lower, you get filled.
+
+    **Use when:** You want a specific price and are willing to wait.
+  </Tab>
+  <Tab title="Market Orders">
+    You specify only size. Your order executes immediately at the best available price.
+
+    **Example:** You place a market order to LONG 500 USDC. The best ask is 64%. You get filled at 64%.
+
+    **Use when:** You want to enter or exit immediately and accept the current price.
+  </Tab>
+</Tabs>
+
+
+## Matching Logic
+
+The matching engine follows price-time priority:
+
+1. **Best price first**: Orders at better prices get filled before orders at worse prices
+2. **Earlier orders first**: At the same price, older orders have priority
+
+This ensures fair execution with no preferential treatment.
+
+**Example:**
+
+Three traders place LONG limit orders at 62%:
+
+| Trader | Time | Size |
+|--------|------|------|
+| Alice | 10:00:01 | 500 USDC |
+| Bob | 10:00:05 | 300 USDC |
+| Carol | 10:00:10 | 400 USDC |
+
+A new SHORT market order comes in for 600 USDC.
+
+Fills:
+- Alice gets filled: 500 USDC (she was first)
+- Bob gets filled: 100 USDC (partial fill, he was second)
+- Carol gets nothing yet (Bob's remaining 200 USDC fills before her)
+
+Bob's remaining 200 USDC order stays on the book.
+
+
+## Partial Fills
+
+Orders can be partially filled when available liquidity is insufficient.
+
+**Example:**
+
+You place a market order to LONG 1,000 USDC. The orderbook looks like:
+
+| Price | Ask Size |
+|-------|----------|
+| 64% | 400 USDC |
+| 65% | 300 USDC |
+| 66% | 500 USDC |
+
+Your order fills across multiple price levels:
+
+- 400 USDC at 64%
+- 300 USDC at 65%
+- 300 USDC at 66%
+
+Total: 1,000 USDC filled at an average price of approximately 64.9%.
+
+This is called "walking the book." Large orders may experience slippage if liquidity is thin.
+
+
+## Spread and Liquidity
+
+The spread is the gap between the best bid and best ask.
+
+| Spread | Meaning |
+|--------|---------|
+| Tight (0.1-0.5%) | High liquidity, active market, low trading cost |
+| Medium (0.5-2%) | Normal liquidity, moderate trading cost |
+| Wide (2%+) | Low liquidity, higher trading cost, use limit orders |
+
+**Example:**
+
+- Best bid: 62%
+- Best ask: 64%
+- Spread: 2%
+
+If you market buy and immediately market sell, you lose 2% just to the spread. In tight markets, this cost is much lower.
+
+
+## Order Validation
+
+Every order is validated before being accepted:
+
+<AccordionGroup>
+  <Accordion title="Margin check" icon="vault">
+    You must have sufficient margin to cover the position if the order fills. Orders that would exceed your available margin are rejected.
+  </Accordion>
+
+  <Accordion title="Leverage check" icon="gauge">
+    The resulting position must stay within the market's maximum leverage. Orders that would create excessive leverage are rejected.
+  </Accordion>
+
+  <Accordion title="Price bounds" icon="arrows-left-right">
+    Orders at extreme prices (far from current market) may be rejected or flagged. This prevents fat-finger errors and manipulation.
+  </Accordion>
+
+  <Accordion title="Size limits" icon="ruler">
+    Orders must meet minimum size requirements and cannot exceed maximum position limits.
+  </Accordion>
+</AccordionGroup>
+
+
+## Matching vs Risk Management
+
+The matching engine and risk engine are separate:
+
+| System | Responsibility |
+|--------|---------------|
+| Matching Engine | Pairs compatible orders, executes trades |
+| Risk Engine | Enforces margin, leverage, liquidation rules |
+
+The matching engine is "risk-neutral." It only matches orders. All safety guarantees are enforced by the risk engine independently.
+
+**Key invariant:** No order can be matched unless margin and leverage requirements are satisfied at execution time. If a match would violate risk constraints, it is rejected.
+
+
+## Why CLOB for Prediction Markets
+
+The orderbook model provides:
+
+- **Transparent pricing**: All bids and offers are visible
+- **Fair execution**: Price-time priority treats everyone equally
+- **No slippage from curves**: You trade at discrete prices, not along a bonding curve
+- **Real depth**: You can see exactly how much liquidity exists at each price level
+- **Professional compatibility**: Market makers and algorithmic traders can participate using familiar infrastructure
+
+This is what allows Ascend to attract the liquidity that prediction markets need.
+
+
+## Continuous Price Discovery
+
+Prices on Ascend update continuously as orders are placed, matched, and canceled.
+
+Every trade prints a new price. Every new limit order changes the orderbook state. The "current price" is always the midpoint between best bid and best ask, or the last traded price.
+
+This continuous process is how probability prices evolve in real time as traders express their views.
+
+
+<Card
+  title="Next: Settlement & Resolution"
+  icon="arrow-right"
+  href="/market-mechanics/settlement-resolution"
+>
+  Learn how markets resolve and positions settle
+</Card>
+
+
+---
+
+# Settlement & Resolution
+
+
+While Ascend markets trade continuously like perpetuals, many prediction markets are tied to real-world events that eventually resolve. When an event outcome becomes known, the market settles and all positions are finalized.
+
+Settlement is deterministic, transparent, and rule-based. The same inputs always produce the same outcomes.
+
+
+## How Resolution Works
+
+When an underlying event resolves:
+
+1. The final outcome is determined using predefined resolution criteria
+2. The resolved outcome establishes the final probability price
+3. All open positions settle at that price
+4. PnL is calculated and applied to trader balances
+
+**Example:**
+
+Market: "Will Apple beat Q2 earnings?"
+
+- Apple reports Q2 earnings and misses estimates
+- Resolution source confirms: NO
+- Final probability price: 0% (the outcome did not happen)
+- All LONG positions settle at 0%
+- All SHORT positions settle at 0%
+
+LONGs who bought at higher prices lose. SHORTs who sold at higher prices win.
+
+
+## Resolution Sources
+
+Each market defines its resolution sources at creation. These are the authorities that determine the final outcome.
+
+<Tabs>
+  <Tab title="Official Sources">
+    Government announcements, regulatory filings, official results.
+
+    **Examples:**
+    - Federal Reserve press releases for rate decisions
+    - State election boards for election results
+    - SEC filings for corporate events
+
+    These are considered highest reliability.
+  </Tab>
+  <Tab title="Prediction Market Consensus">
+    Resolution based on how major prediction markets resolve.
+
+    **Examples:**
+    - Polymarket resolution
+    - Kalshi resolution
+    - Multiple platform consensus
+
+    Used when Ascend references external prediction markets.
+  </Tab>
+  <Tab title="Oracle Networks">
+    Decentralized oracle systems that aggregate multiple data sources.
+
+    **Examples:**
+    - Chainlink data feeds
+    - UMA optimistic oracle
+    - Custom oracle implementations
+
+    Used for asset-linked and composite markets.
+  </Tab>
+</Tabs>
+
+
+## Resolution Criteria
+
+Resolution criteria are defined at market creation and cannot be changed. They specify exactly what outcome maps to what settlement price.
+
+**Example: Binary event market**
+
+Market: "Will BTC be above $100k on Dec 31?"
+
+| Outcome | Settlement Price |
+|---------|-----------------|
+| BTC closes above $100,000 | 100% |
+| BTC closes at or below $100,000 | 0% |
+
+**Example: Multi-outcome market**
+
+Market: "Who wins the 2028 presidential election?"
+
+| Outcome | Settlement Price |
+|---------|-----------------|
+| Candidate A wins | 100% for A, 0% for others |
+| Candidate B wins | 100% for B, 0% for others |
+| Candidate C wins | 100% for C, 0% for others |
+
+Only one outcome settles at 100%. All others settle at 0%.
+
+
+## Settlement Process
+
+When resolution occurs:
+
+<Steps>
+  <Step title="Resolution triggered">
+    The resolution source confirms the outcome. This may happen immediately (election called) or after a delay (official certification).
+  </Step>
+  <Step title="Final price set">
+    The settlement price is set based on resolution criteria. For binary markets, this is 0% or 100%.
+  </Step>
+  <Step title="Positions settled">
+    All open positions are closed at the settlement price. PnL is calculated using entry price vs settlement price.
+  </Step>
+  <Step title="Balances updated">
+    Final PnL is applied to trader balances. Margin is released. The market transitions to settled state.
+  </Step>
+</Steps>
+
+
+## Settlement PnL Calculation
+
+At settlement, your PnL is:
+
+```
+Settlement PnL = Direction × Position Size × (Settlement Price − Entry Price)
+```
+
+**Example: LONG position, outcome happens**
+
+- Entry Price: 55%
+- Settlement Price: 100% (outcome happened)
+- Position Size: 1,000 USDC
+- Direction: LONG (+1)
+
+```
+PnL = +1 × 1,000 × (1.00 − 0.55)
+    = 1,000 × 0.45
+    = +450 USDC
+```
+
+You profit 450 USDC.
+
+**Example: LONG position, outcome does not happen**
+
+- Entry Price: 55%
+- Settlement Price: 0% (outcome did not happen)
+- Position Size: 1,000 USDC
+- Direction: LONG (+1)
+
+```
+PnL = +1 × 1,000 × (0.00 − 0.55)
+    = 1,000 × (−0.55)
+    = −550 USDC
+```
+
+You lose 550 USDC.
+
+
+## Exiting Before Settlement
+
+You do not have to hold until settlement. You can close your position at any time before resolution.
+
+**Why exit early:**
+
+- Lock in profits if the price has moved in your favor
+- Cut losses if conviction has changed
+- Free up margin for other trades
+- Avoid settlement uncertainty
+
+**Example:**
+
+You went LONG at 55%. Price rises to 72% as the event approaches. You can:
+
+- Hold until settlement and hope for 100%
+- Close now and take the 17 point profit
+
+If you close at 72%, your PnL is locked in regardless of the final outcome.
+
+
+## What Happens After Settlement
+
+Once a market settles:
+
+- All positions are closed
+- No new positions can be opened
+- Historical data remains available
+- The market is archived
+
+Settled markets serve as a permanent record of the outcome and trading activity.
+
+
+## Edge Cases
+
+<AccordionGroup>
+  <Accordion title="Ambiguous outcomes" icon="question">
+    Resolution criteria are designed to avoid ambiguity. If an edge case occurs that criteria do not clearly address, the market may use a fallback resolution mechanism defined at creation.
+
+    **Example:** A market on "Will X happen by Dec 31?" might specify that the resolution source's timezone is UTC, eliminating ambiguity.
+  </Accordion>
+
+  <Accordion title="Delayed resolution" icon="clock">
+    Some events take time to resolve (recounts, appeals, verification). Markets remain open for trading until official resolution. Prices may converge toward the expected outcome during this period.
+  </Accordion>
+
+  <Accordion title="Voided markets" icon="ban">
+    In rare cases, a market may be voided if the underlying event is canceled or resolution becomes impossible. Voided markets return all traders to their entry state. No profit or loss is realized.
+
+    **Example:** An election market where the election is postponed indefinitely.
+  </Accordion>
+</AccordionGroup>
+
+
+## Resolution Timeline
+
+| Phase | What Happens |
+|-------|--------------|
+| Trading | Market is open. Positions can be opened and closed. Prices fluctuate. |
+| Pending Resolution | Event has occurred. Awaiting official confirmation. Trading may continue. |
+| Resolution | Outcome confirmed. Settlement price set. |
+| Settlement | Positions closed. PnL applied. Margin released. |
+| Archived | Market closed permanently. Data preserved. |
+
+
+## Deterministic Settlement
+
+Settlement on Ascend is fully deterministic:
+
+- The same resolution input always produces the same settlement price
+- The same position always produces the same PnL
+- No discretionary intervention is required
+- All calculations are transparent and verifiable
+
+This ensures fairness and predictability for all participants.
+
+
+<Card
+  title="Next: Edge Cases"
+  icon="arrow-right"
+  href="/market-mechanics/edge-cases"
+>
+  Learn how the system handles extreme conditions
+</Card>
+
+
+---
+
+# Edge Cases
+
+
+## Binary Compression Near Extremes
+
+As probability prices approach 0% or 100%:
+
+- Marginal price movement becomes asymmetrical
+- Small probability changes can have outsized impact
+- Liquidity naturally thins near extremes
+
+Ascend handles this by:
+
+- Applying consistent tick sizing
+- Maintaining symmetric LONG / SHORT mechanics
+- Preserving deterministic PnL behavior
+
+
+## Probability Drift Without Resolution
+
+Some probability markets may drift for extended periods without ever reaching resolution.
+
+Examples:
+
+- Long-term macro expectations
+- Ongoing policy speculation
+- Persistent sentiment indicators
+
+Behavior:
+
+- Markets remain continuously tradable
+- Funding maintains alignment with external signals
+- No forced settlement occurs
+
+This enables prediction markets to function as **ongoing probability instruments**, not one-off bets.
+
+
+## Sudden Truth Revelation
+
+Some events resolve instantaneously and unambiguously.
+
+Examples:
+
+- Official results released
+- Market-moving announcements
+
+Behavior:
+
+- Index Price updates immediately
+- Mark Price converges deterministically
+- Settlement proceeds according to predefined rules
+
+No discretionary delay is introduced.
+
+
+## Contrarian Liquidity Vacuums
+
+At high confidence levels, few traders may be willing to take the opposing side.
+
+Behavior:
+
+- Spreads widen naturally
+- Funding incentives increase
+- Liquidity reflects true market conviction
+
+Markets remain functional without artificial liquidity injection.
+
+
+## Oracle Irregularities
+
+### Stale Oracle Data
+
+If one or more oracle sources stop updating:
+
+- Stale inputs are excluded from Index Price calculation
+- Remaining valid sources continue to contribute
+- Mark Price smoothing limits sudden jumps
+
+If insufficient valid sources remain, the market may enter a **restricted state** until updates resume.
+
+
+### Conflicting Oracle Inputs
+
+If oracle inputs diverge beyond acceptable bounds:
+
+- Outlier prices are ignored according to predefined thresholds
+- Weighted aggregation continues using valid inputs
+- The Mark Price clamp limits divergence
+
+This prevents a single oracle from dominating price formation.
+
+
+<Card
+  title="Back to Start"
+  icon="arrow-left"
+  href="/start-here/what-is-ascend"
+>
+  Return to the beginning
+</Card>
+
+
+# $ASCEND
+
+---
+
+# Tokenomics
+
+
+## $ASCEND Utility
+
+$ASCEND is the native utility token powering Ascend Markets, an events perpetuals platform.
+
+It plays a central role in aligning traders, liquidity providers, and long term protocol participants.
+
+
+## Key Utilities
+
+### 1. Staking & Fee Sharing
+
+$ASCEND holders can stake their tokens to earn a **share of protocol-generated fees**, including:
+
+- Trading fees
+- Funding-related fees
+- Future premium market fees
+
+Staking aligns long-term token holders with the growth and success of the Ascend ecosystem.
+
+### 2. Collateral Utility
+
+$ASCEND can be used as **additional collateral** across Ascend's prediction perpetuals and event-based markets.
+
+Using $ASCEND as collateral provides:
+
+- **Discounted trading fees**
+- **Access to higher effective leverage**
+- **Priority participation in new markets and modes**
+
+In the event of liquidation, any $ASCEND used as collateral may be **burned**, creating a deflationary mechanism aligned with protocol risk.
+
+### 3. Trading Fee Discounts
+
+$ASCEND holders receive **discounted trading fees** when using the platform.
+
+Fee discounts:
+
+- Apply to all prediction and event perpetual markets
+- Can be **stacked** with discounts from using $ASCEND as collateral
+- Incentivize active usage and long-term holding
+
+### 4. Governance
+
+$ASCEND is the **governance token** of Ascend Markets.
+
+Token holders can vote on:
+
+- Protocol upgrades
+- New market launches
+- Risk parameters (leverage caps, funding bounds, settlement rules)
+- Treasury usage and ecosystem initiatives
+
+Governance ensures Ascend evolves in line with its community and active traders.
+
+
+## Exclusive Market Access
+
+$ASCEND holders receive **exclusive access to select markets, modes, and features**:
+
+<AccordionGroup>
+  <Accordion title="Early Access" icon="clock">
+    Early access to newly launched prediction and event perpetual markets.
+  </Accordion>
+
+  <Accordion title="High-Conviction Markets" icon="fire">
+    Exclusive high conviction markets with limited participation.
+  </Accordion>
+
+  <Accordion title="Advanced Trading Modes" icon="gauge-high">
+    Higher leverage presets, special settlement windows, and more.
+  </Accordion>
+
+  <Accordion title="Experimental Markets" icon="flask">
+    Invitation-only experimental markets before public rollout.
+  </Accordion>
+</AccordionGroup>
+
+
+## Token Supply & Distribution
+
+**Total Supply: 22,000,000 $ASCEND**
+
+| Category | Allocation | Tokens |
+|----------|------------|--------|
+| Public Sale | 60% | 13,200,000 |
+| Rewards & Incentives | 12% | 2,640,000 |
+| DAO Treasury | 10% | 2,200,000 |
+| Liquidity | 10% | 2,200,000 |
+| Team & Advisors | 8% | 1,760,000 |
+| **Total** | **100%** | **22,000,000** |
+
+
+## Rewards & Incentives Allocation
+
+| Ecosystem | Allocation | $ASCEND Tokens |
+|-----------|------------|---------------|
+| Cardano + Midnight | 50% | 1,320,000 |
+| Solana | 20% | 528,000 |
+| EVM (ETH + L2s) | 20% | 528,000 |
+| Other (BTC, HYPE, Web2, etc.) | 10% | 264,000 |
+| **Total** | **100%** | **2,640,000** |
+
+<Note>
+Incentives are allocated across ecosystems based on strategic alignment and trading activity. Cardano and Midnight receive a foundational allocation, while Solana, EVM, and other ecosystems are incentivized based on participation and growth potential.
+</Note>
+
+
+# Tech Docs
+
+---
+
+# Architecture Overview
+
+
+## Introduction
+
+Ascend is a **fully verifiable events perpetuals decentralized exchange** enabling leveraged trading on **outcome probabilities**. Ascend supports **Cardano, EVM, and Solana environments**, while enforcing all trading, risk, account, and settlement logic within Midnight, a **Cardano partnerchain** with **multi-resource consensus and native privacy.** Ascend inspires from Midnight's **Minotaur philosophy** for **multichain DeFi execution**, privacy focused, policy-driven model to:
+
+- Order execution
+- Margin and leverage enforcement
+- Liquidation logic
+- Event settlement
+
+This allows execution rights, capital, risk, and permissions to be treated as **distinct yet composable resources**, all enforced under zero-knowledge guarantees.
+
+Ascend adopts a **ZK-enforced execution architecture**, where all user actions are finalized on Midnight.
+
+The architecture is designed to:
+
+- Maximize throughput
+- Preserve user privacy
+- Provide cryptographic guarantees of correctness
+- Maintain a single canonical execution state
+
+<Frame>
+  <img src="/images/arch.png" alt="Ascend Architecture Diagram" />
+</Frame>
+
+
+## Ascend Engines
+
+Instead of separating execution into off-chain and on-chain domains, Ascend structures protocol logic into **deterministic execution engines**, each enforced through Midnight ZK verification.
+
+<AccordionGroup>
+  <Accordion title="Matching Engine" icon="arrows-rotate">
+    Executes probability-priced event perpetual orders with deterministic matching.
+  </Accordion>
+  <Accordion title="Risk Engine" icon="chart-line">
+    Evaluates margin, leverage, and liquidation conditions in real-time.
+  </Accordion>
+  <Accordion title="Account Engine" icon="user">
+    Manages funding and trading account state transitions.
+  </Accordion>
+  <Accordion title="Fund Control Engine" icon="vault">
+    Handles internal and external fund movements securely.
+  </Accordion>
+  <Accordion title="Event Engine" icon="calendar-check">
+    Governs event lifecycle, resolution, and settlement.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+All engine outputs are subject to **ZK-verified constraints** and committed via Midnight.
+</Note>
+
+
+## Execution & Verification
+
+### Trade Execution Flow
+
+<Steps>
+  <Step title="Sign">
+    Orders are signed using **native ecosystem credentials** (Cardano, EVM, or Solana)
+  </Step>
+  <Step title="Match">
+    Orders are interpreted by the Ascend Matching Engine
+  </Step>
+  <Step title="Validate">
+    Execution results are validated by the Risk Engine
+  </Step>
+  <Step title="Commit">
+    Final state transitions are proven and committed on Midnight
+  </Step>
+</Steps>
+
+### Risk & Liquidation Enforcement
+
+- Margin requirements evaluated per trading account
+- Liquidation conditions checked deterministically
+- Liquidation actions only applied if **ZK-verified as fair**
+
+
+## Account Architecture
+
+<CardGroup cols={2}>
+  <Card title="Funding Account" icon="wallet">
+    The **primary on-chain ownership entity** within Ascend.
+
+    - Accept and manage deposits
+    - Process withdrawals
+    - Transfer funds between accounts
+    - Allocate capital to trading accounts
+
+    Tracks collateral, linked accounts, permissions, and multi-sig thresholds.
+  </Card>
+  <Card title="Trading Account" icon="chart-candlestick">
+    **Subordinate accounts** dedicated to trading operations.
+
+    - Isolated margin per account
+    - Independent liquidation conditions
+    - Position and funding tracking
+
+    Multiple trading accounts can link to a single funding account.
+  </Card>
+</CardGroup>
+
+
+## Account State Model
+
+All account-related state is maintained as **zero-knowledge–verified state on Midnight**.
+
+| Account Type | State Includes |
+|--------------|----------------|
+| Funding Account | Collateral balance, linked trading accounts, roles & permissions, multi-sig config |
+| Trading Account | Active positions, margin utilization, funding adjustments, liquidation status |
+
+
+## Identity & Credentials
+
+Ascend implements a **fully cryptographic identity framework** working with existing KYC, KYB, and identity providers.
+
+<CardGroup cols={2}>
+  <Card title="Multi-Account Control" icon="users">
+    A single user may control multiple protocol accounts
+  </Card>
+  <Card title="Key-Based Ownership" icon="key">
+    Account ownership tied to cryptographic keys
+  </Card>
+  <Card title="Signed Authorization" icon="signature">
+    All actions enforced through signed transactions
+  </Card>
+  <Card title="No Web2 Layer" icon="ban">
+    No separate Web2 identity required for execution
+  </Card>
+</CardGroup>
+
+<Tip>
+This model removes the need for a Web2/Web3 credential split while preserving institutional-grade permissioning and access guarantees.
+</Tip>
+
+
+---
+
+# API Docs
+
+
+## API & Programmatic Access
+
+Ascend exposes **protocol interfaces** for frontends, bots, and institutional traders.
+
+
+## Interface Categories
+
+| Type | Description |
+|------|-------------|
+| Read | Markets, prices, funding rates, events |
+| Write | Orders, transfers, margin actions |
+
+
+## API Keys
+
+- API keys are issued at the **Trading Account level**
+- Trade-only permissions by default
+- Each API key is bound to a signing authority
+
+
+## Authentication
+
+- API keys authenticate sessions
+- Session tokens are used for request authorization
+
+
+## Transaction Authorization
+
+- All actions are cryptographically signed
+- Signatures are validated inside execution circuits
+- Unauthorized or replayed actions are rejected
+

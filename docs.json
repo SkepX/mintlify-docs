@@ -25,7 +25,8 @@
             "group": "Ascend Testnet",
             "pages": [
               "ascend-testnet/testnet-guide",
-              "ascend-testnet/trading-competition"
+              "ascend-testnet/trading-competition",
+              "ascend-testnet/community-boost"
             ]
           },
           {
@@ -76,7 +77,8 @@
           {
             "group": "Getting Started",
             "pages": [
-              "agent-skills/overview"
+              "agent-skills/overview",
+              "agent-skills/claude-web-bot"
             ]
           },
           {
