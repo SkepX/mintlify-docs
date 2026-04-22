@@ -1,0 +1,52 @@
+---
+title: "Spot DEX"
+---
+
+The **Ascend Spot DEX** is a **verifiable, orderbook-based spot market** for trading between supported digital assets, and a **strong standalone product** in its own right: **Midnight’s first orderbook Spot DEX** implementation. It complements Ascend’s core **event perpetuals** product ([What is Ascend](https://docs.ascend.market/start-here/what-is-ascend)) by providing **non-expiring, spot** liquidity for users who want to swap, hedge, or rebalance collateral without opening a probability-priced perpetual position.
+
+---
+
+## What the Spot DEX is
+
+- **CLOB (central limit order book)** spot trading: **peer-to-peer** price discovery, not a bonding-curve AMM.
+- **Direct asset exchange**: a **base** is exchanged for a **quote** (e.g. BASE/QUOTE) at discrete prices, with **partial fills** and **price–time priority** on the book.
+- **Complementary to perpetuals**: spot balances and flows can be used to **manage collateral and exposure** around outcome markets without conflating **spot** fills with **probability** PnL.
+
+---
+
+## How Spot Trading Works
+
+1. **Choose a spot pair**Select a market listed as `BASE/QUOTE` (e.g. stable vs native asset, or other supported pairs as announced).
+2. **Place an order**Use **limit** orders (rest on the book at a price and size) or **market** orders (execute against the best available liquidity). Minimum size, tick size, and pair status follow each market’s specification.
+3. **Matching**The **matching engine** pairs compatible bids and offers per **CLOB** rules. Large orders can **walk the book** and receive a volume-weighted average price across multiple levels.
+4. **Settlement**
+   On success, **balances** for the two legs update; fees are applied per the fee schedule.
+
+---
+
+## Order types (spot)
+
+| Type             | Behavior                                                                                                                             |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **Limit**  | Rests on the book until filled, cancelled, or expired.                                                                               |
+| **Market** | Fills immediately against the opposite side, subject to available depth and any max-slippage or notional caps configured in the app. |
+
+---
+
+## Spot vs event perpetuals
+
+|                        | **Spot DEX**                                        | **Event perpetuals**                                                                                                                          |
+| ---------------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Price object** | Asset vs asset (e.g. BASE in QUOTE)                       | Outcome**probability** (0–100%) per [Outcome Probabilities](https://docs.ascend.market/core-concepts/outcome-probabilities.md)                  |
+| **Position**     | Spot**balances**; no per-market “LONG/SHORT on %” | **LONG/SHORT** on a probability                                                                                                               |
+| **Leverage**     | Unlevered spot                                            | **Leverage** and **margin** per market rules; see [Margin Model](https://docs.ascend.market/risk-margin/margin-model.md)                   |
+| **Settlement**   | **Trade** settlement (fills and fees)               | **Event resolution** and [Settlement &amp; Resolution](https://docs.ascend.market/market-mechanics/settlement-resolution.md) for outcome markets |
+
+Use **spot** to move value between assets; use **perpetuals** to trade **belief about future probabilities** with the perpetual structure ([Perpetual Market Structure](https://docs.ascend.market/core-concepts/perpetual-market-structure.md)).
+
+---
+
+## Multi-chain and verification
+
+- **Wallets and signing**: as on the rest of Ascend, actions use **ecosystem-native** credentials (Cardano, EVM, or Solana) and are only executed when the protocol’s rules pass validation.
+- **Canonical execution**: the **Matching**, **Account**, and related engines maintain a **single coherent** trading and fund state, with ZK and commitment guarantees aligned to Midnight where specified for the deployment.
