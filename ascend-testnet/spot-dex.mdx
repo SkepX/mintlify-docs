@@ -11,8 +11,8 @@ Built on Midnight’s zero-knowledge infrastructure, the Spot DEX brings **priva
 
 ## What the Spot DEX Is
 
-<CardGroup cols={3}>
-  <Card title=”CLOB Orderbook” icon=”book-open”>
+<CardGroup cols={2}>
+  <Card title=”CLOB Orderbook” icon=”arrows-rotate”>
     Peer-to-peer price discovery through a central limit order book. No bonding curves, no AMM slippage.
   </Card>
 
@@ -97,7 +97,7 @@ The Ascend Spot DEX leverages Midnight’s zero-knowledge architecture to unlock
     **Result:** No front-running, no sandwich attacks, no MEV extraction. You get the price you deserve.
   </Accordion>
 
-  <Accordion title=”Confidential Large Block Trades (Institutional Dark Pools)” icon=”building-columns”>
+  <Accordion title=”Confidential Large Block Trades (Institutional Dark Pools)” icon=”vault”>
     Institutions moving large positions on transparent DEXs face a fundamental problem: the market sees the order before it fills. A $2M buy order on a public orderbook signals demand and moves the price against the buyer before execution completes.
 
     The Ascend Spot DEX enables **confidential block trading** where order size and intent remain hidden from other market participants. Large orders execute without broadcasting information to the market, preserving price integrity for the institution.
@@ -105,7 +105,7 @@ The Ascend Spot DEX leverages Midnight’s zero-knowledge architecture to unlock
     **Result:** Institutional-grade block execution on a decentralized venue. No information leakage, no adverse price impact from visibility.
   </Accordion>
 
-  <Accordion title=”Selective Disclosure for Regulatory Compliance” icon=”file-shield”>
+  <Accordion title=”Selective Disclosure for Regulatory Compliance” icon=”scale-balanced”>
     Regulated entities need to prove compliance (KYC/KYB status, transaction history, jurisdictional eligibility) without exposing their full trading activity to the public chain.
 
     Midnight’s **selective disclosure model** allows traders to prove specific attributes to regulators or counterparties using zero-knowledge proofs without revealing anything else. A fund can prove it is a licensed entity without disclosing its positions. A trader can prove jurisdictional eligibility without revealing their identity on-chain.
@@ -113,7 +113,7 @@ The Ascend Spot DEX leverages Midnight’s zero-knowledge architecture to unlock
     **Result:** Trade on a decentralized venue while meeting institutional and regulatory requirements. Compliance without surveillance.
   </Accordion>
 
-  <Accordion title=”Private OTC-Style Spot Trading for Sensitive Assets” icon=”user-shield”>
+  <Accordion title=”Private OTC-Style Spot Trading for Sensitive Assets” icon=”lock”>
     Some trades are sensitive by nature: treasury rebalancing, strategic accumulation, early-stage token positions, or cross-chain collateral movements. On transparent chains, every wallet’s activity is permanently visible and trivially analyzed.
 
     The Ascend Spot DEX provides **OTC-grade privacy** on a public orderbook. Trade activity, balances, and counterparty relationships remain confidential. Strategic positions can be built or unwound without broadcasting intent to the entire market.
@@ -131,7 +131,7 @@ The Ascend Spot DEX leverages Midnight’s zero-knowledge architecture to unlock
     Actions use native credentials from **Cardano, EVM, or Solana**. Orders are only executed when the protocol’s validation rules pass.
   </Card>
 
-  <Card title=”Canonical Execution State” icon=”microchip”>
+  <Card title=”Canonical Execution State” icon=”server”>
     The Matching, Account, and related engines maintain a **single coherent** trading and fund state, with ZK and commitment guarantees aligned to Midnight.
   </Card>
 </CardGroup>
