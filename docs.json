@@ -27,7 +27,8 @@
               "ascend-testnet/testnet-guide",
               "ascend-testnet/trading-competition",
               "ascend-testnet/boosted-contest",
-              "ascend-testnet/spot-dex"
+              "ascend-testnet/spot-dex",
+              "ascend-testnet/orderbook-dex"
             ]
           },
           {
