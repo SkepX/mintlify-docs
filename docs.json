@@ -55,6 +55,12 @@
             ]
           },
           {
+            "group": "Liquid Staking",
+            "pages": [
+              "liquid-staking/staking-guide"
+            ]
+          },
+          {
             "group": "Market Mechanics",
             "pages": [
               "market-mechanics/funding-price-alignment",
