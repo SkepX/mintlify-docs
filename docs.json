@@ -31,6 +31,12 @@
             ]
           },
           {
+            "group": "Liquid Staking",
+            "pages": [
+              "liquid-staking/staking-guide"
+            ]
+          },
+          {
             "group": "Core Concepts",
             "pages": [
               "core-concepts/outcome-probabilities",
@@ -52,12 +58,6 @@
             "pages": [
               "risk-margin/margin-model",
               "risk-margin/liquidation-logic"
-            ]
-          },
-          {
-            "group": "Liquid Staking",
-            "pages": [
-              "liquid-staking/staking-guide"
             ]
           },
           {
