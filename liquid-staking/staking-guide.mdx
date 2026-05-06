@@ -16,33 +16,13 @@ Your tokens are never locked in a contract or swapped for a receipt token, you d
 
 ## What is Liquid Staking
 
-Traditional staking sends your tokens into a smart contract or to a validator. Once they're in there, they aren't really yours to use. You have to wait through an unbonding period before you can move them again.
-
-Liquid staking removes that constraint. Your tokens stay in your wallet the whole time. You sign a message saying how much ASCEND you're committing, and the protocol records that commitment on-chain. Your wallet balance is your stake. There's no separate pool holding anything.
-
-What that means in practice:
-
-<CardGroup cols={3}>
-  <Card title="You keep custody" icon="wallet">
-    Tokens never leave your wallet. Your seed phrase still controls them. There is no contract that can be paused, drained, or upgraded out from under you.
-  </Card>
-
-  <Card title="No unbonding period" icon="clock">
-    There is no 7, 14, or 21 day waiting period. You can unstake at any time, and the change takes effect as soon as your transaction confirms.
-  </Card>
-
-  <Card title="Your stake tracks your balance" icon="scale-balanced">
-    If you move tokens out of your wallet, your stake automatically adjusts down to whatever you still hold. You cannot earn rewards on tokens you no longer own.
-  </Card>
-</CardGroup>
+Traditional staking sends your tokens into a smart contract or to a validator, and you wait through an unbonding period to get them back. Liquid staking skips that. Your tokens stay in your wallet, your wallet balance is your stake, and if you move tokens out, your stake adjusts down automatically. You can't earn rewards on tokens you no longer own.
 
 ---
 
 ## Why Stakers Earn 100% of Protocol Revenue
 
-Every fee Ascend collects goes to stakers. There's no team cut and no buyback layer in between.
-
-Your rewards come from people actually trading on the platform, not from minting new tokens. ASCEND is capped at **22 million** with no further issuance, so what you earn isn't being paid for by diluting your share.
+Every fee Ascend collects is paid to stakers, in proportion to how much each wallet has staked. Rewards come from real trading activity, not from minting new tokens. ASCEND is capped at **22 million** with no further issuance, so what you earn isn't paid for by diluting your share.
 
 ---
 
@@ -54,44 +34,38 @@ Your rewards come from people actually trading on the platform, not from minting
 
 <Steps>
   <Step title="Connect your Cardano wallet">
-    Open the staking page and connect any Cardano wallet that holds ASCEND. The first time you connect, your wallet address is registered with the protocol so it can track your stake.
+    Open the staking page and connect any Cardano wallet that holds ASCEND. The first time you connect, your address is registered with the protocol so it can track your stake.
   </Step>
 
   <Step title="Sign a staking transaction">
-    Choose how much ASCEND you want to stake and approve the transaction in your wallet. You're signing a small on-chain transaction that carries metadata describing your action: the asset (ASCEND), the amount, your address, and a one-time identifier so the same approval can't be replayed.
+    Choose how much ASCEND to stake and approve the transaction. You're signing a small on-chain transaction with metadata describing your action: the asset, the amount, your address, and a one-time identifier so it can't be replayed.
 
-    The transaction is short-lived. It has to reach the chain within 10 minutes of being signed, otherwise it expires and you sign a fresh one. Your tokens never move. It's just there to prove the wallet owner authorized the stake.
+    The signed transaction has to confirm within 10 minutes or it expires. Your tokens never move. The transaction is just a signed authorization.
   </Step>
 
   <Step title="The protocol verifies on-chain">
-    Once your transaction is in a Cardano block, the protocol reads it directly from the chain to confirm three things:
+    Once the transaction is in a block, the protocol reads it to confirm:
 
-    - The transaction was signed by the wallet that claims to be staking (verified by checking that one of the inputs comes from your address)
-    - The metadata is well-formed and references the ASCEND token specifically
-    - The one-time identifier has not been used before
+    - It was signed by the wallet claiming to stake (one of the inputs has to come from your address)
+    - The metadata is well-formed and references ASCEND
+    - The one-time identifier hasn't been used before
 
-    Only after all of those pass is your stake recorded.
+    Only then is your stake recorded.
   </Step>
 
-  <Step title="Your stake is active and earning">
-    Your wallet is now marked as staked with the amount you committed. Any further stakes from the same wallet get added on top of your existing position instead of replacing it. From here, you start earning your share of fees.
-  </Step>
-
-  <Step title="Unstake whenever you want">
-    Unstaking is the same flow in reverse. You sign a transaction declaring the amount you want to remove, and once it confirms on-chain your stake is reduced. No waiting period. If you unstake the full amount, the wallet is marked unstaked.
+  <Step title="You're earning, and you can exit anytime">
+    Your wallet is marked as staked, and any further stakes add to your position instead of replacing it. Unstaking is the same flow in reverse: sign a transaction declaring the amount, wait for it to confirm, done. No waiting period.
   </Step>
 </Steps>
 
 ---
 
-## How Your Balance and Stake Stay in Sync
+## How Your Balance Stays in Sync
 
-Because your tokens never leave your wallet, the protocol has to make sure your declared stake matches what you actually hold. It does this with a recurring balance check.
+Because tokens never leave your wallet, the protocol checks twice a day, at **00:00 UTC and 12:00 UTC**, that staked wallets still hold what they claim:
 
-Twice a day, at **00:00 UTC and 12:00 UTC**, the protocol scans every staked wallet and compares your on-chain ASCEND balance against the staked amount on record:
+- If your balance is equal to or greater than your staked amount, nothing changes.
+- If it's dropped below, your stake is reduced to whatever you currently hold.
+- If it's zero, the wallet is marked fully unstaked.
 
-- If your balance is **equal to or greater than** your staked amount, nothing changes.
-- If your balance has **dropped below** your staked amount (because you sent some tokens out), your stake is automatically reduced to whatever you currently hold.
-- If your balance has gone to **zero**, your wallet is marked fully unstaked.
-
-You keep your tokens the entire time, and rewards are always calculated against what you actually hold.
+Rewards are always calculated against what you actually hold.
