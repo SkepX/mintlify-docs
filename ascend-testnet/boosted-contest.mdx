@@ -39,19 +39,49 @@ Ascend has a dedicated **SNEK leaderboard** separate from the main competition l
   <img src="/images/leaderboardsnek.png" alt="SNEK leaderboard showing boosted traders with SNEK 2x indicator" />
 </Frame>
 
-The SNEK Boosted Contest uses the same weighted scoring formula as the main $10K competition:
+### Global Leaderboard
+
+**Step 1 — Normalize each metric (0–100):**
 
 ```
-Score = 20% x Account PnL% + 50% x No. of Trades + 30% x No. of Active Days
+normPnl_i = (pnlPercent_i - min) / (max - min) × 100
 ```
 
-With the 2x boost applied:
+Same for `tradeCount` → `normTrades` and `activeDays` → `normDays`.
+
+**Step 2 — Base score:**
 
 ```
-Boosted Score = Score x 2
+baseScore = 0.2 × normPnl + 0.5 × normTrades + 0.3 × normDays
 ```
 
-The SNEK leaderboard is a dedicated leaderboard tracking only boosted traders. You can switch to it on the Leaderboard page to see how you rank among other SNEK holders.
+**Step 3 — SNEK boost (eligible addresses with SNEK period PnL only):**
+
+```
+snekShare = min(snekPnl / totalPnl, 1)
+
+finalScore = baseScore + (0.2 × normPnl) × snekShare × 1
+                         └──── boost addend ────┘
+```
+
+Where `snekPnl` is DB-scoped to Apr 7–13 only.
+
+#### What The Boost Actually Does
+
+For a non-eligible address: `finalScore = baseScore`
+
+For an eligible address it adds a fraction of their PnL component back on top, proportional to how much of their PnL came from SNEK event trades:
+
+| Address | snekShare | Boost addend | Effect |
+|---|---|---|---|
+| `addr_test1qr5w` (3.6M / 4.7M) | 77% | `+0.77 × pnlComponent` | Large boost — most PnL was SNEK |
+| `addr_test1qqur` (98M / 112B) | 0.09% | `+0.0009 × pnlComponent` | Tiny boost — SNEK was negligible vs all-time PnL |
+
+**Max possible boost** is `+1×` the PnL component (when `snekShare = 1`, i.e. 100% of their PnL came from SNEK trades). The total score can never exceed `baseScore + pnlComponent`, so it's bounded and can't artificially inflate rankings beyond what the PnL metric justifies.
+
+### SNEK-Only Leaderboard
+
+Unchanged — still binary `base × 2` for eligible, `base` for everyone else, scored against SNEK-period trades only.
 
 ---
 
