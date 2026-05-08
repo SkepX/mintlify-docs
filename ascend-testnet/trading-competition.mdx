@@ -32,10 +32,20 @@ The top 10 traders share a total prize pool of **$10,000 USD**:
 
 ## Leaderboard & Scoring
 
-The leaderboard ranks traders using a **weighted scoring formula** that rewards consistent, active trading, not just raw PnL:
+The leaderboard ranks traders using a **weighted scoring formula** that rewards consistent, active trading, not just raw PnL. Each metric is normalized across all traders before being weighted, so scores are comparable regardless of absolute values.
+
+**Step 1 — Normalize each metric (0–100):**
 
 ```
-Score = 20% × Account PnL% + 50% × No. of Trades + 30% × No. of Active Days
+normPnl_i = (pnlPercent_i - min) / (max - min) × 100
+```
+
+Same for `tradeCount` → `normTrades` and `activeDays` → `normDays`.
+
+**Step 2 — Base score:**
+
+```
+baseScore = 0.2 × normPnl + 0.5 × normTrades + 0.3 × normDays
 ```
 
 | Factor | Weight | What It Measures |
@@ -43,6 +53,17 @@ Score = 20% × Account PnL% + 50% × No. of Trades + 30% × No. of Active Days
 | **Account PnL%** | 20% | Overall profitability relative to your account |
 | **No. of Trades** | 50% | Trading activity and engagement |
 | **No. of Active Days** | 30% | Consistency over time |
+
+**Step 3 — SNEK boost (eligible addresses with SNEK period PnL only):**
+
+```
+snekShare = min(snekPnl / totalPnl, 1)
+
+finalScore = baseScore + (0.2 × normPnl) × snekShare × 1
+                         └──── boost addend ────┘
+```
+
+Where `snekPnl` is scoped to the SNEK event window (Apr 7–13) only. For non-eligible addresses, `finalScore = baseScore`. See the [SNEK Boosted Contest](/ascend-testnet/boosted-contest) for full details.
 
 This means the most active and consistent traders have the best chance of climbing the leaderboard, even without the highest PnL percentage.
 
