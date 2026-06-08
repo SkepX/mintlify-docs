@@ -26,8 +26,13 @@
             "pages": [
               "ascend-testnet/testnet-guide",
               "ascend-testnet/trading-competition",
-              "ascend-testnet/boosted-contest",
-              "ascend-testnet/orderbook-dex"
+              "ascend-testnet/boosted-contest"
+            ]
+          },
+          {
+            "group": "Ascend Mainnet",
+            "pages": [
+              "ascend-mainnet/orderbook-dex"
             ]
           },
           {
