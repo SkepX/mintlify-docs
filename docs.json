@@ -36,6 +36,12 @@
             ]
           },
           {
+            "group": "Mainnet",
+            "pages": [
+              "mainnet/private-mainnet-beta"
+            ]
+          },
+          {
             "group": "Liquid Staking",
             "pages": [
               "liquid-staking/staking-guide"
