@@ -32,13 +32,8 @@
           {
             "group": "Ascend Mainnet",
             "pages": [
-              "ascend-mainnet/orderbook-dex"
-            ]
-          },
-          {
-            "group": "Mainnet",
-            "pages": [
-              "mainnet/private-mainnet-beta"
+              "ascend-mainnet/orderbook-dex",
+              "ascend-mainnet/private-mainnet-beta"
             ]
           },
           {
