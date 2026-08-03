@@ -1,0 +1,263 @@
+---
+title: "Fee Structure"
+description: "What it costs to trade on Ascend — tiered taker fees, zero maker fees"
+---
+
+Ascend uses a tiered fee schedule. **Makers pay nothing at every tier. Takers start at 0.040% and pay less as their volume grows.**
+
+Your tier is determined by your own trading activity, not by a token balance or an application process. Every account starts at the base tier and moves up automatically.
+
+<CardGroup cols={3}>
+  <Card title="0.000%" icon="circle-check">
+    Maker fee at every tier
+  </Card>
+  <Card title="0.040% → 0.025%" icon="arrow-trend-down">
+    Taker fee, scaling with 30-day volume
+  </Card>
+  <Card title="100%" icon="coins">
+    Of protocol revenue paid to $ASCEND stakers
+  </Card>
+</CardGroup>
+
+***
+
+## Fee Tiers
+
+| Tier       |     30D Volume | Taker Fee | Maker Fee |
+| ---------- | -------------: | --------: | --------: |
+| **Tier 0** |     $0 – $250K |    0.040% |    0.000% |
+| **Tier 1** |    $250K – $1M |    0.035% |    0.000% |
+| **Tier 2** |      $1M – $5M |    0.032% |    0.000% |
+| **Tier 3** |     $5M – $25M |    0.030% |    0.000% |
+| **Tier 4** |   $25M – $100M |    0.027% |    0.000% |
+| **Tier 5** |      ≥ $100M   |    0.025% |    0.000% |
+
+Maker fills are free at every tier. Tiers only change what you pay when you take liquidity.
+
+***
+
+## How Tiers Are Calculated
+
+<Steps>
+  <Step title="Volume accumulates on filled notional">
+    Every fill counts toward your 30-day volume at its notional value. Both maker and taker fills count. Unfilled and canceled orders do not.
+  </Step>
+
+  <Step title="The window rolls">
+    Your volume is the trailing 30 days, not a calendar month. Activity older than 30 days drops out of the calculation.
+  </Step>
+
+  <Step title="Tiers are recalculated daily">
+    Your tier is recomputed once per day at **00:00 UTC** and applies to every fill until the next recalculation. Crossing a threshold mid-day does not change your rate until the next update.
+  </Step>
+
+  <Step title="New accounts start at Tier 0">
+    Every account begins at the base rate. There is no application, no form, and no minimum deposit to reach a higher tier — only volume.
+  </Step>
+</Steps>
+
+***
+
+## Maker vs Taker
+
+Every fill has two sides. One trader was already there, one trader came and took it. That distinction decides which rate applies.
+
+<Tabs>
+  <Tab title="You are the maker (0%)">
+    Your order sat on the book and waited. You provided the liquidity someone else needed.
+
+    * You placed a **limit order** at a price that did not cross the spread
+    * Your order rested on the bid or ask side
+    * Someone else's order came in and matched against yours
+
+    **Example:** Best ask is 64%. You place a limit order to LONG 1,000 USDC at 62%. Your order rests on the bid side. Twenty minutes later a SHORT market order sells into you at 62%.
+
+    **Fee: 0.00 USDC, at any tier.**
+  </Tab>
+
+  <Tab title="You are the taker (tiered)">
+    Your order executed immediately against liquidity that was already on the book. You consumed the depth someone else posted.
+
+    * You placed a **market order**, or
+    * You placed a **limit order at a price that crossed the spread**
+    * Either way, your order matched instantly instead of resting
+
+    **Example:** Best ask is 64%. You are on Tier 0 and place a market order to LONG 1,000 USDC, filling at 64%.
+
+    ```
+    Fee = 1,000 × 0.0004 = 0.40 USDC
+    ```
+  </Tab>
+</Tabs>
+
+<Note>
+  The maker/taker label is decided by the matching engine at execution time, not by the order type you selected. A limit order that crosses the spread is a taker fill. If you want to guarantee the maker rate, place limit orders that sit behind the spread and let the market come to you.
+</Note>
+
+***
+
+## How Fees Are Applied
+
+Fees are charged on the notional value of the filled portion of your order:
+
+```
+Trading Fee = Fill Notional × Fee Rate
+```
+
+This is the same notional used for [funding](/market-mechanics/funding-price-alignment). A few things follow from it:
+
+* **Fees are charged on notional, not margin.** A 500 USDC position at 10x leverage is 5,000 USDC notional, and the fee is calculated on 5,000.
+* **Fees are charged per fill.** A single order that fills across three price levels is one fee, calculated on the total filled notional.
+* **Unfilled orders cost nothing.** Placing, amending, and canceling orders is free. You are only charged on execution.
+* **Entry and exit are separate fills.** A round trip means two fee events.
+* **Your tier is fixed for the day.** The rate applied is your tier at the most recent recalculation.
+
+***
+
+## Examples
+
+<AccordionGroup>
+  <Accordion title="Taker fill at Tier 0" icon="1">
+    ```
+    Fill notional = 10,000 USDC
+    Taker fee     = 0.040%
+
+    Fee = 10,000 × 0.0004 = 4.00 USDC
+    ```
+  </Accordion>
+
+  <Accordion title="The same fill at Tier 4" icon="2">
+    ```
+    Fill notional = 10,000 USDC
+    Taker fee     = 0.027%
+
+    Fee = 10,000 × 0.00027 = 2.70 USDC
+    ```
+
+    Same trade, same size, 32% cheaper. The difference is trailing volume, nothing else.
+  </Accordion>
+
+  <Accordion title="Maker fill" icon="3">
+    ```
+    Fill notional = 10,000 USDC
+    Maker fee     = 0.000%
+
+    Fee = 10,000 × 0 = 0.00 USDC
+    ```
+
+    Maker fills are free at every tier, so this number does not change as you move up.
+  </Accordion>
+
+  <Accordion title="One order, both roles" icon="4">
+    You place a limit order to LONG 1,000 USDC at 64%. The best ask is 64%, but only 400 USDC is available there.
+
+    * **400 USDC fills immediately** against the resting ask → taker
+    * **600 USDC rests on the book** at 64% and fills later → maker
+
+    ```
+    Taker portion = 400 × 0.0004 = 0.16 USDC
+    Maker portion = 600 × 0      = 0.00 USDC
+
+    Total fee = 0.16 USDC
+    ```
+  </Accordion>
+
+  <Accordion title="Leverage" icon="5">
+    Fees scale with notional, so leverage multiplies your fee relative to the margin you posted.
+
+    ```
+    Margin        = 500 USDC
+    Leverage      = 10x
+    Notional      = 5,000 USDC
+
+    Taker fee = 5,000 × 0.0004 = 2.00 USDC   (0.4% of your margin)
+    ```
+  </Accordion>
+</AccordionGroup>
+
+***
+
+## Round-Trip Cost
+
+Your total cost to open and close depends on how you executed each side. On a 10,000 USDC position at **Tier 0**:
+
+| Entry | Exit  | Total Fee | Effective Rate |
+| ----- | ----- | --------: | -------------: |
+| Taker | Taker | 8.00 USDC |         0.080% |
+| Taker | Maker | 4.00 USDC |         0.040% |
+| Maker | Taker | 4.00 USDC |         0.040% |
+| Maker | Maker | 0.00 USDC |         0.000% |
+
+A patient trader working limit orders on both sides pays nothing to trade on Ascend, at any tier.
+
+***
+
+## Costs That Are Not Trading Fees
+
+Trading fees are not the only thing that affects your entry and exit price. These are separate mechanics, and none of them are a fee paid to the protocol:
+
+<AccordionGroup>
+  <Accordion title="The spread" icon="arrows-left-right">
+    The gap between the best bid and the best ask is the cost of trading immediately. If the spread is 1% and you market in and market out, you give up 1% to the book itself — 25x the Tier 0 taker fee.
+
+    In liquid markets the spread is far smaller than in thin ones. See [CLOB & Matching](/market-mechanics/clob-matching).
+  </Accordion>
+
+  <Accordion title="Slippage" icon="chart-line">
+    Large orders walk the book, filling across multiple price levels at progressively worse prices. Your average fill price ends up worse than the top of book.
+
+    This is a function of available depth, not a charge. Limit orders avoid it entirely.
+  </Accordion>
+
+  <Accordion title="Funding" icon="clock">
+    Funding is a transfer between LONG and SHORT traders that keeps the Mark Price anchored to the Index Price. The protocol does not take a cut of it.
+
+    Depending on which side you are on, funding can be a cost or an income. See [Funding & Price Alignment](/market-mechanics/funding-price-alignment).
+  </Accordion>
+</AccordionGroup>
+
+***
+
+## Where Fees Go
+
+Taker fees are the protocol's revenue, and **100% of that revenue is paid out to $ASCEND stakers**.
+
+Staking is liquid. Your tokens stay in your Cardano wallet, nothing is locked, and you can exit at any time. Every taker fill on the platform flows back to the people holding the network.
+
+<Card title="Staking Guide" icon="coins" href="/liquid-staking/staking-guide">
+  Stake $ASCEND without giving up custody and earn 100% of protocol revenue
+</Card>
+
+***
+
+## Why Maker Fees Are Zero
+
+Prediction markets live or die on depth. A market showing a 63/64 quote is tradeable; a market showing 55/72 is not, no matter how interesting the question is.
+
+Charging makers would tax exactly the behavior these markets need most. So Ascend does not charge it, at any tier:
+
+* **Tighter spreads** — market makers can quote closer to fair value when quoting is free
+* **Real depth at every level** — resting size costs nothing to post or cancel
+* **Lower all-in cost for takers** — the spread you cross is usually larger than the fee you pay
+* **No barrier to entry** — a new account posts liquidity on the same terms as the largest desk
+
+The taker fee funds the protocol. The maker rate builds the book.
+
+***
+
+## Key Points
+
+* Maker fees are **0.000%** at every tier.
+* Taker fees start at **0.040%** and decrease with 30-day volume.
+* Tiers are based on trailing 30-day filled notional and recalculated daily at 00:00 UTC.
+* Maker or taker is determined at execution: resting orders are maker fills, crossing orders are taker fills.
+* Fees are calculated on filled notional, not on margin, so leverage scales them.
+* Placing, amending, and canceling orders is free. You are only charged on execution.
+* Spread, slippage, and funding are separate from trading fees.
+* 100% of collected fees are paid out to $ASCEND stakers.
+
+***
+
+<Card title="Next: Settlement & Resolution" icon="arrow-right" href="/market-mechanics/settlement-resolution">
+  Learn how markets resolve and positions settle
+</Card>
