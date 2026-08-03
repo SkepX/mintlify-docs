@@ -1,58 +1,58 @@
 ---
 title: "Fee Structure"
-description: "What it costs to trade on Ascend: lower fees as your share of total volume grows, and rebates for top makers"
+description: "What it costs to trade on Ascend: base fee for everyone, discounts for $ASCEND stakers, and makers always pay 0%"
 ---
 
-Ascend has a simple fee system. **Makers pay 0% at lower tiers and earn rebates at the top. Takers pay 0.040% to start, and pay less as their share of platform volume grows.**
+Ascend has a simple fee system. **Everyone starts at 0.040% taker and 0% maker. Stake $ASCEND to get up to 40% off your taker fee.**
 
-Your fee level depends on how much of the platform's total volume you traded over the last 30 days. You do not need to hold any token or fill out any form. Everyone starts at the base level and moves up on their own.
+You do not need to hold anything to trade. The base rate is available to every account from day one. Stakers get progressively cheaper taker fees, all the way down to 0.024%. Makers pay 0% at every tier.
 
 <CardGroup cols={3}>
-  <Card title="0% or rebate" icon="circle-check">
-    Makers pay nothing at lower tiers, earn up to −0.004% at the top
+  <Card title="0.000%" icon="circle-check">
+    Makers pay nothing, at every tier
   </Card>
-  <Card title="0.040% → 0.020%" icon="arrow-trend-down">
-    Takers pay less as their 30-day volume share grows
+  <Card title="0.040% → 0.024%" icon="arrow-trend-down">
+    Takers pay up to 40% less based on staked $ASCEND
   </Card>
   <Card title="100%" icon="coins">
-    Of net taker fees go to $ASCEND stakers
+    Of taker fees go back to $ASCEND stakers
   </Card>
 </CardGroup>
 
 ***
 
-## Fee Tiers
+## Staking Tiers
 
-| Tier       | 30D Volume Share | Taker Fee | Maker Fee |
-| ---------- | ---------------: | --------: | --------: |
-| **Tier 0** |           < 0.5% |    0.040% |    0.000% |
-| **Tier 1** |           ≥ 0.5% |    0.036% |    0.000% |
-| **Tier 2** |             ≥ 2% |    0.032% |    0.000% |
-| **Tier 3** |             ≥ 5% |    0.028% |   −0.001% |
-| **Tier 4** |            ≥ 10% |    0.024% |   −0.002% |
-| **Tier 5** |            ≥ 20% |    0.020% |   −0.004% |
+| Tier       | Staked \$ASCEND | Discount | Taker Fee | Maker Fee |
+| ---------- | --------------: | -------: | --------: | --------: |
+| **Base**   |               — |        — |    0.040% |    0.000% |
+| **Tier 1** |          10,000 |       5% |    0.038% |    0.000% |
+| **Tier 2** |          50,000 |      10% |    0.036% |    0.000% |
+| **Tier 3** |         150,000 |      20% |    0.032% |    0.000% |
+| **Tier 4** |         500,000 |      30% |    0.028% |    0.000% |
+| **Tier 5** |       1,500,000 |      40% |    0.024% |    0.000% |
 
-A negative maker fee is a **rebate**: the protocol pays you to provide liquidity. From Tier 3 onward, makers earn on every fill.
+The discount only applies to taker fees. Makers pay 0% at every tier.
 
 ***
 
-## How Your Tier Is Calculated
+## How Your Tier Is Set
 
 <Steps>
-  <Step title="We measure your share of platform volume">
-    Your tier is based on the share of Ascend's total 30-day trading volume that came from your account. Both maker and taker trades count. Orders you place but never fill do not count. Orders you cancel do not count.
+  <Step title="Stake $ASCEND">
+    Your tier is based on the amount of $ASCEND you have staked. Staking is liquid: your tokens stay in your Cardano wallet, nothing is locked, and you can unstake any time.
   </Step>
 
-  <Step title="We look at the last 30 days">
-    The window is the last 30 days of trading, not a calendar month. Trades older than 30 days drop off.
+  <Step title="Hit a threshold, unlock a tier">
+    Cross a threshold and your tier moves up. Fall below one and your tier moves down. The tier that applies is the highest threshold you currently meet.
   </Step>
 
   <Step title="Your tier updates once a day">
-    Your tier is set once per day at **00:00 UTC** and stays the same all day. If you cross into a new tier in the middle of the day, your fee changes at the next update, not right away.
+    Your tier is set once per day at **00:00 UTC** based on your staked balance at that moment. Staking or unstaking mid-day does not change your rate until the next update.
   </Step>
 
-  <Step title="Everyone starts at Tier 0">
-    Every account starts at the base rate. No application. No form. No minimum deposit. Just trade, and your tier goes up.
+  <Step title="No stake is fine too">
+    You can trade at the Base rate without staking anything. There is no application, no form, and no minimum. Staking only makes your taker fee cheaper.
   </Step>
 </Steps>
 
@@ -63,7 +63,7 @@ A negative maker fee is a **rebate**: the protocol pays you to provide liquidity
 Every trade has two sides. One person was waiting on the book. The other person came in and took their offer. That is what decides which fee you pay.
 
 <Tabs>
-  <Tab title="Maker (0% or rebate)">
+  <Tab title="Maker (0%)">
     You were the one waiting. You put an order on the book, and someone else came and matched it.
 
     * You placed a **limit order** at a price that did not cross the current spread
@@ -72,7 +72,7 @@ Every trade has two sides. One person was waiting on the book. The other person 
 
     **Example (BTC-USD):** The best ask is \$50,000. You place a limit order to LONG 1,000 USD at \$49,000. Your order waits on the bid side. Twenty minutes later, someone sends a SHORT market order and fills you at \$49,000.
 
-    **Fee: 0.00 USD at Tiers 0–2. At Tier 3+, you earn a small rebate on every fill.**
+    **Fee: 0.00 USD, at every tier.**
   </Tab>
 
   <Tab title="Taker (tiered)">
@@ -82,7 +82,7 @@ Every trade has two sides. One person was waiting on the book. The other person 
     * You placed a **limit order at a price that crossed the spread**
     * Either way, your order filled right away instead of waiting
 
-    **Example (ADA-USD):** The best ask is \$0.50. You are on Tier 0 and place a market order to LONG 1,000 USD. It fills at \$0.50.
+    **Example (ADA-USD):** The best ask is \$0.50. You are at the Base tier and place a market order to LONG 1,000 USD. It fills at \$0.50.
 
     ```
     Fee = 1,000 × 0.0004 = 0.40 USD
@@ -111,14 +111,13 @@ This is the same trade size used for [funding](/market-mechanics/funding-price-a
 * **Placing and canceling orders is free.** You only pay when your order actually fills.
 * **Opening and closing are two separate trades.** A full round trip means two fees.
 * **Your tier is locked in for the day.** The fee you pay is your tier from the last daily update.
-* **A negative maker fee pays you.** If your tier has a rebate, that amount is credited to your account on every maker fill.
 
 ***
 
 ## Examples
 
 <AccordionGroup>
-  <Accordion title="Taker fill at Tier 0" icon="1">
+  <Accordion title="Taker fill at Base" icon="1">
     ```
     Trade size = 10,000 USD
     Taker fee  = 0.040%
@@ -127,18 +126,29 @@ This is the same trade size used for [funding](/market-mechanics/funding-price-a
     ```
   </Accordion>
 
-  <Accordion title="Same fill at Tier 4" icon="2">
+  <Accordion title="Same fill at Tier 3 (150,000 $ASCEND staked)" icon="2">
     ```
     Trade size = 10,000 USD
-    Taker fee  = 0.024%
+    Taker fee  = 0.032%   (20% discount)
+
+    Fee = 10,000 × 0.00032 = 3.20 USD
+    ```
+
+    Same trade, same size, 20% cheaper. The only reason is your staked $ASCEND.
+  </Accordion>
+
+  <Accordion title="Same fill at Tier 5 (1,500,000 $ASCEND staked)" icon="3">
+    ```
+    Trade size = 10,000 USD
+    Taker fee  = 0.024%   (40% discount)
 
     Fee = 10,000 × 0.00024 = 2.40 USD
     ```
 
-    Same trade, same size, but 40% cheaper. The only reason is your share of platform volume.
+    At the top tier, you pay 40% less than base on every taker fill.
   </Accordion>
 
-  <Accordion title="Maker fill at Tier 0" icon="3">
+  <Accordion title="Maker fill" icon="4">
     ```
     Trade size = 10,000 USD
     Maker fee  = 0.000%
@@ -146,18 +156,7 @@ This is the same trade size used for [funding](/market-mechanics/funding-price-a
     Fee = 10,000 × 0 = 0.00 USD
     ```
 
-    Makers pay nothing at Tiers 0–2, so this number stays flat until Tier 3.
-  </Accordion>
-
-  <Accordion title="Maker rebate at Tier 5" icon="4">
-    ```
-    Trade size = 10,000 USD
-    Maker fee  = −0.004%
-
-    Rebate = 10,000 × 0.00004 = 0.40 USD credited to you
-    ```
-
-    At Tier 5, you get paid 0.40 USD every time a 10,000 USD maker order fills.
+    Makers pay nothing at every tier, so this number never changes.
   </Accordion>
 
   <Accordion title="One order, both roles" icon="5">
@@ -191,7 +190,7 @@ This is the same trade size used for [funding](/market-mechanics/funding-price-a
 
 ## Round-Trip Cost
 
-Your total cost to open and close depends on how each side fills. Here is a 10,000 USD position at **Tier 0**:
+Your total cost to open and close depends on how each side fills. Here is a 10,000 USD position at the **Base** tier:
 
 | Entry | Exit  | Total Fee | Effective Rate |
 | ----- | ----- | --------: | -------------: |
@@ -200,7 +199,7 @@ Your total cost to open and close depends on how each side fills. Here is a 10,0
 | Maker | Taker | 4.00 USD |         0.040% |
 | Maker | Maker | 0.00 USD |         0.000% |
 
-If you are patient and use limit orders on both sides, you pay nothing to trade on Ascend at Tier 0, and you actually earn from Tier 3 onward.
+If you are patient and use limit orders on both sides, you pay nothing to trade on Ascend, at any tier.
 
 ***
 
@@ -210,7 +209,7 @@ Trading fees are not the only thing that affects your price. These other costs a
 
 <AccordionGroup>
   <Accordion title="The spread" icon="arrows-left-right">
-    The gap between the best bid and the best ask is the cost of trading right away. If the spread is 1% and you market in and market out, you lose 1% to the book. That is 25 times more than the Tier 0 taker fee.
+    The gap between the best bid and the best ask is the cost of trading right away. If the spread is 1% and you market in and market out, you lose 1% to the book. That is 25 times more than the Base taker fee.
 
     Busy markets have small spreads. Quiet markets have big ones. See [CLOB & Matching](/market-mechanics/clob-matching).
   </Accordion>
@@ -232,9 +231,9 @@ Trading fees are not the only thing that affects your price. These other costs a
 
 ## Where the Fees Go
 
-Taker fees are how the protocol earns money. Maker rebates are paid out of that same pool, and **100% of what is left goes to $ASCEND stakers**.
+Taker fees are how the protocol earns money, and **100% of that money goes to $ASCEND stakers**.
 
-Staking is easy. Your tokens stay in your Cardano wallet. Nothing is locked. You can leave any time. Every taker trade on the platform sends money back to the people who hold the network.
+Staking is easy. Your tokens stay in your Cardano wallet. Nothing is locked. You can leave any time. So staking does two things at once: it drops your own taker fee, and it earns you a share of every taker fee on the platform.
 
 <Card title="Staking Guide" icon="coins" href="/liquid-staking/staking-guide">
   Stake $ASCEND without giving up custody and earn 100% of protocol revenue
@@ -242,31 +241,31 @@ Staking is easy. Your tokens stay in your Cardano wallet. Nothing is locked. You
 
 ***
 
-## Why Makers Get Paid
+## Why Makers Pay Nothing
 
 Perpetual markets need deep books to work. A market with a tight spread is easy to trade. A market with a wide spread is not, no matter how interesting the asset is.
 
-Charging makers would punish the exact behavior these markets need most. Ascend goes further: at the top tiers, we pay makers to post liquidity.
+Charging makers would punish the exact behavior these markets need most. So Ascend does not charge makers, at any tier:
 
-* **Tighter spreads.** Market makers can quote closer to fair value when posting is free, or better than free.
-* **Real depth at every level.** Rebates reward posting size, not chasing fills.
+* **Tighter spreads.** Market makers can post prices closer to fair value when it is free to do so.
+* **Real depth at every level.** Posting and canceling orders costs nothing.
 * **Lower total cost for takers.** The spread you cross is usually bigger than the fee you pay.
-* **A level playing field.** A new account posts on the same terms as the biggest firm, and can climb into rebate tiers on trading alone.
+* **A level playing field.** A new account can post liquidity on the same terms as the biggest firm.
 
-Takers fund the protocol. Makers build the book. Rebates make sure the best makers stay building.
+Takers fund the protocol. Makers build the book.
 
 ***
 
 ## Key Points
 
-* Makers pay **0%** at Tiers 0–2 and earn **rebates up to −0.004%** at Tier 5.
-* Takers start at **0.040%** and pay as low as **0.020%** at Tier 5.
-* Tiers are based on your share of Ascend's last 30 days of volume and update once a day at 00:00 UTC.
+* Makers pay **0.000%** at every tier.
+* Takers start at **0.040%** and pay as low as **0.024%** with 1,500,000 $ASCEND staked.
+* Tiers are based on the amount of $ASCEND you have staked, and update once a day at 00:00 UTC.
 * You are a maker if your order waited on the book, and a taker if your order took liquidity right away.
 * Fees are based on trade size, not on your margin, so leverage makes them bigger.
 * Placing and canceling orders is free. You only pay when your order fills.
 * Spread, slippage, and funding are separate from trading fees.
-* 100% of net taker fees go to $ASCEND stakers.
+* 100% of taker fees go to $ASCEND stakers.
 
 ***
 
