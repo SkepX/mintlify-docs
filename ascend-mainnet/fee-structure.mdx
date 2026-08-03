@@ -70,9 +70,9 @@ Every trade has two sides. One person was waiting on the book. The other person 
     * Your order sat on the book
     * Someone else's order matched yours
 
-    **Example:** The best ask is 64%. You place a limit order to LONG 1,000 USDC at 62%. Your order waits on the bid side. Twenty minutes later, someone sends a SHORT market order and fills you at 62%.
+    **Example (BTC-USD):** The best ask is \$50,000. You place a limit order to LONG 1,000 USD at \$49,000. Your order waits on the bid side. Twenty minutes later, someone sends a SHORT market order and fills you at \$49,000.
 
-    **Fee: 0.00 USDC, at every tier.**
+    **Fee: 0.00 USD, at every tier.**
   </Tab>
 
   <Tab title="Taker (tiered)">
@@ -82,10 +82,10 @@ Every trade has two sides. One person was waiting on the book. The other person 
     * You placed a **limit order at a price that crossed the spread**
     * Either way, your order filled right away instead of waiting
 
-    **Example:** The best ask is 64%. You are on Tier 0 and place a market order to LONG 1,000 USDC. It fills at 64%.
+    **Example (ADA-USD):** The best ask is \$0.50. You are on Tier 0 and place a market order to LONG 1,000 USD. It fills at \$0.50.
 
     ```
-    Fee = 1,000 × 0.0004 = 0.40 USDC
+    Fee = 1,000 × 0.0004 = 0.40 USD
     ```
   </Tab>
 </Tabs>
@@ -106,7 +106,7 @@ Trading Fee = Trade Size × Fee Rate
 
 This is the same trade size used for [funding](/market-mechanics/funding-price-alignment). A few things to keep in mind:
 
-* **Fees are based on trade size, not on your margin.** A 500 USDC position at 10x leverage is a 5,000 USDC trade, and the fee is worked out on 5,000.
+* **Fees are based on trade size, not on your margin.** A 500 USD position at 10x leverage is a 5,000 USD trade, and the fee is worked out on 5,000.
 * **One fill, one fee.** If your order fills across three price levels, that is still one fee, based on the total size.
 * **Placing and canceling orders is free.** You only pay when your order actually fills.
 * **Opening and closing are two separate trades.** A full round trip means two fees.
@@ -119,19 +119,19 @@ This is the same trade size used for [funding](/market-mechanics/funding-price-a
 <AccordionGroup>
   <Accordion title="Taker fill at Tier 0" icon="1">
     ```
-    Trade size = 10,000 USDC
+    Trade size = 10,000 USD
     Taker fee  = 0.040%
 
-    Fee = 10,000 × 0.0004 = 4.00 USDC
+    Fee = 10,000 × 0.0004 = 4.00 USD
     ```
   </Accordion>
 
   <Accordion title="Same fill at Tier 4" icon="2">
     ```
-    Trade size = 10,000 USDC
+    Trade size = 10,000 USD
     Taker fee  = 0.027%
 
-    Fee = 10,000 × 0.00027 = 2.70 USDC
+    Fee = 10,000 × 0.00027 = 2.70 USD
     ```
 
     Same trade, same size, but 32% cheaper. The only reason is your trading volume.
@@ -139,26 +139,26 @@ This is the same trade size used for [funding](/market-mechanics/funding-price-a
 
   <Accordion title="Maker fill" icon="3">
     ```
-    Trade size = 10,000 USDC
+    Trade size = 10,000 USD
     Maker fee  = 0.000%
 
-    Fee = 10,000 × 0 = 0.00 USDC
+    Fee = 10,000 × 0 = 0.00 USD
     ```
 
     Makers pay nothing at every tier, so this number never changes.
   </Accordion>
 
   <Accordion title="One order, both roles" icon="4">
-    You place a limit order to LONG 1,000 USDC at 64%. The best ask is 64%, but only 400 USDC is available at that price.
+    On BTC-USD, you place a limit order to LONG 1,000 USD at \$50,000. The best ask is \$50,000, but only 400 USD is available at that price.
 
-    * **400 USDC fills right away** against the ask → taker
-    * **600 USDC waits on the book** at 64% and fills later → maker
+    * **400 USD fills right away** against the ask → taker
+    * **600 USD waits on the book** at \$50,000 and fills later → maker
 
     ```
-    Taker part = 400 × 0.0004 = 0.16 USDC
-    Maker part = 600 × 0      = 0.00 USDC
+    Taker part = 400 × 0.0004 = 0.16 USD
+    Maker part = 600 × 0      = 0.00 USD
 
-    Total fee = 0.16 USDC
+    Total fee = 0.16 USD
     ```
   </Accordion>
 
@@ -166,11 +166,11 @@ This is the same trade size used for [funding](/market-mechanics/funding-price-a
     Fees are based on trade size, so using leverage makes your fee bigger compared to the margin you put up.
 
     ```
-    Margin    = 500 USDC
+    Margin    = 500 USD
     Leverage  = 10x
-    Trade size = 5,000 USDC
+    Trade size = 5,000 USD
 
-    Taker fee = 5,000 × 0.0004 = 2.00 USDC   (0.4% of your margin)
+    Taker fee = 5,000 × 0.0004 = 2.00 USD   (0.4% of your margin)
     ```
   </Accordion>
 </AccordionGroup>
@@ -179,14 +179,14 @@ This is the same trade size used for [funding](/market-mechanics/funding-price-a
 
 ## Round-Trip Cost
 
-Your total cost to open and close depends on how each side fills. Here is a 10,000 USDC position at **Tier 0**:
+Your total cost to open and close depends on how each side fills. Here is a 10,000 USD position at **Tier 0**:
 
 | Entry | Exit  | Total Fee | Effective Rate |
 | ----- | ----- | --------: | -------------: |
-| Taker | Taker | 8.00 USDC |         0.080% |
-| Taker | Maker | 4.00 USDC |         0.040% |
-| Maker | Taker | 4.00 USDC |         0.040% |
-| Maker | Maker | 0.00 USDC |         0.000% |
+| Taker | Taker | 8.00 USD |         0.080% |
+| Taker | Maker | 4.00 USD |         0.040% |
+| Maker | Taker | 4.00 USD |         0.040% |
+| Maker | Maker | 0.00 USD |         0.000% |
 
 If you are patient and use limit orders on both sides, you pay nothing to trade on Ascend, at any tier.
 
@@ -232,7 +232,7 @@ Staking is easy. Your tokens stay in your Cardano wallet. Nothing is locked. You
 
 ## Why Makers Pay Nothing
 
-Prediction markets need deep books to work. A market showing a 63/64 quote is easy to trade. A market showing 55/72 is not, no matter how interesting the topic is.
+Perpetual markets need deep books to work. A market with a tight spread is easy to trade. A market with a wide spread is not, no matter how interesting the asset is.
 
 Charging makers would punish the exact behavior these markets need most. So Ascend does not charge makers, at any tier:
 
