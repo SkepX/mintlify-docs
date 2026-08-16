@@ -155,29 +155,21 @@ Once placed, they appear under your open orders. Whichever one doesn't fire canc
 
 ## Leverage and liquidation
 
-At 5x, 100 USDC of margin controls a 500 USDC position. A 1% price move is 5 USDC instead of 1. That's the half everyone repeats.
+Leverage increases the size of your position without requiring you to put up the full amount as margin.
 
-The other half is what it does to your margin of error. Every step up on the slider brings your liquidation price closer to where the market already is:
+For example, 100 USDC at 5x leverage controls a 500 USDC position. A 1% move in the market would therefore result in roughly a 5 USDC gain or loss, rather than 1 USDC.
 
-| Leverage        | Move against you that wipes the position |
-| --------------- | ---------------------------------------- |
-| 1x              | ~50%                                     |
-| 5x              | ~20%                                     |
-| 10x (ADA cap)   | ~10%                                     |
-| 25x             | ~4%                                      |
-| 50x (BTC cap)   | ~2%                                      |
+But leverage works both ways. The higher your leverage, the less room the market has to move against you before your position can be liquidated.
 
-Read the bottom row properly. At 50x, BTC moving 2% against you ends the position. BTC does 2% before lunch on a quiet day. The top of the slider is not where you learn, and the traders who last aren't sitting up there.
+| Leverage        | Move against you that liquidates the position |
+| --------------- | --------------------------------------------- |
+| 1x              | ~50%                                          |
+| 5x              | ~20%                                          |
+| 10x (ADA cap)   | ~10%                                          |
+| 25x             | ~4%                                           |
+| 50x (BTC cap)   | ~2%                                           |
 
-ADA stops at 10x for the same reason in reverse. It's the thinner of the two markets and it moves harder, so the ceiling is lower on purpose.
-
-<Warning>
-  **What liquidation actually means**
-
-  If the price reaches your liquidation price, the position **closes automatically** and the margin behind it is gone. You don't owe anything beyond that and nobody asks you to top up. It ends there.
-
-  Your liquidation price is shown before you open and stays visible for as long as the position is open. Check it before you raise leverage, not after.
-</Warning>
+Liquidation happens when your position no longer has enough margin to support its losses. When that point is reached, the position is automatically closed.
 
 ## Getting your money out
 
