@@ -1,0 +1,274 @@
+---
+title: "Ascend Perps"
+description: "Long or short on BTC and ADA, settled in USDC. Everything from a fresh account to your first trade and back out again."
+---
+
+Long or short on BTC and ADA, settled in USDC. No expiry, no rollover, nothing to roll into. You open a position, you close it when you want.
+
+## At a glance
+
+<CardGroup cols={2}>
+  <Card title="Markets" icon="chart-candlestick">
+    **BTC** and **ADA**, quoted in USDC.
+  </Card>
+  <Card title="Max leverage" icon="gauge-high">
+    **50x** on BTC · **10x** on ADA
+  </Card>
+  <Card title="Direction" icon="arrows-up-down">
+    Long or short, same two clicks.
+  </Card>
+  <Card title="Settled in" icon="dollar-sign">
+    All P&L clears in **USDC**.
+  </Card>
+  <Card title="Taker fee" icon="receipt">
+    **0.04%**. Maker orders are free.
+  </Card>
+  <Card title="Deposits / Withdrawals" icon="arrow-right-arrow-left">
+    Min **15 USDC** in · **10 USDC** out
+  </Card>
+</CardGroup>
+
+## What you're actually trading
+
+You never own the BTC or the ADA. You take a position on where the price is going, and when you close it you settle the difference in USDC. Price went your way, you take the gain. It went against you, you take the loss.
+
+Three things worth knowing up front:
+
+<CardGroup cols={3}>
+  <Card title="No end date" icon="infinity">
+    A prediction market resolves and pays out. A perp doesn't. Your position sits there gaining or losing until you close it or it gets liquidated.
+  </Card>
+  <Card title="Short is normal" icon="arrow-trend-down">
+    Selling is the same two clicks as buying and costs the same. No borrowing, no permissions, nothing to arrange first.
+  </Card>
+  <Card title="Size above balance" icon="bolt">
+    That's leverage. It's why perps move fast in both directions. Full section below.
+  </Card>
+</CardGroup>
+
+## Get set up
+
+Four steps, about fifteen minutes, and most of that is waiting on a transfer.
+
+<Steps>
+  <Step title="Create an account" icon="key">
+    You get **24 words**, shown once. That is your account. Write them on paper. No screenshots, no notes app, no emailing them to yourself.
+
+    Then set a **password**. It encrypts your account on this device so you're not typing 24 words to log in.
+
+    No email, no phone, no KYC.
+  </Step>
+
+  <Step title="Save a backup file" icon="floppy-disk">
+    Do this now, while you're thinking about it.
+
+    A backup file is your account, encrypted, saved as a file you keep. It's what lets you log in from another browser or another device without typing out the phrase. Open the backup dialog, enter your password, and hit **Save a backup file**.
+
+    Two things to hold onto, and you need both:
+
+    <CardGroup cols={2}>
+      <Card title="The file" icon="file-shield">
+        Keep it somewhere you'll actually find it again. A drive, a USB stick, wherever you keep things that matter.
+      </Card>
+      <Card title="Your password" icon="lock">
+        The file is encrypted with it, so the file on its own gets nobody anywhere. A forgotten password makes the file useless.
+      </Card>
+    </CardGroup>
+
+    Coming back on a new device later? There's a **restore from a backup** page for exactly that. Point it at your file, enter your password, and you're in.
+
+    Your 24 words still sit above all of this. The backup file is the convenient route between devices. The phrase is the one that works when everything else is gone, which is why it goes on paper and not on a hard drive.
+  </Step>
+
+  <Step title="Fund it" icon="wallet">
+    Send USDC from a wallet you already use.
+
+    | Route    | Arrives in    | Minimum |
+    | -------- | ------------- | ------- |
+    | Solana   | ~11 minutes   | 15 USDC |
+    | Ethereum | ~1 hour       | 15 USDC |
+
+    Pick one and you'll get an address. Send to it, then leave the tab open or come back later. It completes on its own and the screen tells you where it's at.
+
+    <Warning>
+      **Send USDC, on the network you picked.** Wrong network doesn't arrive. Wrong token doesn't arrive.
+    </Warning>
+  </Step>
+
+  <Step title="Turn on trading" icon="toggle-on">
+    Once your funds land, hit **Set up trading**. It takes a few seconds and you do it once. After that the trade panel is live.
+  </Step>
+</Steps>
+
+## Placing your first trade
+
+<Steps>
+  <Step title="Pick a market" icon="chart-line">
+    BTC or ADA. The header shows the current price and how it's moved.
+  </Step>
+
+  <Step title="Pick a direction" icon="arrows-up-down">
+    **Buy** if you think the price is going up. **Sell** if you think it's going down. There's no penalty for choosing the second one and nothing extra to set up.
+  </Step>
+
+  <Step title="Set your size" icon="sliders">
+    Type the amount of USDC you want to commit. This is your margin, the money actually at risk on this trade. Start smaller than feels interesting. Your first trade is for learning where the buttons are.
+  </Step>
+
+  <Step title="Leave leverage alone the first time" icon="gauge">
+    The slider opens at **1x**, where your position is exactly the size of your margin and your money tracks the price 1:1. It stays there until you move it.
+
+    How far it goes depends on the market. **BTC runs to 50x, ADA to 10x.** Read the leverage section below before you touch it.
+  </Step>
+
+  <Step title="Check the numbers before you confirm" icon="magnifying-glass">
+    Before you hit the button the panel shows your position size, the fee, and your **liquidation price**. That last one is the price at which this position gets closed out and the margin behind it is gone. Look at it. If it's uncomfortably close to the current price, your size or your leverage is too high.
+  </Step>
+
+  <Step title="Add exits, if you want them" icon="shield">
+    You can attach a stop loss and a take profit on the way in. Both are optional and both are covered in the next section.
+  </Step>
+
+  <Step title="Confirm" icon="circle-check">
+    The position opens and appears in your positions list with live profit and loss, your entry price, and that liquidation price sitting there for reference.
+  </Step>
+
+  <Step title="Close it" icon="xmark">
+    Close whenever you want, in full or in part. Closing part of a position takes some money off the table and leaves the rest running. Your profit or loss settles into your balance the moment it closes.
+
+    Nothing depends on you sitting there. Close the tab, shut the laptop, the position stays exactly as it is.
+  </Step>
+</Steps>
+
+## Stops and takes
+
+Two automatic exits. Set one, both, or neither.
+
+<CardGroup cols={2}>
+  <Card title="Stop loss" icon="shield-halved">
+    Closes you out at a level you pick if the trade goes wrong. It caps the damage and it's the single most useful habit you can build early.
+  </Card>
+  <Card title="Take profit" icon="flag-checkered">
+    Closes you out at a number you're happy with, so you're not watching a chart at 3am waiting for a level you already decided on.
+  </Card>
+</CardGroup>
+
+They sit under your open orders once placed. Whichever one doesn't fire cancels itself when the position closes. You can still close by hand at any point regardless.
+
+## Leverage and liquidation
+
+At 5x, 100 USDC of margin controls a 500 USDC position. A 1% price move is 5 USDC instead of 1. That's the half everyone repeats.
+
+The other half is what it does to your margin of error. Every step up on the slider brings your liquidation price closer to where the market already is:
+
+| Leverage        | Move against you that wipes the position |
+| --------------- | ---------------------------------------- |
+| 1x              | ~50%                                     |
+| 5x              | ~20%                                     |
+| 10x (ADA cap)   | ~10%                                     |
+| 25x             | ~4%                                      |
+| 50x (BTC cap)   | ~2%                                      |
+
+Read the bottom row properly. At 50x, BTC moving 2% against you ends the position. BTC does 2% before lunch on a quiet day. The top of the slider is not where you learn, and the traders who last aren't sitting up there.
+
+ADA stops at 10x for the same reason in reverse. It's the thinner of the two markets and it moves harder, so the ceiling is lower on purpose.
+
+<Warning>
+  **What liquidation actually means**
+
+  If the price reaches your liquidation price, the position **closes automatically** and the margin behind it is gone. You don't owe anything beyond that and nobody asks you to top up. It ends there.
+
+  Your liquidation price is shown before you open and stays visible for as long as the position is open. Check it before you raise leverage, not after.
+</Warning>
+
+## Fees
+
+<CardGroup cols={2}>
+  <Card title="Taker" icon="bolt">
+    **0.04%** on an order that fills straight away at the current price. On a 500 USDC position that's **20 cents**.
+  </Card>
+  <Card title="Maker" icon="clock">
+    Orders you leave waiting at your own price are **free**.
+  </Card>
+</CardGroup>
+
+## Getting your money out
+
+Withdrawals are live. You can pull your USDC out to any **Ethereum** or **Solana** address you control, minimum 10 USDC. Head to the withdraw page and pick your network.
+
+**You never type an address.** You connect the wallet you want paid and sign a message with it. Signing moves nothing, it only proves the wallet is yours. There's no address field to mistype, which is the whole point, because a wrong address is money nobody can retrieve.
+
+Then it moves in two steps, both signed by you:
+
+<Steps>
+  <Step title="Off Ascend" icon="arrow-right-from-bracket">
+    To an address only you control. **1 to 3 minutes.**
+  </Step>
+  <Step title="Onward to your wallet" icon="wallet">
+    Your wallet asks **twice** here, once to approve the amount and once to send it. Both are real transactions, nothing has gone wrong. Then **10 to 20 minutes** to arrive.
+  </Step>
+</Steps>
+
+<Warning>
+  **Keep the tab open**
+
+  Both steps are signed on your device. Close the page halfway through and your USDC parks at your own address. It's safe and nobody else can reach it, but it stays there until you come back and finish.
+</Warning>
+
+**One at a time.** Withdrawing to both chains? Wait for Ethereum to say Done before starting Solana.
+
+The network fee comes out of the amount you're sending. You'll see it before you confirm.
+
+## Your keys, not ours
+
+The keys that move your funds are generated on your device and never leave it. We don't hold anything that can spend on your behalf.
+
+<Warning>
+  The flip side is just as real. Lose your 24 words and the account is gone, for you and for us. No reset link, no support ticket, no exception.
+
+  Write them down, save a backup file, and do both before you fund anything.
+</Warning>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can I lose more than I put in?" icon="circle-question">
+    No. The position closes before it can eat past the margin behind it. Worst case is losing what you committed to that trade.
+  </Accordion>
+
+  <Accordion title="Can I have more than one position open?" icon="layer-group">
+    Yes. Each one has its own margin, its own profit and loss, and its own liquidation price.
+  </Accordion>
+
+  <Accordion title="What if I close the tab with a position open?" icon="window-restore">
+    It stays open and keeps running. Your stops and takes stay armed too. Nothing about your position depends on your browser being open.
+  </Accordion>
+
+  <Accordion title="How do I log in on my laptop when I signed up on my phone?" icon="mobile-screen">
+    Restore from your backup file on the new device, using the same password. If you don't have the file, your 24 words will do it.
+  </Accordion>
+
+  <Accordion title="Is the backup file safe to keep in cloud storage?" icon="cloud">
+    It's encrypted with your password, so the file alone isn't enough to get in. That does mean your password is now doing real work, so make it a decent one and don't store it next to the file.
+  </Accordion>
+
+  <Accordion title="I lost my phone." icon="triangle-exclamation">
+    Restore from a backup, or type your 24 words into another device. With neither, nobody can help, and that includes us.
+  </Accordion>
+
+  <Accordion title="Can you freeze my account or take my funds?" icon="lock">
+    No. We don't hold a key that can move your money.
+  </Accordion>
+
+  <Accordion title="Why is my deposit stuck on 'checking'?" icon="hourglass-half">
+    Transfers take as long as the network takes. Roughly 11 minutes on Solana, an hour on Ethereum. The screen names the stage it's on instead of spinning at you.
+  </Accordion>
+
+  <Accordion title="Why only two markets?" icon="chart-simple">
+    Starting with BTC and ADA. More follow.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+_Trade with money you can afford to lose. With leverage, that stops being a formality._

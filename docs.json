@@ -34,7 +34,8 @@
             "pages": [
               "ascend-mainnet/orderbook-dex",
               "ascend-mainnet/private-mainnet-beta",
-              "ascend-mainnet/fee-structure"
+              "ascend-mainnet/fee-structure",
+              "ascend-mainnet/ascend-perps"
             ]
           },
           {
