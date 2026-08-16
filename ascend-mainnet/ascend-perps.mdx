@@ -32,25 +32,25 @@ This guide will take you through account setup, account funding, placing your fi
 
 ## What you're actually trading
 
-You never own the BTC or the ADA. You take a position on where the price is going, and when you close it you settle the difference in USDC. Price went your way, you take the gain. It went against you, you take the loss.
+When you trade BTC or ADA perps, you don't buy or own the underlying asset. You're trading a contract that tracks its price. If the market moves in your favor, your position gains value. If it moves against you, your position loses value. When you close the trade, your profit or loss is settled in USDC.
 
-Three things worth knowing up front:
+Three things you should know before you trade:
 
 <CardGroup cols={3}>
-  <Card title="No end date" icon="infinity">
-    A prediction market resolves and pays out. A perp doesn't. Your position sits there gaining or losing until you close it or it gets liquidated.
+  <Card title="Perps don't expire" icon="infinity">
+    Unlike traditional futures contracts, perpetuals have no expiry date. Your position remains open until you close it or it is liquidated.
   </Card>
-  <Card title="Short is normal" icon="arrow-trend-down">
-    Selling is the same two clicks as buying and costs the same. No borrowing, no permissions, nothing to arrange first.
+  <Card title="You can go long or short" icon="arrows-up-down">
+    Go long if you think the price will rise, short if you think it will fall. This allows you to trade the market in either direction without owning the underlying BTC or ADA.
   </Card>
-  <Card title="Size above balance" icon="bolt">
-    That's leverage. It's why perps move fast in both directions. Full section below.
+  <Card title="Leverage increases both gains and losses" icon="bolt">
+    Leverage lets you open a position larger than the collateral you put up. This increases your exposure, meaning both profits and losses can happen faster. If the market moves far enough against your position, it can be liquidated.
   </Card>
 </CardGroup>
 
-## Get set up
+## Account setup
 
-Four steps, about fifteen minutes, and most of that is waiting on a transfer.
+This is a four-step process that should take about 15 minutes (incl. deposit transfer time).
 
 <Steps>
   <Step title="Create an account" icon="key">
