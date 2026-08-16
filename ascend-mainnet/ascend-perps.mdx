@@ -169,7 +169,23 @@ But leverage works both ways. The higher your leverage, the less room the market
 | 25x             | ~4%                                           |
 | 50x (BTC cap)   | ~2%                                           |
 
+Read that last line carefully. At 50x leverage, even a relatively small move against your position can result in liquidation. Higher leverage leaves significantly less room for the market to move against you, so it also carries substantially greater risk.
+
+Ascend currently supports up to 50x leverage on BTC and 10x on ADA. Maximum leverage differs by market based on factors such as liquidity and volatility.
+
+If you're new to perpetuals, consider starting with lower leverage while you become familiar with how leveraged positions behave.
+
 Liquidation happens when your position no longer has enough margin to support its losses. When that point is reached, the position is automatically closed.
+
+<Warning>
+  **What liquidation means**
+
+  If the market reaches your liquidation price, your position will be automatically closed and the margin allocated to that position is lost.
+
+  Your estimated liquidation price is shown before you open a position and remains visible while the position is open.
+
+  Always check your liquidation price before placing a trade or increasing your leverage.
+</Warning>
 
 ## Getting your money out
 
