@@ -101,57 +101,57 @@ This is a four-step process that should take about 15 minutes (incl. deposit tra
 ## Placing your first trade
 
 <Steps>
-  <Step title="Pick a market" icon="chart-line">
-    BTC or ADA. The header shows the current price and how it's moved.
+  <Step title="Select a market" icon="chart-line">
+    Choose from BTC or ADA. You'll be shown current price and recent movement.
   </Step>
 
   <Step title="Pick a direction" icon="arrows-up-down">
-    **Buy** if you think the price is going up. **Sell** if you think it's going down. There's no penalty for choosing the second one and nothing extra to set up.
+    **Long** if you think the price is going up. **Short** if you think it's going down.
   </Step>
 
-  <Step title="Set your size" icon="sliders">
-    Type the amount of USDC you want to commit. This is your margin, the money actually at risk on this trade. Start smaller than feels interesting. Your first trade is for learning where the buttons are.
+  <Step title="Set your position size" icon="sliders">
+    Type in the amount of USDC you want to commit to the position. This is your **margin**, or, the money you are putting at risk with the trade.
   </Step>
 
-  <Step title="Leave leverage alone the first time" icon="gauge">
-    The slider opens at **1x**, where your position is exactly the size of your margin and your money tracks the price 1:1. It stays there until you move it.
+  <Step title="Understanding leverage" icon="gauge">
+    Leverage allows you to control a larger position size with less of your own money put up.
 
-    How far it goes depends on the market. **BTC runs to 50x, ADA to 10x.** Read the leverage section below before you touch it.
+    For example, with $100 of margin (your funds), 5x leverage allows you to open a $500 position. 10x leverage allows you to open a $1000 position.
+
+    <Warning>
+      The higher your leverage, the more your position gains or loses when the market moves. Example: at 10x leverage, a 1% move in the market is roughly a 10% gain or loss relative to your margin.
+    </Warning>
+
+    Higher leverage means you can be liquidated much sooner if the market moves against you.
   </Step>
 
-  <Step title="Check the numbers before you confirm" icon="magnifying-glass">
-    Before you hit the button the panel shows your position size, the fee, and your **liquidation price**. That last one is the price at which this position gets closed out and the margin behind it is gone. Look at it. If it's uncomfortably close to the current price, your size or your leverage is too high.
+  <Step title="Review the numbers before you confirm the trade" icon="magnifying-glass">
+    Before you confirm, review your position size, the fee, and your **liquidation price**.
+
+    Liquidation price is the price at which your position will be closed out and you will lose your margin. If the liquidation price is close to the current price, your size or leverage amount may be too high.
   </Step>
 
-  <Step title="Add exits, if you want them" icon="shield">
-    You can attach a stop loss and a take profit on the way in. Both are optional and both are covered in the next section.
-  </Step>
+  <Step title="Manage your trade with Stop Loss and Take Profit settings" icon="shield">
+    You can set a **Stop Loss** to automatically close your position if the market moves against you, or a **Take Profit** to automatically close it when the market reaches your profit target.
 
-  <Step title="Confirm" icon="circle-check">
-    The position opens and appears in your positions list with live profit and loss, your entry price, and that liquidation price sitting there for reference.
-  </Step>
-
-  <Step title="Close it" icon="xmark">
-    Close whenever you want, in full or in part. Closing part of a position takes some money off the table and leaves the rest running. Your profit or loss settles into your balance the moment it closes.
-
-    Nothing depends on you sitting there. Close the tab, shut the laptop, the position stays exactly as it is.
+    Both are optional and further explained in the next section of this document.
   </Step>
 </Steps>
 
-## Stops and takes
+## Stop Loss and Take Profit
 
-Two automatic exits. Set one, both, or neither.
+Set your position to automatically close when it reaches a specific loss or profit target. Both are optional.
 
 <CardGroup cols={2}>
-  <Card title="Stop loss" icon="shield-halved">
-    Closes you out at a level you pick if the trade goes wrong. It caps the damage and it's the single most useful habit you can build early.
+  <Card title="Stop Loss" icon="shield-halved">
+    Automatically closes your position at a price level you set to limit your loss if the market moves against you.
   </Card>
-  <Card title="Take profit" icon="flag-checkered">
-    Closes you out at a number you're happy with, so you're not watching a chart at 3am waiting for a level you already decided on.
+  <Card title="Take Profit" icon="flag-checkered">
+    Automatically closes your position at a price level you set to lock in gains when the market reaches your target.
   </Card>
 </CardGroup>
 
-They sit under your open orders once placed. Whichever one doesn't fire cancels itself when the position closes. You can still close by hand at any point regardless.
+Once placed, they appear under your open orders. Whichever one doesn't fire cancels itself when the position closes. You can still close manually at any time.
 
 ## Leverage and liquidation
 
